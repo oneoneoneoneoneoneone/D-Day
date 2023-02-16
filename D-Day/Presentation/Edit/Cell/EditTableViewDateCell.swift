@@ -30,6 +30,7 @@ class EditTableViewDateCell: UITableViewCell{
         label.text = "날짜"
         
         datePicker.datePickerMode = .date
+        datePicker.locale = Locale(identifier: "ko")
         datePicker.preferredDatePickerStyle = .wheels
     }
     

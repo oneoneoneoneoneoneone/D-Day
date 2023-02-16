@@ -9,8 +9,8 @@ import UIKit
 import SideMenu
 
 class SettingSideViewController: UIViewController{
-    let menuHeader = ["지원", "알림", "화면", "백업"]
-    let menu = [["email 보내기", "리뷰쓰기",], ["알림", "알림시간"], ["위젯 테마"], ["캘린더", "백업", "로그인"]]
+    let menuHeader = ["알림", "화면", "지원", "백업"]
+    let menu = [["알림 시간"], ["위젯 테마"], ["email 보내기", "리뷰쓰기",], ["캘린더", "백업", "로그인"]]
     
     let tableView = UITableView()
     
@@ -51,9 +51,30 @@ extension SettingSideViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "default") ?? UITableViewCell(style: .default, reuseIdentifier: "default")
-        cell.textLabel?.text = menu[indexPath.section][indexPath.row]
-        
-        return cell
+        switch menu[indexPath.section][indexPath.row]{
+//        case "알림":
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "default") ?? UITableViewCell(style: .default, reuseIdentifier: "default")
+//            cell.textLabel?.text = menu[indexPath.section][indexPath.row]
+//            
+//            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "default") ?? UITableViewCell(style: .default, reuseIdentifier: "default")
+            cell.textLabel?.text = menu[indexPath.section][indexPath.row]
+            
+            return cell
+            break
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch menu[indexPath.section][indexPath.row]{
+        case "알림 시간":
+            let settingAlert = SettingAlert()
+            navigationController?.pushViewController(settingAlert, animated: true)
+
+        default:
+            break
+        }
+
     }
 }

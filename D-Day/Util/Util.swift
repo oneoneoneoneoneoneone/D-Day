@@ -10,6 +10,28 @@ import UIKit
 import Toast
 
 struct Util{
+    static func getAlertTime() -> AlertTime!{
+        guard let savedData = UserDefaults.standard.object(forKey: "alertTime") as? Foundation.Data else {return nil}
+
+        do{
+            return try JSONDecoder().decode(AlertTime.self, from: savedData)
+        }
+        catch{
+            print("UserData decode Error - \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    static func setAlertTime(data: AlertTime!){
+        do{
+            let encoded = try JSONEncoder().encode(data)
+            UserDefaults.standard.setValue(encoded, forKey: "alertTime")
+        }
+        catch{
+            print("UserData encode Error - \(error.localizedDescription)")
+        }
+    }
+    
     static func StringFromDate(date: Date) -> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"

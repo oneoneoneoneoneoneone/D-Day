@@ -9,8 +9,6 @@ import UIKit
 import RxSwift
 
 class EditViewController: UIViewController{
-    let userNotificationCenter = UNUserNotificationCenter.current()
-    
     let disposeBag = DisposeBag()
     final let cellList = CellList.allCases
     //var item = Item()
@@ -78,9 +76,6 @@ class EditViewController: UIViewController{
             .accept(item.id)    //relay의 추가는 .accept()로 접근
         
         rightSaveButton.rx.tap
-//            .subscribe{_ in
-//                self.userNotificationCenter.addNotificationRequest(by: item)
-//            }
             .bind(to: viewModel.saveButtonTapped)
             .disposed(by: disposeBag)
     }
@@ -195,7 +190,15 @@ extension Reactive where Base: EditViewController{
                 return
             }
             
+            //저장
             Repository().edit(data: data)
+            
+            //알림시간 불러오기
+            let alertTime = Util.getAlertTime()
+            
+            //알림 추가
+            let userNotificationCenter = UNUserNotificationCenter.current()
+            userNotificationCenter.addNotificationRequest(by: data, alertTime: alertTime ?? AlertTime(isOn: true, day: 0, time: Date.now))
                      
             if base.navigationController?.viewControllers.filter({$0 is DetailViewController}).count == 0{
                 let detailViewController = DetailViewController()

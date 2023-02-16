@@ -19,6 +19,7 @@ class DetailViewController: UIViewController{
     let titleLabel = UILabel()
     let dDayLabel = UILabel()
     let dateLabel = UILabel()
+    let vvStackView = UIStackView()
     let memoLabel = UILabel()
     
     let hStackView = UIStackView()
@@ -52,7 +53,12 @@ class DetailViewController: UIViewController{
         vStackView.axis = .vertical
         vStackView.alignment = .center
         vStackView.distribution = .fillEqually
-        vStackView.spacing = 20
+        vStackView.spacing = 10
+        
+        vvStackView.axis = .vertical
+        vvStackView.alignment = .center
+        vvStackView.distribution = .fillEqually
+        vvStackView.spacing = 20
         
         hStackView.axis = .horizontal
         hStackView.alignment = .center
@@ -60,9 +66,11 @@ class DetailViewController: UIViewController{
 //        vStackView.spacing = 40
         
         titleLabel.font = .systemFont(ofSize: 24, weight: .medium)
+        titleLabel.numberOfLines = 0
         dDayLabel.font = .systemFont(ofSize: 42, weight: .semibold)
         dateLabel.font = .systemFont(ofSize: 14, weight: .light)
         memoLabel.font = .systemFont(ofSize: 14, weight: .light)
+        memoLabel.numberOfLines = 0
 
         shareButton.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         shareButton.tintColor = .label
@@ -91,9 +99,14 @@ class DetailViewController: UIViewController{
     
     private func setLayout(){
         view.addSubview(vStackView)
+        view.addSubview(vvStackView)
         
-        [titleLabel, dDayLabel, dateLabel, memoLabel, hStackView].forEach{
+        [titleLabel, dDayLabel, dateLabel].forEach{
             vStackView.addArrangedSubview($0)
+        }
+        
+        [memoLabel, hStackView].forEach{
+            vvStackView.addArrangedSubview($0)
         }
         
         [shareButton, deleteButton].forEach{
@@ -102,6 +115,11 @@ class DetailViewController: UIViewController{
         
         vStackView.snp.makeConstraints{
             $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(view.snp.width)
+        }
+        vvStackView.snp.makeConstraints{
+            $0.top.equalTo(vStackView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
 //        titleLabel.snp.makeConstraints{
@@ -118,16 +136,38 @@ class DetailViewController: UIViewController{
         vStackView.backgroundColor = UIColor(hexCode: item.backgroundColor)
     }
     
+    ///현재 화면 캡쳐
+    private func transformToImage() -> UIImage? {
+        //비트맵 기반 그래픽 컨텍스트를 만들음
+        UIGraphicsBeginImageContextWithOptions(vStackView.bounds.size, vStackView.isOpaque, 0.0)
+        defer{
+            UIGraphicsEndImageContext()
+        }
+        //UIGraphicsBeginImageContextWithOptions.. 변수로 치환한 것도 아닌데.. 어케 이어지는..
+        if let context = UIGraphicsGetCurrentContext(){
+            vStackView.layer.render(in: context)
+            return UIGraphicsGetImageFromCurrentImageContext()
+        }
+        return nil
+    }
+    
     private func shareButtonTap(){
+        
+        let image = transformToImage()
+        
         var activityItems: [Any] = []
         
         //이미지 + text. ..
         activityItems.append(item.title)
         activityItems.append(Util.StringFromDate(date: item.date))
+        activityItems.append(image)
         
         let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         //제거할 공유타입
-        activityViewController.excludedActivityTypes = [.addToReadingList, .assignToContact, .openInIBooks]
+        activityViewController.excludedActivityTypes = [.addToReadingList, .assignToContact, .openInIBooks, .saveToCameraRoll]
+        
+        //복사하기 햇을때 사진만 복사 댐.
+        
         present(activityViewController, animated: true)
     }
     

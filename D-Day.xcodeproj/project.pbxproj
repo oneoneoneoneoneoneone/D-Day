@@ -17,6 +17,7 @@
 		333BBE3B299A52E2000AEC91 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 333BBE3A299A52E2000AEC91 /* Toast */; };
 		333BBE3D299A52F9000AEC91 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 333BBE3C299A52F9000AEC91 /* RealmSwift */; };
 		3373C551299CFAC600E5758A /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373C550299CFAC600E5758A /* UNUserNotificationCenter.swift */; };
+		3373C553299D38EB00E5758A /* SettingAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373C552299D38EB00E5758A /* SettingAlert.swift */; };
 		339D1FBA299CC0A400FEE6DB /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 339D1FB9299CC0A400FEE6DB /* SideMenu */; };
 		339D1FBC299CC0C900FEE6DB /* SettingSideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339D1FBB299CC0C900FEE6DB /* SettingSideViewController.swift */; };
 		33AE1F6C2994CDEB008A67A5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AE1F6B2994CDEB008A67A5 /* WidgetKit.framework */; };
@@ -81,6 +82,7 @@
 /* Begin PBXFileReference section */
 		332D1CFE29994B3D00239C46 /* D_DayWidget.intentdefinition */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.intentdefinition; path = D_DayWidget.intentdefinition; sourceTree = "<group>"; };
 		3373C550299CFAC600E5758A /* UNUserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNUserNotificationCenter.swift; sourceTree = "<group>"; };
+		3373C552299D38EB00E5758A /* SettingAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAlert.swift; sourceTree = "<group>"; };
 		339D1FBB299CC0C900FEE6DB /* SettingSideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSideViewController.swift; sourceTree = "<group>"; };
 		33AE1F692994CDEB008A67A5 /* D-DayWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "D-DayWidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33AE1F6B2994CDEB008A67A5 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -281,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				339D1FBB299CC0C900FEE6DB /* SettingSideViewController.swift */,
+				3373C552299D38EB00E5758A /* SettingAlert.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				33D272CA29896C4800EF9321 /* EditTableViewSegmentCell.swift in Sources */,
 				33D272A32983A99E00EF9321 /* CollectionViewController.swift in Sources */,
 				33D2727E29824B0000EF9321 /* CollectionViewCell_2x2_Circle.swift in Sources */,
+				3373C553299D38EB00E5758A /* SettingAlert.swift in Sources */,
 				33D2727829824AD400EF9321 /* CollectionViewCell_1x4.swift in Sources */,
 				33D272BE2988054300EF9321 /* DetailViewController.swift in Sources */,
 				3373C551299CFAC600E5758A /* UNUserNotificationCenter.swift in Sources */,

@@ -10,6 +10,7 @@ import RxSwift
 import RxRelay
 
 class EditTableViewToggleCell: UITableViewCell{
+//    let data: ((_ isOn: Bool) -> Void)?
     let disposeBag = DisposeBag()
     
     let label = UILabel()

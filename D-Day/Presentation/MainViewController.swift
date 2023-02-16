@@ -156,13 +156,8 @@ class MainViewController: UIViewController {
     }
     
     private func setData(){
-        let items = Repository().read()
-        
-        self.items = []
-        items!.forEach{
-            self.items.append($0)
-        }
-        
+        self.items = Array(Repository().read())
+
         setSort()
 //        setDisplay()
     }

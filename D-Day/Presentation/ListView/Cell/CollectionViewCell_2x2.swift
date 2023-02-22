@@ -8,6 +8,7 @@
 import UIKit
 
 class CollectionViewCell_2x2: UICollectionViewCell{
+    let imageView = UIImageView()
     let d_DayLabel = UILabel()
     let titleLabel = UILabel()
     
@@ -19,19 +20,27 @@ class CollectionViewCell_2x2: UICollectionViewCell{
     }
     
     private func setAttribute(){
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        
         d_DayLabel.font = .systemFont(ofSize: 36, weight: .semibold)
         titleLabel.font = .systemFont(ofSize: 24, weight: .light)
     }
     
     private func setLayout(){
-        [d_DayLabel, titleLabel].forEach{
+        [imageView, d_DayLabel, titleLabel].forEach{
             addSubview($0)
+        }
+        
+        imageView.snp.makeConstraints{
+            $0.edges.equalToSuperview()
         }
         
         d_DayLabel.snp.makeConstraints{
             $0.centerY.equalToSuperview()//.offset(-10)
             $0.centerX.equalToSuperview()
         }
+        
         titleLabel.snp.makeConstraints{
             $0.top.equalTo(d_DayLabel.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
@@ -43,17 +52,19 @@ class CollectionViewCell_2x2: UICollectionViewCell{
         titleLabel.text = item.title
         
         if item.isCircle{
-            self.layer.cornerRadius = frame.height/2
+            imageView.layer.cornerRadius = frame.height/2
         }
         else{
-            self.layer.cornerRadius = 0
+            imageView.layer.cornerRadius = 0
         }
         
         if item.isBackgroundColor{
-            self.backgroundColor = UIColor(hexCode: item.backgroundColor)
+            imageView.backgroundColor = UIColor(hexCode: item.backgroundColor)
+            imageView.image = nil
         }
         if item.isBackgroundImage{
-            self.largeContentImage = UIImage()// item.backgroundImage
+            imageView.image = Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue)
+            imageView.backgroundColor = nil
         }
     }
 }

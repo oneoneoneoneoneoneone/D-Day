@@ -18,10 +18,10 @@ class Item: Object{
     @Persisted var isStartCount: Bool = false
     @Persisted var repeatCode: Repeat.RawValue //= .none
     @Persisted var backgroundColor: String //= "FFFFFFFF"//0xff000000
-    @Persisted var isCircle: Bool = false
-
     @Persisted var isBackgroundColor: Bool = true
     @Persisted var isBackgroundImage: Bool = false
+    @Persisted var isCircle: Bool = false
+
     
 //    override static func primaryKey() -> String? {
 //        return "id"

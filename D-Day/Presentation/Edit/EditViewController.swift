@@ -124,6 +124,7 @@ extension EditViewController: UITableViewDelegate, UITableViewDataSource{
         switch cellList[row] {
         case .title:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewTitleCell", for: indexPath) as! EditTableViewTitleCell
+            cell.selectionStyle = .none
             cell.setPlaceholderText(text: cellList[row].text)
             cell.bind(viewModel.title, viewModel.titleColor)
             cell.setDate(text: item.title, color: item.titleColor)
@@ -131,6 +132,7 @@ extension EditViewController: UITableViewDelegate, UITableViewDataSource{
             return cell
         case .date:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewDateCell", for: indexPath) as! EditTableViewDateCell
+            cell.selectionStyle = .none
             cell.setLabelText(text: cellList[row].text)
             cell.bind(viewModel.date)
             cell.setDate(date: item.date)
@@ -138,6 +140,7 @@ extension EditViewController: UITableViewDelegate, UITableViewDataSource{
             return cell
         case .isStartCount:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewToggleCell", for: indexPath) as! EditTableViewToggleCell
+            cell.selectionStyle = .none
             cell.setLabelText(text: cellList[row].text)
             cell.bind(viewModel.isStartCount)
             cell.setDate(isOn: item.isStartCount)
@@ -145,6 +148,7 @@ extension EditViewController: UITableViewDelegate, UITableViewDataSource{
             return cell
         case .repeatCode:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewSegmentCell", for: indexPath) as! EditTableViewSegmentCell
+            cell.selectionStyle = .none
             cell.setLabelText(text: cellList[row].text)
             cell.bind(viewModel.repeatCode)
             cell.setDate(value: item.repeatCode)
@@ -152,19 +156,23 @@ extension EditViewController: UITableViewDelegate, UITableViewDataSource{
             return cell
         case .backgroundColor:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewColorCell", for: indexPath) as! EditTableViewColorCell
+            cell.selectionStyle = .none
             cell.setLabelText(text: cellList[row].text)
-            cell.bind(viewModel.bgColor)
-            cell.setDate(color: item.backgroundColor)
+            cell.bind(viewModel.isBgColor, viewModel.bgColor)
+            cell.setDate(isOn: item.isBackgroundColor, color: item.backgroundColor)
             
             return cell
         case .backgroundImage:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewImageCell", for: indexPath) as! EditTableViewImageCell
+            cell.selectionStyle = .none
             cell.setLabelText(text: cellList[row].text)
-            cell.setDate(id: item.id.stringValue)
+            cell.bind(viewModel.isBgImage)
+            cell.setDate(isOn: item.isBackgroundImage, id: item.id.stringValue)
             
             return cell
         case .isCircle:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewToggleCell", for: indexPath) as! EditTableViewToggleCell
+            cell.selectionStyle = .none
             cell.setLabelText(text: cellList[row].text)
             cell.bind(viewModel.isCircle)
             cell.setDate(isOn: item.isCircle)
@@ -172,6 +180,7 @@ extension EditViewController: UITableViewDelegate, UITableViewDataSource{
             return cell
         case .memo:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewMenoCell", for: indexPath) as! EditTableViewMemoCell
+            cell.selectionStyle = .none
 //            cell.setPlaceholderText(text: cellList[row].text)
             cell.bind(viewModel.memo)
             cell.setDate(text: item.memo)
@@ -257,194 +266,3 @@ extension EditViewController{
         }
     }
 }
-    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        switch list[indexPath.section][indexPath.row]{
-//        case "제목":
-//            let cell = UITableViewCell(style: .default, reuseIdentifier: "titleCell")
-//
-//            let textField = UITextField()
-//            let button = UIButton()
-//
-//            let label = UILabel()
-//
-//            textField.placeholder = "제목을 입력하세요."
-//            button.backgroundColor = .black
-//            //            let colorPicker = UIColorPickerViewController()
-//
-//            [textField, button].forEach{
-//                cell.contentView.addSubview($0)
-//            }
-//
-//            textField.snp.makeConstraints{
-//                $0.leading.equalToSuperview().inset(10)
-//                $0.centerY.equalToSuperview()
-//            }
-//            button.snp.makeConstraints{
-//                $0.trailing.equalToSuperview().inset(10)
-//                $0.centerY.equalToSuperview()
-//            }
-//
-//            return cell
-//
-//        case "날짜":
-//            let cell = UITableViewCell(style: .default, reuseIdentifier: "dateCell")
-//
-//            let label = UILabel()
-//            let datePicker = UIDatePicker()
-//
-//            label.text = "날짜"
-//            datePicker.datePickerMode = .date
-//            datePicker.preferredDatePickerStyle = .wheels
-//
-//            [datePicker].forEach{
-//                cell.contentView.addSubview($0)
-//            }
-//
-//            datePicker.snp.makeConstraints{
-////                $0.trailing.equalToSuperview().inset(10)
-//                $0.centerX.centerY.equalToSuperview()
-////                $0.width.equalTo(240)
-//                $0.height.equalTo(240)
-//            }
-//
-//            return cell
-//        case "시작일":
-//            let cell = UITableViewCell(style: .default, reuseIdentifier: "dateCell")
-//
-//            let label = UILabel()
-//            let toggle = UISwitch()
-//
-//            label.text = "시작일"
-//
-//            [label, toggle].forEach{
-//                cell.contentView.addSubview($0)
-//            }
-//
-//            label.snp.makeConstraints{
-//                $0.leading.equalToSuperview().inset(10)
-//                $0.centerY.equalToSuperview()
-//            }
-//            toggle.snp.makeConstraints{
-//                $0.trailing.equalToSuperview().inset(10)
-//                $0.centerY.equalToSuperview()
-//            }
-//
-//            return cell
-//        case "반복":
-//            let cell = UITableViewCell(style: .default, reuseIdentifier: "dateCell")
-//
-//            let label = UILabel()
-//            let segment = UISegmentedControl()
-//
-//            label.text = "반복"
-//            let dayAction = UIAction(title: "일", handler: {_ in })
-//            let mountAction = UIAction(title: "월", handler: {_ in })
-//            let yearAction = UIAction(title: "년", handler: {_ in })
-//            segment.insertSegment(action: dayAction, at: 0, animated: true)
-//            segment.insertSegment(action: mountAction, at: 1, animated: true)
-//            segment.insertSegment(action: yearAction, at: 2, animated: true)
-//
-//            [label, segment].forEach{
-//                cell.contentView.addSubview($0)
-//            }
-//
-//            label.snp.makeConstraints{
-//                $0.leading.equalToSuperview().inset(10)
-//                $0.centerY.equalToSuperview()
-//            }
-//            segment.snp.makeConstraints{
-//                $0.trailing.equalToSuperview().inset(10)
-//                $0.centerY.equalToSuperview()
-//            }
-//
-//            return cell
-//        case "배경색":
-//            let cell = UITableViewCell(style: .default, reuseIdentifier: "dateCell")
-//
-//            let label = UILabel()
-//            let button = UIButton()
-//
-//            label.text = "배경색"
-//            button.backgroundColor = .yellow
-//
-//            [label, button].forEach{
-//                cell.contentView.addSubview($0)
-//            }
-//
-//            label.snp.makeConstraints{
-//                $0.leading.equalToSuperview().inset(10)
-//                $0.centerY.equalToSuperview()
-//            }
-//            button.snp.makeConstraints{
-//                $0.trailing.equalToSuperview().inset(10)
-//                $0.centerY.equalToSuperview()
-//            }
-//
-//            return cell
-//        case "배경이미지":
-//            let cell = UITableViewCell(style: .default, reuseIdentifier: "dateCell")
-//
-//            let label = UILabel()
-//            let button = UIButton()
-//
-//            label.text = "배경이미지"
-//
-//            [label, button].forEach{
-//                cell.contentView.addSubview($0)
-//            }
-//
-//            label.snp.makeConstraints{
-//                $0.leading.equalToSuperview().inset(10)
-//                $0.centerY.equalToSuperview()
-//            }
-//            button.snp.makeConstraints{
-//                $0.trailing.equalToSuperview().inset(10)
-//                $0.centerY.equalToSuperview()
-//            }
-//
-//            return cell
-//        case "동그랗게":
-//            let cell = UITableViewCell(style: .default, reuseIdentifier: "dateCell")
-//
-//            let label = UILabel()
-//            let toggle = UISwitch()
-//
-//            label.text = "동그랗게"
-//
-//            [label, toggle].forEach{
-//                cell.contentView.addSubview($0)
-//            }
-//
-//            label.snp.makeConstraints{
-//                $0.leading.equalToSuperview().inset(10)
-//                $0.centerY.equalToSuperview()
-//            }
-//            toggle.snp.makeConstraints{
-//                $0.trailing.equalToSuperview().inset(10)
-//                $0.centerY.equalToSuperview()
-//            }
-//            return cell
-//
-//        case "메모":
-//            let cell = UITableViewCell(style: .default, reuseIdentifier: "memoCell")
-//
-//            let label = UILabel()
-//            let textView = UITextView()
-//
-//            [textView].forEach{
-//                cell.contentView.addSubview($0)
-//            }
-//
-//
-//            textView.snp.makeConstraints{
-//                $0.leading.trailing.equalToSuperview().inset(10)
-//                $0.centerY.equalToSuperview()
-//            }
-//
-//            return cell
-//
-//        default:
-//            return UITableViewCell()
-//        }
-//    }

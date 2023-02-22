@@ -13,11 +13,11 @@ import RealmSwift
 
 class EditTableViewImageCell: UITableViewCell{
     let disposeBag = DisposeBag()
+    var id = ""
     
     let label = UILabel()
     let button = UIButton()
-    var id = ""
-//    let button = UIImagePickerController()
+    let toggle = UISwitch()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -43,7 +43,7 @@ class EditTableViewImageCell: UITableViewCell{
     }
     
     private func setLayout(){
-        [label, button].forEach{
+        [label, toggle, button].forEach{
             contentView.addSubview($0)
         }
         
@@ -51,11 +51,16 @@ class EditTableViewImageCell: UITableViewCell{
             $0.leading.equalToSuperview().inset(10)
             $0.centerY.equalToSuperview()
         }
+        toggle.snp.makeConstraints{
+            $0.trailing.equalTo(button.snp.leading).offset(-10)
+            $0.centerY.equalToSuperview()
+        }
         button.snp.makeConstraints{
             $0.trailing.equalToSuperview().inset(10)
             $0.centerY.equalToSuperview()
             $0.width.height.equalTo(120)
         }
+
     }
     
     private func openLibrary(){
@@ -95,12 +100,21 @@ class EditTableViewImageCell: UITableViewCell{
         
         self.window?.rootViewController?.present(alert, animated: true)
     }
+    
+    func bind(_ item: BehaviorRelay<Bool?>){
+        toggle.rx.isOn
+            .bind(to: item)
+            .disposed(by: disposeBag)
+    }
 
     func setLabelText(text: String){
         label.text = text
     }
     
-    func setDate(id: String){
+    func setDate(isOn: Bool, id: String){
+        toggle.isOn = isOn
+        toggle.sendActions(for: .valueChanged)
+        
         self.id = id
         button.setImage(Repository().loadImageFromDocumentDirectory(imageName: id), for: .normal)
     }
@@ -119,9 +133,12 @@ extension EditTableViewImageCell: PHPickerViewControllerDelegate {
         if let itemProvider = itemProvider, //UIImage로 값을 불러올 수 있을 경우에만 실행하도록 구현
            itemProvider.canLoadObject(ofClass: UIImage.self) {
             itemProvider.loadObject(ofClass: UIImage.self) { image, error in
-                DispatchQueue.main.async { //
-                    guard let selectedImage = image as? UIImage else { return }
-                    
+                guard let selectedImage = image as? UIImage else {
+                    print(error?.localizedDescription)
+                    return
+                }
+                
+                DispatchQueue.main.async {
                     Repository().saveImageToDocumentDirectory(imageName: self.id, image: selectedImage)
                     
                     self.setImage(image: selectedImage)

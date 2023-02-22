@@ -64,8 +64,11 @@ class EditTableViewTitleCell: UITableViewCell{
         textField.placeholder = text
     }
     
-    func setDate(text: String, color: String){
+    func setDate(text: String, color: String?){
         textField.insertText(text)
+        
+        guard let color = color, color != "" else { return }
+        
         button.selectedColor = UIColor(hexCode: color)
         button.sendActions(for: .valueChanged)
     }

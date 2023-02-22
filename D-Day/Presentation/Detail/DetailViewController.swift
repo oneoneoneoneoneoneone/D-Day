@@ -16,6 +16,7 @@ class DetailViewController: UIViewController{
     var item = Item()
     
     let vStackView = UIStackView()
+    let imageView = UIImageView()
     let titleLabel = UILabel()
     let dDayLabel = UILabel()
     let dateLabel = UILabel()
@@ -63,7 +64,9 @@ class DetailViewController: UIViewController{
         hStackView.axis = .horizontal
         hStackView.alignment = .center
         hStackView.distribution = .fillEqually
-//        vStackView.spacing = 40
+        
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         
         titleLabel.font = .systemFont(ofSize: 24, weight: .medium)
         titleLabel.numberOfLines = 0
@@ -98,8 +101,9 @@ class DetailViewController: UIViewController{
     }
     
     private func setLayout(){
-        view.addSubview(vStackView)
-        view.addSubview(vvStackView)
+        [imageView, vStackView, vvStackView].forEach{
+            view.addSubview($0)
+        }
         
         [titleLabel, dDayLabel, dateLabel].forEach{
             vStackView.addArrangedSubview($0)
@@ -118,13 +122,14 @@ class DetailViewController: UIViewController{
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(view.snp.width)
         }
+        imageView.snp.makeConstraints{
+            $0.top.leading.trailing.bottom.equalTo(vStackView)
+        }
+        
         vvStackView.snp.makeConstraints{
             $0.top.equalTo(vStackView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
-//        titleLabel.snp.makeConstraints{
-//            $0.
-//        }
     }
     
     private func setDisplay(){
@@ -133,7 +138,16 @@ class DetailViewController: UIViewController{
         dDayLabel.text = "D\(Util.NumberOfDaysFromDate(from: item.date))"
         dateLabel.text = Util.StringFromDate(date: item.date)
         memoLabel.text = item.memo
-        vStackView.backgroundColor = UIColor(hexCode: item.backgroundColor)
+        
+        imageView.layer.cornerRadius = item.isCircle ? (imageView.frame.height)/2 : 0
+        if item.isBackgroundColor{
+            imageView.isHidden = true
+            imageView.backgroundColor = UIColor(hexCode: item.backgroundColor)
+        }
+        if item.isBackgroundImage{
+            imageView.isHidden = false
+            imageView.image = Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue)
+        }
     }
     
     ///현재 화면 캡쳐
@@ -174,8 +188,9 @@ class DetailViewController: UIViewController{
     private func deleteButtonTap(){
         let alert = UIAlertController(title: "삭제하시겠습니까?", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .destructive, handler: {_ in
-            Repository().delete(data: self.item)
             self.userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [self.item.id.stringValue])
+            Repository().deleteImageToDocumentDirectory(imageName: self.item.id.stringValue)
+            Repository().delete(data: self.item)
             
             self.navigationController?.popToRootViewController(animated: true)
         }))

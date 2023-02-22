@@ -8,7 +8,8 @@
 import UIKit
 
 class CollectionViewCell_2x4: UICollectionViewCell{
-    let bgView = UIView()
+    let imageView = UIImageView()
+    let circleView = UIImageView()
     let d_DayLabel = UILabel()
     let titleLabel = UILabel()
     let dateLabel = UILabel()
@@ -20,28 +21,36 @@ class CollectionViewCell_2x4: UICollectionViewCell{
         setLayout()
     }
     private func setAttribute(){
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        circleView.contentMode = .scaleAspectFill
+        circleView.clipsToBounds = true
+        
         titleLabel.font = .systemFont(ofSize: 24, weight: .light)
         dateLabel.font = .systemFont(ofSize: 18, weight: .light)
         d_DayLabel.font = .systemFont(ofSize: 36, weight: .semibold)
     }
     
     private func setLayout(){
-        [bgView, d_DayLabel, titleLabel, dateLabel].forEach{
+        [imageView, circleView, d_DayLabel, titleLabel, dateLabel].forEach{
             addSubview($0)
         }
         
-        bgView.snp.makeConstraints{
+        imageView.snp.makeConstraints{
+            $0.edges.equalToSuperview()
+        }
+        
+        circleView.snp.makeConstraints{
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(10)
             $0.height.equalToSuperview().offset(-80)
-            $0.width.equalTo(bgView.snp.height)
+            $0.width.equalTo(circleView.snp.height)
         }
         d_DayLabel.snp.makeConstraints{
             $0.bottom.equalTo(titleLabel.snp.top)
             $0.centerX.equalToSuperview()
         }
         titleLabel.snp.makeConstraints{
-            //$0.top.equalTo(d_DayLabel.snp.bottom).offset(10)
             $0.centerY.centerX.equalToSuperview()
         }
         dateLabel.snp.makeConstraints{
@@ -56,27 +65,33 @@ class CollectionViewCell_2x4: UICollectionViewCell{
         dateLabel.text = Util.StringFromDate(date: item.date)
         
         if item.isCircle{
-            bgView.layer.cornerRadius = (self.frame.height-80)/2
+            circleView.isHidden = false
+            imageView.isHidden = true
+            
+            circleView.layer.cornerRadius = (self.frame.height-80)/2
             
             if item.isBackgroundColor{
-                bgView.backgroundColor = UIColor(hexCode: item.backgroundColor)
-                self.backgroundColor = nil
+                circleView.backgroundColor = UIColor(hexCode: item.backgroundColor)
+                circleView.image = nil
             }
             if item.isBackgroundImage{
-                bgView.largeContentImage = UIImage()//item.backgroundImage
-                self.largeContentImage = nil
+                circleView.image = Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue)
+                circleView.backgroundColor = nil
             }
         }
         else{
-            bgView.layer.cornerRadius = 0
+            imageView.isHidden = false
+            circleView.isHidden = true
+            
+            circleView.layer.cornerRadius = 0
             
             if item.isBackgroundColor{
-                self.backgroundColor = UIColor(hexCode: item.backgroundColor)
-                bgView.backgroundColor = nil
+                imageView.backgroundColor = UIColor(hexCode: item.backgroundColor)
+                imageView.image = nil
             }
             if item.isBackgroundImage{
-                self.largeContentImage = UIImage()//item.backgroundImage
-                bgView.largeContentImage = nil
+                imageView.image = Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue)
+                imageView.backgroundColor = nil
             }
         }
     }

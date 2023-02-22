@@ -27,18 +27,21 @@ struct EditViewModel{
     let repeatCode = BehaviorRelay<Int?>(value: 0)
     let bgColor = BehaviorRelay<UIColor?>(value: .systemBackground)
     let bgImage = BehaviorRelay<UIImage?>(value: UIImage())//이미지
+    let isBgColor = BehaviorRelay<Bool?>(value: false)
+    let isBgImage = BehaviorRelay<Bool?>(value: false)
     let isCircle = BehaviorRelay<Bool?>(value: false)
     let memo = BehaviorRelay<String?>(value: "")
     
     init(){
+        
         let mainItem = Observable<Item>
         //값을 방출할 때마다 해당 클로저를 호출하여 인라인 안에 결합규칙을 적용하여 방출
             .combineLatest(id, title, titleColor, date, isStartCount, repeatCode) {id, title, titleColor, date, isStartCount, repeatCode in
                 let item = Item()   //클로저 안에서 초기화 되어야함
                 
-                item.id = id! as! ObjectId
+                item.id = id!
                 item.title = title!
-                item.titleColor = titleColor?.rgbString ?? "00000000"
+                item.titleColor = titleColor?.rgbString ?? "FF000000"
                 item.date = date!
                 item.isStartCount = isStartCount!
                 item.repeatCode = repeatCode!
@@ -48,8 +51,10 @@ struct EditViewModel{
         
         let viewItem = Observable<Item>
         //값을 방출할 때마다 해당 클로저를 호출하여 인라인 안에 결합규칙을 적용하여 방출
-            .combineLatest(mainItem, bgColor, isCircle, memo) {item, bgColor, isCircle, memo in
-                item.backgroundColor = bgColor?.rgbString ?? "00000000"
+            .combineLatest(mainItem, bgColor, isBgColor, isBgImage, isCircle, memo) {item, bgColor, isBgColor, isBgImage, isCircle, memo in
+                item.backgroundColor = bgColor?.rgbString ?? "FFFFFFFF"
+                item.isBackgroundColor = isBgColor!
+                item.isBackgroundImage = isBgImage!
                 item.isCircle = isCircle!
                 item.memo = memo! == "메모를 입력해주세요." ? "" : memo!
                 

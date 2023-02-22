@@ -11,10 +11,10 @@ import RxCocoa
 
 class EditTableViewColorCell: UITableViewCell{
     let disposeBag = DisposeBag()
-    let picker = UIColorPickerViewController()
     
     let label = UILabel()
-    let button = UIColorWell()// UIButton()
+    let button = UIColorWell()
+    let toggle = UISwitch()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -29,17 +29,10 @@ class EditTableViewColorCell: UITableViewCell{
     
     private func setAttribute(){
         label.text = "배경색"
-        
-//        button.backgroundColor = .yellow
-//        button.rx.tap
-//            .subscribe{_ in
-//                self.presentColorPicker()
-//            }
-//            .disposed(by: disposeBag)
     }
     
     private func setLayout(){
-        [label, button].forEach{
+        [label, toggle, button].forEach{
             contentView.addSubview($0)
         }
         
@@ -47,53 +40,41 @@ class EditTableViewColorCell: UITableViewCell{
             $0.leading.equalToSuperview().inset(10)
             $0.centerY.equalToSuperview()
         }
+        toggle.snp.makeConstraints{
+            $0.trailing.equalTo(button.snp.leading).offset(-10)
+            $0.centerY.equalToSuperview()
+        }
         button.snp.makeConstraints{
             $0.trailing.equalToSuperview().inset(10)
             $0.centerY.equalToSuperview()
         }
+
     }
     
-//    private func presentColorPicker(){
-//        picker.delegate = self
-//
-//        window?.rootViewController!.present(picker, animated: true, completion: nil)
-//    }
-    
-    func bind(_ item: BehaviorRelay<UIColor?>){
- 
-//        viewModel.bgColor.bind(to: picker.selectedColor)
-//        picker.rx.selectedColor
-//            .bind(to: )
-//            .disposed(by: disposeBag)
-//
-        button.rx.color
+    func bind(_ item: BehaviorRelay<Bool?>, _ color: BehaviorRelay<UIColor?>){
+        toggle.rx.isOn
             .bind(to: item)
             .disposed(by: disposeBag)
-//        button.rx.color
-//            .bind(to: item)
-//            .disposed(by: disposeBag)
         
+        button.rx.color
+            .bind(to: color)
+            .disposed(by: disposeBag)
     }
     
     func setLabelText(text: String){
         label.text = text
     }
     
-    func setDate(color: String){
-        if color == ""{
-            return
-        }
+    func setDate(isOn: Bool, color: String?){
+        toggle.isOn = isOn
+        toggle.sendActions(for: .valueChanged)
         
+        guard let color = color, color != "" else { return }
+  
         button.selectedColor = UIColor(hexCode: color)
         button.sendActions(for: .valueChanged)
     }
 }
-
-//extension EditTableViewColorCell: UIColorPickerViewControllerDelegate{
-//    func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
-//        button.backgroundColor = viewController.selectedColor
-//    }
-//}
 
 extension Reactive where Base: UIColorWell{
     var color: ControlProperty<UIColor?>{
@@ -108,9 +89,6 @@ extension Reactive where Base: UIColorWell{
                     colorWell.selectedColor
                 },
                 setter: { colorWell, value in
-                    // This check is important because setting text value always clears control state
-                    // including marked text selection which is important for proper input
-                    // when IME input method is used.
                     if colorWell.selectedColor != value {
                         colorWell.selectedColor = value
                     }

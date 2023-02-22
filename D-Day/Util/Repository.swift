@@ -28,7 +28,7 @@ class Repository: RepositoryType{
     }
     
     func read() -> Results<Item>!{
-        //print(realm.configuration.fileURL!)
+//        print(realm.configuration.fileURL!)
         
         return realm.objects(Item.self)
     }
@@ -42,6 +42,8 @@ class Repository: RepositoryType{
                 item.date = data.date
                 item.isStartCount = data.isStartCount
                 item.backgroundColor = data.backgroundColor
+                item.isBackgroundColor = data.isBackgroundColor
+                item.isBackgroundImage = data.isBackgroundImage
                 item.isCircle = data.isCircle
                 item.memo = data.memo
             }
@@ -77,17 +79,7 @@ class Repository: RepositoryType{
            return
         }
 
-        // 4. 이미지 저장: 동일한 경로에 이미지를 저장하게 될 경우, 덮어쓰기하는 경우
-        // 4-1. 이미지 경로 여부 확인
-        if FileManager.default.fileExists(atPath: imageUrl.path) {
-           // 4-2. 이미지가 존재한다면 기존 경로에 있는 이미지 삭제
-           do {
-               try FileManager.default.removeItem(at: imageUrl)
-               print("이미지 삭제 완료")
-           } catch {
-               print("이미지를 삭제하지 못했습니다.")
-           }
-        }
+        deleteImageToDocumentDirectory(imageName: imageName)
 
         // 5. 이미지를 도큐먼트에 저장
         // 파일을 저장하는 등의 행위는 조심스러워야하기 때문에 do try catch 문을 사용하는 편임
@@ -117,4 +109,23 @@ class Repository: RepositoryType{
         print("\(imageName) - \(imageUrl.path)")
         return UIImage(contentsOfFile: imageUrl.path)
     }
+    
+    
+    func deleteImageToDocumentDirectory(imageName: String) {
+        let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupId)
+        guard let imageUrl = container?.appendingPathComponent(imageName) else {return}
+        
+        // 4. 이미지 저장: 동일한 경로에 이미지를 저장하게 될 경우, 덮어쓰기하는 경우
+        // 4-1. 이미지 경로 여부 확인
+        if FileManager.default.fileExists(atPath: imageUrl.path) {
+           // 4-2. 이미지가 존재한다면 기존 경로에 있는 이미지 삭제
+           do {
+               try FileManager.default.removeItem(at: imageUrl)
+               print("이미지 삭제 완료")
+           } catch {
+               print("이미지를 삭제하지 못했습니다.")
+           }
+        }
+    }
+    
 }

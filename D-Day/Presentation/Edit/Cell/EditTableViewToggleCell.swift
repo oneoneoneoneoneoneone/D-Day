@@ -29,7 +29,7 @@ class EditTableViewToggleCell: UITableViewCell{
     
     private func setAttribute(){
         label.text = "시작일"
-    }
+        }
     
     private func setLayout(){
         [label, toggle].forEach{

@@ -23,8 +23,8 @@ struct EditViewModel{
     let title = PublishRelay<String?>()
     let titleColor = BehaviorRelay<UIColor?>(value: .label)
     let date = PublishRelay<Date?>()
-    let isStartCount = BehaviorRelay<Bool?>(value: false)
-    let repeatCode = BehaviorRelay<Int?>(value: 0)
+//    let isStartCount = BehaviorRelay<Bool?>(value: false)
+//    let repeatCode = BehaviorRelay<Int?>(value: 0)
     let bgColor = BehaviorRelay<UIColor?>(value: .systemBackground)
     let bgImage = BehaviorRelay<UIImage?>(value: UIImage())//이미지
     let isBgColor = BehaviorRelay<Bool?>(value: false)
@@ -36,15 +36,15 @@ struct EditViewModel{
         
         let mainItem = Observable<Item>
         //값을 방출할 때마다 해당 클로저를 호출하여 인라인 안에 결합규칙을 적용하여 방출
-            .combineLatest(id, title, titleColor, date, isStartCount, repeatCode) {id, title, titleColor, date, isStartCount, repeatCode in
+            .combineLatest(id, title, titleColor, date) {id, title, titleColor, date in
                 let item = Item()   //클로저 안에서 초기화 되어야함
                 
                 item.id = id!
                 item.title = title!
                 item.titleColor = titleColor?.rgbString ?? "FF000000"
                 item.date = date!
-                item.isStartCount = isStartCount!
-                item.repeatCode = repeatCode!
+//                item.isStartCount = isStartCount!
+//                item.repeatCode = repeatCode!
                 
                 return item
             }

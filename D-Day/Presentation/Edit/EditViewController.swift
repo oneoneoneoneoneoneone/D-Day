@@ -138,22 +138,22 @@ extension EditViewController: UITableViewDelegate, UITableViewDataSource{
             cell.setDate(date: item.date)
             
             return cell
-        case .isStartCount:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewToggleCell", for: indexPath) as! EditTableViewToggleCell
-            cell.selectionStyle = .none
-            cell.setLabelText(text: cellList[row].text)
-            cell.bind(viewModel.isStartCount)
-            cell.setDate(isOn: item.isStartCount)
-            
-            return cell
-        case .repeatCode:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewSegmentCell", for: indexPath) as! EditTableViewSegmentCell
-            cell.selectionStyle = .none
-            cell.setLabelText(text: cellList[row].text)
-            cell.bind(viewModel.repeatCode)
-            cell.setDate(value: item.repeatCode)
-            
-            return cell
+//        case .isStartCount:
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewToggleCell", for: indexPath) as! EditTableViewToggleCell
+//            cell.selectionStyle = .none
+//            cell.setLabelText(text: cellList[row].text)
+//            cell.bind(viewModel.isStartCount)
+//            cell.setDate(isOn: item.isStartCount)
+//
+//            return cell
+//        case .repeatCode:
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewSegmentCell", for: indexPath) as! EditTableViewSegmentCell
+//            cell.selectionStyle = .none
+//            cell.setLabelText(text: cellList[row].text)
+//            cell.bind(viewModel.repeatCode)
+//            cell.setDate(value: item.repeatCode)
+//
+//            return cell
         case .backgroundColor:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewColorCell", for: indexPath) as! EditTableViewColorCell
             cell.selectionStyle = .none
@@ -231,11 +231,12 @@ extension EditViewController{
     }
     
     enum CellList: CaseIterable{
-        case title, date, isStartCount, repeatCode, backgroundColor, backgroundImage, isCircle, memo
+        case title, date, backgroundColor, backgroundImage, isCircle, memo
+        // isStartCount, repeatCode
 
         var section: CellType{
             switch self{
-            case.title, .date, .isStartCount, .repeatCode:
+            case.title, .date://, .isStartCount, .repeatCode:
                 return .main
             case .backgroundColor, .backgroundImage, .isCircle:
                 return .view
@@ -250,10 +251,10 @@ extension EditViewController{
                 return "제목을 입력해주세요."
             case .date:
                 return "날짜"
-            case .isStartCount:
-                return "시작일"
-            case .repeatCode:
-                return "반복"
+//            case .isStartCount:
+//                return "시작일"
+//            case .repeatCode:
+//                return "반복"
             case .backgroundColor:
                 return "배경색"
             case .backgroundImage:

@@ -33,6 +33,9 @@ class EditTableViewImageCell: UITableViewCell{
     private func setAttribute(){
         label.text = "배경이미지"
         
+        button.tintColor = .systemGray
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
         button.imageView?.contentMode = .scaleAspectFill
         button.sizeToFit()
         button.rx.tap
@@ -116,6 +119,11 @@ class EditTableViewImageCell: UITableViewCell{
         toggle.sendActions(for: .valueChanged)
         
         self.id = id
+        
+        guard let image = Repository().loadImageFromDocumentDirectory(imageName: id) else {
+            button.setImage(UIImage(systemName: "plus.square"), for: .normal)
+            return
+        }
         button.setImage(Repository().loadImageFromDocumentDirectory(imageName: id), for: .normal)
     }
     

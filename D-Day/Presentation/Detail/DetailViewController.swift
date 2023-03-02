@@ -136,16 +136,17 @@ class DetailViewController: UIViewController{
         titleLabel.text = item.title
         titleLabel.textColor = UIColor(hexCode: item.titleColor)
         dDayLabel.text = "D\(Util.NumberOfDaysFromDate(from: item.date))"
+        dDayLabel.textColor = UIColor(hexCode: item.titleColor)
         dateLabel.text = Util.StringFromDate(date: item.date)
         memoLabel.text = item.memo
         
         imageView.layer.cornerRadius = item.isCircle ? (imageView.frame.height)/2 : 0
         if item.isBackgroundColor{
-            imageView.isHidden = true
+//            imageView.isHidden = true
             imageView.backgroundColor = UIColor(hexCode: item.backgroundColor)
         }
         if item.isBackgroundImage{
-            imageView.isHidden = false
+//            imageView.isHidden = false
             imageView.image = Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue)
         }
     }

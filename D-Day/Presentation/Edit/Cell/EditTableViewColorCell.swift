@@ -28,6 +28,8 @@ class EditTableViewColorCell: UITableViewCell{
     }
     
     private func setAttribute(){
+        button.contentVerticalAlignment = .center
+        button.contentHorizontalAlignment = .trailing
         label.text = "배경색"
     }
     
@@ -47,6 +49,7 @@ class EditTableViewColorCell: UITableViewCell{
         button.snp.makeConstraints{
             $0.trailing.equalToSuperview().inset(10)
             $0.centerY.equalToSuperview()
+            $0.width.height.equalTo(120)
         }
 
     }

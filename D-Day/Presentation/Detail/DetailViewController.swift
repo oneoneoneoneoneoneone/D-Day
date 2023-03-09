@@ -125,7 +125,7 @@ extension DetailViewController: DetailProtocol{
         navigationItem.backAction = UIAction(handler: {_ in
             self.navigationController?.popViewController(animated: true)
         })
-    }   
+    }
     
     func setLayout(){
         [imageView, vStackView, vvStackView].forEach{
@@ -159,7 +159,7 @@ extension DetailViewController: DetailProtocol{
         }
     }
     
-    func setData(_ item: Item){
+    func setData(item: Item, image: UIImage){
         titleLabel.text = item.title
         titleLabel.textColor = UIColor(hexCode: item.titleColor)
         dDayLabel.text = "D\(Util.NumberOfDaysFromDate(from: item.date))"
@@ -172,7 +172,7 @@ extension DetailViewController: DetailProtocol{
             imageView.backgroundColor = UIColor(hexCode: item.backgroundColor)
         }
         if item.isBackgroundImage{
-            imageView.image = Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue)
+            imageView.image = image
         }
     }
 
@@ -186,7 +186,7 @@ extension DetailViewController: DetailProtocol{
     func showDeleteAlertController(){
         let alert = UIAlertController(title: "삭제하시겠습니까?", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .destructive, handler: {_ in
-            self.presenter.deleteRepository()
+            self.presenter.deleteItem()
             self.navigationController?.popToRootViewController(animated: true)
         }))
         alert.addAction(UIAlertAction(title: "취소", style: .cancel))

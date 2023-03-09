@@ -29,16 +29,19 @@ protocol EditProtocol{
 
 final class EditPresenter: NSObject{
     private let viewController: EditProtocol
+    private let delegate: EditDelegate
+    private let repository: Repository
+    
+    let textViewPlaceHolder = "메모를 입력해주세요."
+    private let cellList = EditViewController2.CellList.allCases
+    private let userNotificationCenter = UNUserNotificationCenter.current()
+    
     private let item: Item
     
-    private let delegate: EditDelegate
-    
-    private final let cellList = EditViewController2.CellList.allCases
-    let textViewPlaceHolder = "메모를 입력해주세요."
-    
-    init(viewController: EditProtocol, delegate: EditDelegate, item: Item) {
+    init(viewController: EditProtocol, delegate: EditDelegate, repository: Repository = Repository(), item: Item) {
         self.viewController = viewController
         self.delegate = delegate
+        self.repository = repository
         self.item = item
     }
     
@@ -67,15 +70,15 @@ final class EditPresenter: NSObject{
             return
         }
         
-//        if isBgColor && bgColor == nil{
-//            viewController.showToast(message: "배경색을 선택해주세요.")
-//            return
-//        }
+        //        if isBgColor && bgColor == nil{
+        //            viewController.showToast(message: "배경색을 선택해주세요.")
+        //            return
+        //        }
         if isBgImage && bgImage == nil{
             viewController.showToast(message: "배경이미지를 선택해주세요.")
             return
         }
-                
+        
         let saveItem = Item()
         saveItem.id = item.id
         saveItem.title = title
@@ -86,15 +89,14 @@ final class EditPresenter: NSObject{
         saveItem.isBackgroundImage = isBgImage
         saveItem.isCircle = isCircle
         saveItem.memo = memo == textViewPlaceHolder ? "" : memo
-
+        
         //저장
-        Repository().edit(data: saveItem)
-
+        repository.editItem(saveItem)
+        
         //알림시간 불러오기
         let alertTime = Util.getAlertTime()
-
+        
         //알림 추가
-        let userNotificationCenter = UNUserNotificationCenter.current()
         userNotificationCenter.addNotificationRequest(by: item, alertTime: alertTime ?? AlertTime(isOn: true, day: 0, time: Date.now))
         
         viewController.dismiss()
@@ -103,6 +105,10 @@ final class EditPresenter: NSObject{
     
     func bgImageButtonTap(){
         viewController.showImageSelectAlertController()
+    }
+    
+    func saveImage(selectedImage: UIImage){
+        repository.saveImageToDocumentDirectory(imageName: item.id.stringValue, image: selectedImage)
     }
     
 //    func isSwitchChangedValue(){

@@ -74,7 +74,7 @@ class SettingAlert: UIViewController{
         Util.setAlertTime(data: alertTime)
         
         //알림 저장
-        let items = Array(Repository().read())
+        let items = Array(Repository().readItem())
         userNotificationCenter.editNotificationTime(by: items, alertTime: alertTime)
     }
     

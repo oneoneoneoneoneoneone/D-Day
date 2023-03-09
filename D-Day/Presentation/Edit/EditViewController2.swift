@@ -284,14 +284,6 @@ extension EditViewController2: EditProtocol{
     
     func dismiss() {
         self.dismiss(animated: true)
-//        self.view.window?.rootViewController?.dismiss(animated: true)
-        
-//
-//        let detailViewController = DetailViewController(id: item.id)
-//
-//        self.view.window?.rootViewController?.navigationController?.pushViewController(detailViewController, animated: true)
-        
-        
     }
 }
 
@@ -347,9 +339,8 @@ extension EditViewController2: PHPickerViewControllerDelegate {
                     return
                 }
                 
+                self.presenter.saveImage(selectedImage: selectedImage)
                 DispatchQueue.main.async {
-                    Repository().saveImageToDocumentDirectory(imageName: self.item.id.stringValue, image: selectedImage)
-                    
                     self.setImage(selectedImage)
                 }
             }
@@ -362,9 +353,8 @@ extension EditViewController2: UINavigationControllerDelegate, UIImagePickerCont
         picker.dismiss(animated: true, completion: nil)
         
         if let selectedImage = info[.editedImage] as? UIImage {
+            self.presenter.saveImage(selectedImage: selectedImage)
             DispatchQueue.main.async { //
-                Repository().saveImageToDocumentDirectory(imageName: self.item.id.stringValue, image: selectedImage)
-                
                 self.setImage(selectedImage)
             }
         }

@@ -13,7 +13,7 @@ import RealmSwift
 protocol DetailProtocol{
     func setNavigation()
     func setLayout()
-    func setData(_ item: Item)
+    func setData(item: Item, image: UIImage)
     
     func presentToEditViewController(item: Item)
     func showShareActivityViewController(title: String, date: String, image: UIImage)
@@ -25,13 +25,16 @@ protocol DetailProtocol{
 
 final class DetailPresenter{
     private let viewController: DetailProtocol
+    private let repository: Repository
     
     private let userNotificationCenter = UNUserNotificationCenter.current()
+    
     private let id: ObjectId
     private var item = Item()
     
-    init(viewController: DetailProtocol, id: ObjectId) {
+    init(viewController: DetailProtocol, repository: Repository = Repository(), id: ObjectId) {
         self.viewController = viewController
+        self.repository = repository
         self.id = id
     }
     
@@ -41,9 +44,10 @@ final class DetailPresenter{
     }
     
     func viewWillAppear(){
-        self.item = Repository().read().filter(NSPredicate(format: "id = %@", id )).first ?? Item()
+        self.item = repository.readItem().filter(NSPredicate(format: "id = %@", id )).first ?? Item()
+        guard let image = repository.loadImageFromDocumentDirectory(imageName: item.id.stringValue) else {return}
         
-        viewController.setData(item)
+        viewController.setData(item: item, image: image)
     }
     
     func rightEditButtonTap(){
@@ -60,16 +64,12 @@ final class DetailPresenter{
         viewController.showDeleteAlertController()
     }
     
-    func deleteRepository(){
+    func deleteItem(){
+        //알림
         self.userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [self.item.id.stringValue])
-        Repository().deleteImageToDocumentDirectory(imageName: self.item.id.stringValue)
-        Repository().delete(data: self.item)
+        //이미지
+        repository.deleteImageToDocumentDirectory(imageName: self.item.id.stringValue)
+        //item
+        repository.deleteItem(self.item)
     }
 }
-
-//extension DetailPresenter: EditDelegate{
-//    func updateData(_ item: Item) {
-//        self.item = item
-//        viewController.setData(item)
-//    }
-//}

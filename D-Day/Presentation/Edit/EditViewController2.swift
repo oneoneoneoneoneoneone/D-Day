@@ -57,7 +57,7 @@ class EditViewController2: UIViewController{
         button.tintColor = .systemGray
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
-        button.imageView?.contentMode = .scaleAspectFill
+        button.imageView?.contentMode = .scaleAspectFit
         button.sizeToFit()
         
         button.addTarget(self, action: #selector(bgImageButtonTap), for: .touchUpInside)
@@ -102,12 +102,9 @@ class EditViewController2: UIViewController{
     }
     
     private func openLibrary(){
-        var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 1
-        configuration.filter = .images
-        
-        let picker = PHPickerViewController(configuration: configuration)
-        picker.isEditing = true
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
         picker.delegate = self
         
         self.present(picker, animated: true)
@@ -323,38 +320,13 @@ extension EditViewController2{
 }
 
 
-extension EditViewController2: PHPickerViewControllerDelegate {
-    //사진 선택
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-//        var selectedImage : UIImage?
-        picker.dismiss(animated: true, completion: nil)
-        
-        let itemProvider = results.first?.itemProvider
-        
-        if let itemProvider = itemProvider, //UIImage로 값을 불러올 수 있을 경우에만 실행하도록 구현
-           itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
-                guard let selectedImage = image as? UIImage else {
-                    print(error?.localizedDescription)
-                    return
-                }
-                
-                self.presenter.saveImage(selectedImage: selectedImage)
-                DispatchQueue.main.async {
-                    self.setImage(selectedImage)
-                }
-            }
-        }
-    }
-}
-
 extension EditViewController2: UINavigationControllerDelegate, UIImagePickerControllerDelegate{
+    //camera
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         
         if let selectedImage = info[.editedImage] as? UIImage {
-            self.presenter.saveImage(selectedImage: selectedImage)
-            DispatchQueue.main.async { //
+            DispatchQueue.main.async {
                 self.setImage(selectedImage)
             }
         }

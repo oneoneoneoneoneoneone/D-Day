@@ -30,17 +30,19 @@ protocol EditProtocol{
 final class EditPresenter: NSObject{
     private let viewController: EditProtocol
     private let delegate: EditDelegate
+    private let userDefaultsManager: UserDefaultsManager
     private let repository: Repository
+    private let userNotificationCenter = UNUserNotificationCenter.current()
     
     let textViewPlaceHolder = "메모를 입력해주세요."
     private let cellList = EditViewController2.CellList.allCases
-    private let userNotificationCenter = UNUserNotificationCenter.current()
     
     private let item: Item
     
-    init(viewController: EditProtocol, delegate: EditDelegate, repository: Repository = Repository(), item: Item) {
+    init(viewController: EditProtocol, delegate: EditDelegate, userDefaultsManager: UserDefaultsManager = UserDefaultsManager(), repository: Repository = Repository(), item: Item) {
         self.viewController = viewController
         self.delegate = delegate
+        self.userDefaultsManager = userDefaultsManager
         self.repository = repository
         self.item = item
     }
@@ -94,7 +96,7 @@ final class EditPresenter: NSObject{
         repository.editItem(saveItem)
         
         //알림시간 불러오기
-        let alertTime = Util.getAlertTime()
+        let alertTime = userDefaultsManager.getAlertTime()
         
         //알림 추가
         userNotificationCenter.addNotificationRequest(by: item, alertTime: alertTime ?? AlertTime(isOn: true, day: 0, time: Date.now))

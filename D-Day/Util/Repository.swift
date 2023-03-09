@@ -9,7 +9,6 @@ import Foundation
 import RealmSwift
 import UIKit
 
-
 protocol RepositoryType{
     func readItem() -> Results<Item>!
     func editItem(_ data: Item)
@@ -19,8 +18,6 @@ protocol RepositoryType{
 class Repository: RepositoryType{
     private final let appGroupId = "group.D-Day"
     private final let defaultRealmPath = "default.realm"
-    private final let currentDisplay = "currentDisplay"
-    private final let currentSort = "currentSort"
     private lazy var container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupId)
     
     
@@ -114,23 +111,5 @@ class Repository: RepositoryType{
                 print("이미지를 삭제하지 못했습니다.")
             }
         }
-    }
-    
-    
-    //MARK: UserDefaults
-    func setCurrentDisplay(index: Int){
-        UserDefaults.standard.setValue(index, forKey: currentDisplay)
-    }
-    
-    func setCurrentSort(index: Int){
-        UserDefaults.standard.setValue(index, forKey: currentSort)
-    }
-    
-    func getCurrentDisplay() -> Int{
-        return UserDefaults.standard.integer(forKey: currentDisplay)
-    }
-    
-    func getCurrentSort() -> Int{
-        return UserDefaults.standard.integer(forKey: currentSort)
     }
 }

@@ -23,7 +23,9 @@ protocol MainProtocol{
 
 final class MainPresenter: NSObject{
     private let viewController: MainProtocol
+    private let userDefaultsManager: UserDefaultsManager
     private let repository: Repository
+    
     
     private let DisplayList = [MainViewController.DisplayStyle.x11, MainViewController.DisplayStyle.x22, MainViewController.DisplayStyle.x14, MainViewController.DisplayStyle.x24]
     private let SortList = [MainViewController.AlertAction.title, MainViewController.AlertAction.dateDesc, MainViewController.AlertAction.dateAsc]
@@ -32,8 +34,9 @@ final class MainPresenter: NSObject{
     
     private var items: [Item] = []
     
-    init(viewController: MainProtocol, repository: Repository = Repository()) {
+    init(viewController: MainProtocol, userDefaultsManager: UserDefaultsManager = UserDefaultsManager(), repository: Repository = Repository()) {
         self.viewController = viewController
+        self.userDefaultsManager = userDefaultsManager
         self.repository = repository
     }
     
@@ -60,8 +63,8 @@ final class MainPresenter: NSObject{
         viewController.setNavigationBar()
         viewController.setLayout()
         
-        currentDisplayIndex = repository.getCurrentDisplay()
-        currentSortIndex = repository.getCurrentSort()
+        currentDisplayIndex = userDefaultsManager.getCurrentDisplay()
+        currentSortIndex = userDefaultsManager.getCurrentSort()
     }
     
     func viewWillAppear(){
@@ -75,7 +78,7 @@ final class MainPresenter: NSObject{
         
         bind(items)
         
-        repository.setCurrentDisplay(index: currentDisplayIndex)
+        userDefaultsManager.setCurrentDisplay(index: currentDisplayIndex)
         viewController.showToast(message: "\(DisplayList[currentDisplayIndex].title)로 보여집니다.")
     }
     
@@ -84,7 +87,7 @@ final class MainPresenter: NSObject{
         
         bind(items)
         
-        repository.setCurrentSort(index: currentSortIndex)
+        userDefaultsManager.setCurrentSort(index: currentSortIndex)
         viewController.showToast(message: "\(SortList[currentSortIndex].title)순으로 보여집니다.")
     }
     

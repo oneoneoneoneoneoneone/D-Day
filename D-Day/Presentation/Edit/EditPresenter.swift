@@ -55,7 +55,7 @@ final class EditPresenter: NSObject{
         viewController.setData(item)
         
         guard let image = Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue) else {
-            viewController.setImage(UIImage(systemName: "plus.square"))
+            viewController.setImage(.init(systemName: "photo"))
             return
         }
         viewController.setImage(image)
@@ -76,9 +76,12 @@ final class EditPresenter: NSObject{
         //            viewController.showToast(message: "배경색을 선택해주세요.")
         //            return
         //        }
-        if isBgImage && bgImage == nil{
+        if isBgImage && bgImage == .init(systemName: "photo"){
             viewController.showToast(message: "배경이미지를 선택해주세요.")
             return
+        }
+        if bgImage != .init(systemName: "photo"){
+            repository.saveImageToDocumentDirectory(imageName: item.id.stringValue, image: bgImage)
         }
         
         let saveItem = Item()
@@ -107,10 +110,6 @@ final class EditPresenter: NSObject{
     
     func bgImageButtonTap(){
         viewController.showImageSelectAlertController()
-    }
-    
-    func saveImage(selectedImage: UIImage){
-        repository.saveImageToDocumentDirectory(imageName: item.id.stringValue, image: selectedImage)
     }
     
 //    func isSwitchChangedValue(){

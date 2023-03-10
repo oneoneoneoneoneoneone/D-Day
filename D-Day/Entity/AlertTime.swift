@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct AlertTime: Codable{
+    let isOn: Bool
+    let day: Int
+    let time: Date
+}

@@ -6,32 +6,35 @@
 //
 
 import UIKit
-import RxSwift
-import RxRelay
 
 class EditTableViewToggleCell: UITableViewCell{
-//    let data: ((_ isOn: Bool) -> Void)?
-    let disposeBag = DisposeBag()
+    private var delegate: EditCellDelegate?
+    private var cell: EditViewController.CellList?
     
-    let label = UILabel()
-    let toggle = UISwitch()
+    let label: UILabel = {
+        let label = UILabel()
+        label.text = "시작일"
+        
+        return label
+    }()
+    
+    lazy var toggle: UISwitch = {
+        let toggle = UISwitch()
+        toggle.addTarget(self, action: #selector(toggleValueChanged), for: .valueChanged)
+        
+        return toggle
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setAttribute()
         setLayout()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setAttribute(){
-        label.text = "시작일"
-        }
-    
-    private func setLayout(){
+    func setLayout(){
         [label, toggle].forEach{
             contentView.addSubview($0)
         }
@@ -46,18 +49,18 @@ class EditTableViewToggleCell: UITableViewCell{
         }
     }
     
-    func bind(_ item: BehaviorRelay<Bool?>){
-        toggle.rx.isOn
-            .bind(to: item)
-            .disposed(by: disposeBag)
+    func bind(delegate: EditCellDelegate, cell: EditViewController.CellList){
+        self.delegate = delegate
+        self.cell = cell
+        label.text = cell.text
     }
     
-    func setLabelText(text: String){
-        label.text = text
-    }
-    
-    func setDate(isOn: Bool){
+    func setDate(isOn: Bool){        
         toggle.isOn = isOn
         toggle.sendActions(for: .valueChanged)
+    }
+    
+    @objc func toggleValueChanged(_ sender: UISwitch){
+        delegate?.valueChanged(self.cell!, didChangeValue: sender.isOn)
     }
 }

@@ -6,20 +6,36 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 
 class EditTableViewColorCell: UITableViewCell{
-    let disposeBag = DisposeBag()
+    private var delegate: EditCellDelegate?
+    private var cell: EditViewController.CellList?
     
-    let label = UILabel()
-    let button = UIColorWell()
-    let toggle = UISwitch()
+    let label: UILabel = {
+        let label = UILabel()
+        label.text = "배경색"
+        
+        return label
+    }()
+    
+    lazy var colorWell: UIColorWell = {
+        let colorWell = UIColorWell()
+        colorWell.contentVerticalAlignment = .center
+        colorWell.contentHorizontalAlignment = .trailing
+        colorWell.addTarget(self, action: #selector(colorWellValueChanged), for: .valueChanged)
+        
+        return colorWell
+    }()
+    
+    lazy var toggle: UISwitch = {
+        let toggle = UISwitch()
+        toggle.addTarget(self, action: #selector(toggleValueChanged), for: .valueChanged)
+        
+        return toggle
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setAttribute()
         setLayout()
     }
     
@@ -27,14 +43,8 @@ class EditTableViewColorCell: UITableViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setAttribute(){
-        button.contentVerticalAlignment = .center
-        button.contentHorizontalAlignment = .trailing
-        label.text = "배경색"
-    }
-    
     private func setLayout(){
-        [label, toggle, button].forEach{
+        [label, toggle, colorWell].forEach{
             contentView.addSubview($0)
         }
         
@@ -43,29 +53,20 @@ class EditTableViewColorCell: UITableViewCell{
             $0.centerY.equalToSuperview()
         }
         toggle.snp.makeConstraints{
-            $0.trailing.equalTo(button.snp.leading).offset(-10)
+            $0.trailing.equalTo(colorWell.snp.leading).offset(-10)
             $0.centerY.equalToSuperview()
         }
-        button.snp.makeConstraints{
+        colorWell.snp.makeConstraints{
             $0.trailing.equalToSuperview().inset(10)
             $0.centerY.equalToSuperview()
             $0.width.height.equalTo(120)
         }
-
     }
     
-    func bind(_ item: BehaviorRelay<Bool?>, _ color: BehaviorRelay<UIColor?>){
-        toggle.rx.isOn
-            .bind(to: item)
-            .disposed(by: disposeBag)
-        
-        button.rx.color
-            .bind(to: color)
-            .disposed(by: disposeBag)
-    }
-    
-    func setLabelText(text: String){
-        label.text = text
+    func bind(delegate: EditCellDelegate, cell: EditViewController.CellList){
+        self.delegate = delegate
+        self.cell = cell
+        label.text = cell.text
     }
     
     func setDate(isOn: Bool, color: String?){
@@ -74,28 +75,15 @@ class EditTableViewColorCell: UITableViewCell{
         
         guard let color = color, color != "" else { return }
   
-        button.selectedColor = UIColor(hexCode: color)
-        button.sendActions(for: .valueChanged)
+        colorWell.selectedColor = UIColor(hexCode: color)
+        colorWell.sendActions(for: .valueChanged)
     }
-}
-
-extension Reactive where Base: UIColorWell{
-    var color: ControlProperty<UIColor?>{
-        value
+    
+    @objc func colorWellValueChanged(_ sender: UIColorWell){
+        delegate?.valueChanged(self.cell!, didChangeValue: sender.selectedColor)
     }
-
-    var value: ControlProperty<UIColor?> {
-        return base.rx
-            .controlProperty(
-                editingEvents: UIColorWell.Event.valueChanged,
-                getter: { colorWell in
-                    colorWell.selectedColor
-                },
-                setter: { colorWell, value in
-                    if colorWell.selectedColor != value {
-                        colorWell.selectedColor = value
-                    }
-                }
-            )
+    
+    @objc func toggleValueChanged(_ sender: UISwitch){
+        delegate?.valueChanged(self.cell!, didChangeValue: sender.isOn)
     }
 }

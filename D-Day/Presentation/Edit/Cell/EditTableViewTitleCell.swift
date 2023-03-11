@@ -6,37 +6,41 @@
 //
 
 import UIKit
-import RxSwift
-import RxRelay
-import RxCocoa
 
 class EditTableViewTitleCell: UITableViewCell{
-    let disposeBag = DisposeBag()
+    private var delegate: EditCellDelegate?
+    private var cell: EditViewController.CellList?
     
-    let textField = UITextField()
-    let button = UIColorWell()//UIButton()
-    let label = UILabel()
+    lazy var textField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "제목을 입력하세요."
+        textField.delegate = self
+        
+//        textField.addTarget(self, action: #selector(textFieldValueChanged), for: .valueChanged)
+        
+        return textField
+    }()
+    
+    lazy var colorWell: UIColorWell = {
+        let colorWell = UIColorWell()
+//        colorWell.contentVerticalAlignment = .center
+//        colorWell.contentHorizontalAlignment = .trailing
+        colorWell.addTarget(self, action: #selector(colorWellValueChanged), for: .valueChanged)
+        
+        return colorWell
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setAttribute()
         setLayout()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setAttribute(){ 
-        textField.placeholder = "제목을 입력하세요."
-        
-//        button.backgroundColor = .black
-        //            let colorPicker = UIColorPickerViewController()
-    }
-    
     private func setLayout(){
-        [textField, button].forEach{
+        [textField, colorWell].forEach{
             contentView.addSubview($0)
         }
         
@@ -44,56 +48,41 @@ class EditTableViewTitleCell: UITableViewCell{
             $0.leading.equalToSuperview().inset(10)
             $0.centerY.equalToSuperview()
         }
-        button.snp.makeConstraints{
+        colorWell.snp.makeConstraints{
+            $0.leading.equalTo(textField.snp.trailing).offset(10)
             $0.trailing.equalToSuperview().inset(10)
             $0.centerY.equalToSuperview()
         }
     }
     
-    func bind(_ item: PublishRelay<String?>, _ color: BehaviorRelay<UIColor?>){
-        textField.rx.text
-            .bind(to: item)
-            .disposed(by: disposeBag)
-        
-        button.rx.color
-            .bind(to: color)
-            .disposed(by: disposeBag)
-    }
-    
-    func setPlaceholderText(text: String){
-        textField.placeholder = text
+    func bind(delegate: EditCellDelegate, cell: EditViewController.CellList){
+        self.delegate = delegate
+        self.cell = cell
+        textField.placeholder = cell.text
     }
     
     func setDate(text: String, color: String?){
-        textField.insertText(text)
+        textField.text = text
+        delegate?.valueChanged(self.cell!, didChangeValue: textField.text)
         
         guard let color = color, color != "" else { return }
         
-        button.selectedColor = UIColor(hexCode: color)
-        button.sendActions(for: .valueChanged)
+        colorWell.selectedColor = UIColor(hexCode: color)
+        colorWell.sendActions(for: .valueChanged)
+    }
+    
+//    @objc func textFieldValueChanged(_ sender: UITextField){
+//        delegate?.valueChanged(self.cell!, didChangeValue: sender.text)
+//    }
+    
+    @objc func colorWellValueChanged(_ sender: UIColorWell){
+        delegate?.valueChanged(self.cell!, didChangeValue: sender.selectedColor)
     }
 }
 
-//extension Reactive where Base: UIColorWell{
-//    var color: ControlProperty<UIColor?>{
-//        value
-//    }
-//
-//    var value: ControlProperty<UIColor?> {
-//        return base.rx
-//            .controlProperty(
-//                editingEvents: UIColorWell.Event.editingDidEnd,
-//                getter: { colorWell in
-//                    colorWell.selectedColor
-//                },
-//                setter: { colorWell, value in
-//                    // This check is important because setting text value always clears control state
-//                    // including marked text selection which is important for proper input
-//                    // when IME input method is used.
-//                    if colorWell.selectedColor != value {
-//                        colorWell.selectedColor = value
-//                    }
-//                }
-//            )
-//    }
-//}
+
+extension EditTableViewTitleCell: UITextFieldDelegate{
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        delegate?.valueChanged(self.cell!, didChangeValue: textField.text)
+    }
+}

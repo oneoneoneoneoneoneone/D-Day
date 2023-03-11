@@ -159,7 +159,7 @@ extension DetailViewController: DetailProtocol{
         }
     }
     
-    func setData(item: Item, image: UIImage){
+    func setData(item: Item, image: UIImage!){
         titleLabel.text = item.title
         titleLabel.textColor = UIColor(hexCode: item.titleColor)
         dDayLabel.text = "D\(Util.NumberOfDaysFromDate(from: item.date))"
@@ -167,6 +167,7 @@ extension DetailViewController: DetailProtocol{
         dateLabel.text = Util.StringFromDate(date: item.date)
         memoLabel.text = item.memo
         
+        //@@@@@@@@@@@@@@@@@@@@@@@@@@@ imageView.frame.height = 0.....
         imageView.layer.cornerRadius = item.isCircle ? (imageView.frame.height)/2 : 0
         if item.isBackgroundColor{
             imageView.backgroundColor = UIColor(hexCode: item.backgroundColor)
@@ -177,7 +178,7 @@ extension DetailViewController: DetailProtocol{
     }
 
     func presentToEditViewController(item: Item) {
-        let editViewController = UINavigationController(rootViewController: EditViewController2(item: item))
+        let editViewController = UINavigationController(rootViewController: EditViewController(item: item))
         editViewController.modalPresentationStyle = .fullScreen
         
         present(editViewController, animated: true)

@@ -122,7 +122,7 @@ extension MainViewController: MainProtocol{
     }
     
     func presentToEditViewController(){
-        let editViewController = UINavigationController(rootViewController: EditViewController2(delegate: presenter))
+        let editViewController = UINavigationController(rootViewController: EditViewController(delegate: presenter))
         editViewController.modalPresentationStyle = .fullScreen
         
         present(editViewController, animated: true)

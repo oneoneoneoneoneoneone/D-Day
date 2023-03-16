@@ -6,29 +6,20 @@
 //
 
 import UIKit
-import RxSwift
-import RxRelay
 
 class EditTableViewSegmentCell: UITableViewCell{
-    let disposeBag = DisposeBag()
+    private var delegate: EditCellDelegate?
+    private var cell: EditViewController.CellList?
     
-    let label = UILabel()
-    let segment = UISegmentedControl()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        setAttribute()
-        setLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-        
-    private func setAttribute(){
+    let label: UILabel = {
+        let label = UILabel()
         label.text = "반복"
         
+        return label
+    }()
+    
+    lazy var segment: UISegmentedControl = {
+        let segment = UISegmentedControl()
         let noneAction = UIAction(title: "안함", handler: {_ in })
         let dayAction = UIAction(title: "일", handler: {_ in })
         let mountAction = UIAction(title: "월", handler: {_ in })
@@ -37,6 +28,19 @@ class EditTableViewSegmentCell: UITableViewCell{
         segment.insertSegment(action: dayAction, at: 1, animated: true)
         segment.insertSegment(action: mountAction, at: 2, animated: true)
         segment.insertSegment(action: yearAction, at: 3, animated: true)
+        
+        segment.addTarget(self, action: #selector(segmentValueChanged), for: .valueChanged)
+        
+        return segment
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setLayout(){
@@ -54,18 +58,18 @@ class EditTableViewSegmentCell: UITableViewCell{
         }
     }
     
-    func bind(_ item: BehaviorRelay<Int?>){
-        segment.rx.value
-            .bind(to: item)
-            .disposed(by: disposeBag)
-    }
-    
-    func setLabelText(text: String){
-        label.text = text
+    func bind(delegate: EditCellDelegate, cell: EditViewController.CellList){
+        self.delegate = delegate
+        self.cell = cell
+        label.text = cell.text
     }
     
     func setDate(value: Int){
         segment.selectedSegmentIndex = value
         segment.sendActions(for: .valueChanged)
+    }
+    
+    @objc func segmentValueChanged(_ sender: UISegmentedControl){
+        delegate?.valueChanged(self.cell!, didChangeValue: sender.selectedSegmentIndex)
     }
 }

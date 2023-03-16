@@ -6,28 +6,13 @@
 //
 
 import UIKit
-import RxSwift
-import RxRelay
 
 class EditTableViewMemoCell: UITableViewCell{
-    let disposeBag = DisposeBag()
+    private var delegate: EditCellDelegate?
+    private var cell: EditViewController.CellList?
     
-    let label = UILabel()
-    let textView = UITextView()
-    var textViewPlaceHolder = "메모를 입력해주세요."
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setAttribute()
-        setLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setAttribute(){
+    lazy var textView: UITextView = {
+        let textView = UITextView()
         textView.layer.borderWidth = 1.0
         textView.layer.borderColor = UIColor.systemBackground.withAlphaComponent(0.7).cgColor
         textView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
@@ -36,6 +21,19 @@ class EditTableViewMemoCell: UITableViewCell{
         textView.textColor = .lightGray
         
         textView.delegate = self
+        
+        return textView
+    }()
+    
+    var textViewPlaceHolder = "메모를 입력해주세요."
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setLayout(){
@@ -48,22 +46,17 @@ class EditTableViewMemoCell: UITableViewCell{
         }
     }
     
-    func bind(_ item: BehaviorRelay<String?>){
-        textView.rx.text
-            .bind(to: item)
-            .disposed(by: disposeBag)
+    func bind(delegate: EditCellDelegate, cell: EditViewController.CellList){
+        self.delegate = delegate
+        self.cell = cell
     }
-    
-//    func setPlaceholderText(text: String){
-//        textViewPlaceHolder = text
-//    }
     
     func setDate(text: String){
         if text == "" {
             return
         }
         textView.text = text
-        textView.refreshControl?.sendActions(for: .valueChanged)
+        delegate?.valueChanged(self.cell!, didChangeValue: textView.text)
     }
 }
 
@@ -81,4 +74,12 @@ extension EditTableViewMemoCell: UITextViewDelegate{
             textView.textColor = .lightGray
         }
     }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        delegate?.valueChanged(self.cell!, didChangeValue: textView.text)
+    }
+    
+//    func textViewDidChangeSelection(_ textView: UITextView) {
+//        delegate?.valueChanged(self.cell!, didChangeValue: textView.text)
+//    }
 }

@@ -6,19 +6,31 @@
 //
 
 import UIKit
-import RxSwift
-import RxRelay
 
 class EditTableViewDateCell: UITableViewCell{
-    let disposeBag = DisposeBag()
+    private var delegate: EditCellDelegate?
+    private var cell: EditViewController.CellList?
     
-    let label = UILabel()
-    let datePicker = UIDatePicker()
+    let label: UILabel = {
+        let label = UILabel()
+        label.text = "날짜"
+        
+        return label
+    }()
+    
+    lazy var datePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.locale = Locale(identifier: "ko")
+        datePicker.preferredDatePickerStyle = .wheels
+        
+        datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+        
+        return datePicker
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setAttribute()
         setLayout()
     }
     
@@ -26,13 +38,6 @@ class EditTableViewDateCell: UITableViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setAttribute(){
-        label.text = "날짜"
-        
-        datePicker.datePickerMode = .date
-        datePicker.locale = Locale(identifier: "ko")
-        datePicker.preferredDatePickerStyle = .wheels
-    }
     
     private func setLayout(){
         [datePicker].forEach{
@@ -46,18 +51,18 @@ class EditTableViewDateCell: UITableViewCell{
         }
     }
     
-    func bind(_ item: PublishRelay<Date?>){
-        datePicker.rx.date
-            .bind(to: item)
-            .disposed(by: disposeBag)
-    }
-    
-    func setLabelText(text: String){
-        label.text = text
+    func bind(delegate: EditCellDelegate, cell: EditViewController.CellList){
+        self.delegate = delegate
+        self.cell = cell
+        label.text = cell.text
     }
     
     func setDate(date: Date){
         datePicker.date = date
         datePicker.sendActions(for: .valueChanged)
+    }
+    
+    @objc func datePickerValueChanged(_ sender: UIDatePicker){
+        delegate?.valueChanged(self.cell!, didChangeValue: sender.date)
     }
 }

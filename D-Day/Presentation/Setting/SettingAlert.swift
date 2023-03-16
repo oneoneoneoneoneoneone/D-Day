@@ -6,16 +6,12 @@
 //
 
 import UIKit
-import Foundation
 
-struct AlertTime: Codable{
-    let isOn: Bool
-    let day: Int
-    let time: Date
-}
 
 class SettingAlert: UIViewController{
     let userNotificationCenter = UNUserNotificationCenter.current()
+    let userDefaultsManager = UserDefaultsManager()
+    let repository = Repository()
 //    var data: ((_ alertDay: Int, _ alertDate: Date) -> Void)?
     
     let label = UILabel()
@@ -71,15 +67,15 @@ class SettingAlert: UIViewController{
         let alertTime = AlertTime(isOn: isSwitch.isOn, day: dayPicker.selectedRow(inComponent: 0), time: timePicker.date)
         
         //알림시간 저장
-        Util.setAlertTime(data: alertTime)
+        userDefaultsManager.setAlertTime(data: alertTime)
         
         //알림 저장
-        let items = Array(Repository().read())
+        let items = Array(repository.readItem())
         userNotificationCenter.editNotificationTime(by: items, alertTime: alertTime)
     }
     
     func setData(){
-        let alertTime = Util.getAlertTime()
+        let alertTime = userDefaultsManager.getAlertTime()
         
         isSwitch.isOn = alertTime?.isOn ?? true
         dayPicker.selectRow(alertTime?.day ?? 0, inComponent: 0, animated: false)

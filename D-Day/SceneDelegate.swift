@@ -24,6 +24,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.backgroundColor = .systemBackground
         self.window?.rootViewController = rootNavigationViewController
         self.window?.makeKeyAndVisible()
+        self.window?.overrideUserInterfaceStyle = UserDefaultsManager().getIsDarkMode() ? .dark : .unspecified
+    }
+    
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
 }

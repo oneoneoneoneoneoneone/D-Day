@@ -13,7 +13,7 @@ import RealmSwift
 protocol DetailProtocol{
     func setNavigation()
     func setLayout()
-    func setData(item: Item, image: UIImage)
+    func setData(item: Item, image: UIImage!)
     
     func presentToEditViewController(item: Item)
     func showShareActivityViewController(title: String, date: String, image: UIImage)
@@ -45,7 +45,7 @@ final class DetailPresenter{
     
     func viewWillAppear(){
         self.item = repository.readItem().filter(NSPredicate(format: "id = %@", id )).first ?? Item()
-        guard let image = repository.loadImageFromDocumentDirectory(imageName: item.id.stringValue) else {return}
+        let image = repository.loadImageFromDocumentDirectory(imageName: item.id.stringValue)
         
         viewController.setData(item: item, image: image)
     }

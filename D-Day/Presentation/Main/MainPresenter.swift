@@ -54,9 +54,6 @@ final class MainPresenter: NSObject{
     private func bind(_ items: [Item]){
         self.items = items
         
-        setSort()
-        
-        viewController.reloadCollectionView()
     }
     
     func viewDidLoad(){
@@ -68,26 +65,29 @@ final class MainPresenter: NSObject{
     }
     
     func viewWillAppear(){
-        self.items = Array(repository.readItem())
+        let readItems = Array(repository.readItem())
+        bind(readItems)
+        
+        setSort()
         
         viewController.reloadCollectionView()
     }
     
     func rightDisplayButtonTap(){
         self.currentDisplayIndex = (self.currentDisplayIndex + 1) % DisplayList.count
-        
-        bind(items)
-        
         userDefaultsManager.setCurrentDisplay(index: currentDisplayIndex)
+        
+        viewController.reloadCollectionView()
         viewController.showToast(message: "\(DisplayList[currentDisplayIndex].title)로 보여집니다.")
     }
     
     func rightSortButtonTap(){
         self.currentSortIndex = (currentSortIndex + 1) % SortList.count
-        
-        bind(items)
-        
         userDefaultsManager.setCurrentSort(index: currentSortIndex)
+        
+        setSort()
+        
+        viewController.reloadCollectionView()
         viewController.showToast(message: "\(SortList[currentSortIndex].title)순으로 보여집니다.")
     }
     

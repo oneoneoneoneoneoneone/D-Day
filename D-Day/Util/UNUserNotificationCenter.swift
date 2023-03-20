@@ -10,33 +10,39 @@ import UserNotifications
 
 extension UNUserNotificationCenter{
     //알럿이 켜지면 요청이 추가됨
-    func addNotificationRequest(by item: Item, alertTime: AlertTime){//day: Int, time: Date){
-        let content = UNMutableNotificationContent()
+    func addNotificationRequest(by item: Item, alertData: AlertData){
+        if !alertData.isOn {
+            return
+        }
         
+        //알림 내용
+        let content = UNMutableNotificationContent()
         content.title = item.title
-        content.body = "설정한 D-Day가 .. "
+        content.body = "D-Day"
         content.sound = .default
-        content.badge = 1        //생성된 뱃지는 SceneDelegate에서 없앰
+        content.badge = 1        //생성된 뱃지는 SceneDelegate에서
         
         //트리거 설정
-        
-        var component = Calendar.current.dateComponents([.year, .month, .day], from: item.date.addingTimeInterval(TimeInterval(-86400*alertTime.day)))
-        component.hour = Calendar.current.dateComponents([.hour], from: alertTime.time).hour
-        component.minute = Calendar.current.dateComponents([.minute], from: alertTime.time).minute
+        var component = Calendar.current.dateComponents([.year, .month, .day], from: item.date)//.addingTimeInterval(TimeInterval(25450)))//-86400)))
+        component.hour = Calendar.current.dateComponents([.hour], from: alertData.time).hour
+        component.minute = Calendar.current.dateComponents([.minute], from: alertData.time).minute
         let trigger = UNCalendarNotificationTrigger(dateMatching: component, repeats: false)
-        let request = UNNotificationRequest(identifier: item.id.stringValue, content: content, trigger: trigger)
+        
         //UNUserNotificationCenter에 추가
+        let request = UNNotificationRequest(identifier: item.id.stringValue, content: content, trigger: trigger)
         self.add(request, withCompletionHandler: nil)
         
         print("addNotificationRequest 완 - \(item.title)")
     }
     
     ///알림 시간 변경(전체)
-    func editNotificationTime(by items: [Item], alertTime: AlertTime){
+    func editNotificationTime(by items: [Item], alertData: AlertData){
         self.removeAllDeliveredNotifications()
         
-        items.forEach{
-            addNotificationRequest(by: $0, alertTime: alertTime)
+        if alertData.isOn {
+            items.forEach{
+                addNotificationRequest(by: $0, alertData: alertData)
+            }
         }
     }
     

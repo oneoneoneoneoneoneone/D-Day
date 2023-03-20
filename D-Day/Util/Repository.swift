@@ -24,7 +24,7 @@ class Repository: RepositoryType{
     //MARK: Realm
     private var realm: Realm{
         let realmURL = container?.appendingPathComponent(defaultRealmPath)
-        let config = Realm.Configuration(fileURL: realmURL, schemaVersion: 4)
+        let config = Realm.Configuration(fileURL: realmURL, schemaVersion: 5)
         
         return try! Realm(configuration: config)
     }
@@ -42,7 +42,7 @@ class Repository: RepositoryType{
                 item.title = data.title
                 item.titleColor = data.titleColor
                 item.date = data.date
-                item.isStartCount = data.isStartCount
+//                item.isStartCount = data.isStartCount
                 item.backgroundColor = data.backgroundColor
                 item.isBackgroundColor = data.isBackgroundColor
                 item.isBackgroundImage = data.isBackgroundImage

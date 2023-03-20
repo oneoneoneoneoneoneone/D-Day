@@ -168,7 +168,7 @@ extension DetailViewController: DetailProtocol{
         memoLabel.text = item.memo
         
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@ imageView.frame.height = 0.....
-        imageView.layer.cornerRadius = item.isCircle ? (imageView.frame.height)/2 : 0
+//        imageView.layer.cornerRadius = item.isCircle ? (imageView.frame.height)/2 : 0
         if item.isBackgroundColor{
             imageView.backgroundColor = UIColor(hexCode: item.backgroundColor)
         }

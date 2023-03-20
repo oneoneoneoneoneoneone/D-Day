@@ -20,10 +20,9 @@
 		335B086F29BAF13E008458E8 /* EditTableViewToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335B086729BAF13E008458E8 /* EditTableViewToggleCell.swift */; };
 		335B087129BAF13E008458E8 /* EditTableViewTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335B086929BAF13E008458E8 /* EditTableViewTitleCell.swift */; };
 		3369E8C329B9BD7D001E004C /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3369E8C229B9BD7D001E004C /* UIColor.swift */; };
-		3369E8C529BA25F6001E004C /* AlertTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3369E8C429BA25F6001E004C /* AlertTime.swift */; };
+		3369E8C529BA25F6001E004C /* AlertData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3369E8C429BA25F6001E004C /* AlertData.swift */; };
 		3369E8C729BA2CA0001E004C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3369E8C629BA2CA0001E004C /* UserDefaultsManager.swift */; };
 		3373C551299CFAC600E5758A /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373C550299CFAC600E5758A /* UNUserNotificationCenter.swift */; };
-		3373C553299D38EB00E5758A /* SettingAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373C552299D38EB00E5758A /* SettingAlert.swift */; };
 		339D1FBA299CC0A400FEE6DB /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 339D1FB9299CC0A400FEE6DB /* SideMenu */; };
 		339D1FBC299CC0C900FEE6DB /* SettingSideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339D1FBB299CC0C900FEE6DB /* SettingSideViewController.swift */; };
 		33AE1F6C2994CDEB008A67A5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AE1F6B2994CDEB008A67A5 /* WidgetKit.framework */; };
@@ -32,6 +31,9 @@
 		33AE1F752994CDEB008A67A5 /* D_DayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AE1F742994CDEB008A67A5 /* D_DayWidget.swift */; };
 		33AE1F782994CDED008A67A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33AE1F772994CDED008A67A5 /* Assets.xcassets */; };
 		33AE1F7E2994CDED008A67A5 /* D-DayWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 33AE1F692994CDEB008A67A5 /* D-DayWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		33BEF24C29C3176B0096486A /* AlertToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEF24B29C3176B0096486A /* AlertToggleCell.swift */; };
+		33BEF24E29C318A80096486A /* AlertTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEF24D29C318A80096486A /* AlertTimeCell.swift */; };
+		33BEF25029C89EAD0096486A /* DarkModeToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEF24F29C89EAD0096486A /* DarkModeToggleCell.swift */; };
 		33C487832996074400792ABB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D2728229824D7D00EF9321 /* Item.swift */; };
 		33D27261298233E600EF9321 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D27260298233E600EF9321 /* AppDelegate.swift */; };
 		33D27263298233E600EF9321 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D27262298233E600EF9321 /* SceneDelegate.swift */; };
@@ -87,10 +89,9 @@
 		335B086729BAF13E008458E8 /* EditTableViewToggleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewToggleCell.swift; sourceTree = "<group>"; };
 		335B086929BAF13E008458E8 /* EditTableViewTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewTitleCell.swift; sourceTree = "<group>"; };
 		3369E8C229B9BD7D001E004C /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		3369E8C429BA25F6001E004C /* AlertTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTime.swift; sourceTree = "<group>"; };
+		3369E8C429BA25F6001E004C /* AlertData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertData.swift; sourceTree = "<group>"; };
 		3369E8C629BA2CA0001E004C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		3373C550299CFAC600E5758A /* UNUserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNUserNotificationCenter.swift; sourceTree = "<group>"; };
-		3373C552299D38EB00E5758A /* SettingAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAlert.swift; sourceTree = "<group>"; };
 		339D1FBB299CC0C900FEE6DB /* SettingSideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSideViewController.swift; sourceTree = "<group>"; };
 		33AE1F692994CDEB008A67A5 /* D-DayWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "D-DayWidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33AE1F6B2994CDEB008A67A5 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -99,6 +100,9 @@
 		33AE1F742994CDEB008A67A5 /* D_DayWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = D_DayWidget.swift; sourceTree = "<group>"; };
 		33AE1F772994CDED008A67A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33AE1F792994CDED008A67A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		33BEF24B29C3176B0096486A /* AlertToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertToggleCell.swift; sourceTree = "<group>"; };
+		33BEF24D29C318A80096486A /* AlertTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTimeCell.swift; sourceTree = "<group>"; };
+		33BEF24F29C89EAD0096486A /* DarkModeToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeToggleCell.swift; sourceTree = "<group>"; };
 		33C4877F299606EF00792ABB /* D-Day.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "D-Day.entitlements"; sourceTree = "<group>"; };
 		33C487802996070A00792ABB /* D-DayWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "D-DayWidgetExtension.entitlements"; sourceTree = "<group>"; };
 		33D2725D298233E600EF9321 /* D-Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "D-Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -242,7 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				33D2728229824D7D00EF9321 /* Item.swift */,
-				3369E8C429BA25F6001E004C /* AlertTime.swift */,
+				3369E8C429BA25F6001E004C /* AlertData.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -293,7 +297,9 @@
 			isa = PBXGroup;
 			children = (
 				339D1FBB299CC0C900FEE6DB /* SettingSideViewController.swift */,
-				3373C552299D38EB00E5758A /* SettingAlert.swift */,
+				33BEF24D29C318A80096486A /* AlertTimeCell.swift */,
+				33BEF24B29C3176B0096486A /* AlertToggleCell.swift */,
+				33BEF24F29C89EAD0096486A /* DarkModeToggleCell.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -440,14 +446,16 @@
 				335B087129BAF13E008458E8 /* EditTableViewTitleCell.swift in Sources */,
 				335B086A29BAF13E008458E8 /* EditTableViewImageCell.swift in Sources */,
 				33D272BB2988051900EF9321 /* EditViewController.swift in Sources */,
-				3369E8C529BA25F6001E004C /* AlertTime.swift in Sources */,
+				3369E8C529BA25F6001E004C /* AlertData.swift in Sources */,
 				339D1FBC299CC0C900FEE6DB /* SettingSideViewController.swift in Sources */,
 				3369E8C729BA2CA0001E004C /* UserDefaultsManager.swift in Sources */,
 				33D272DE2990CE8500EF9321 /* Repository.swift in Sources */,
 				3369E8C329B9BD7D001E004C /* UIColor.swift in Sources */,
+				33BEF24E29C318A80096486A /* AlertTimeCell.swift in Sources */,
 				335B086D29BAF13E008458E8 /* EditTableViewColorCell.swift in Sources */,
 				335B086C29BAF13E008458E8 /* EditTableViewMemoCell.swift in Sources */,
 				33D272B62986CC8800EF9321 /* MainPresenter.swift in Sources */,
+				33BEF24C29C3176B0096486A /* AlertToggleCell.swift in Sources */,
 				33DDD9BF29B0D42200C8F0C9 /* EditPresenter.swift in Sources */,
 				33D2728329824D7D00EF9321 /* Item.swift in Sources */,
 				335B086F29BAF13E008458E8 /* EditTableViewToggleCell.swift in Sources */,
@@ -455,7 +463,7 @@
 				33D27265298233E600EF9321 /* MainViewController.swift in Sources */,
 				33DDD9C129B0D96C00C8F0C9 /* DetailPresenter.swift in Sources */,
 				33D27261298233E600EF9321 /* AppDelegate.swift in Sources */,
-				3373C553299D38EB00E5758A /* SettingAlert.swift in Sources */,
+				33BEF25029C89EAD0096486A /* DarkModeToggleCell.swift in Sources */,
 				335B086E29BAF13E008458E8 /* EditTableViewSegmentCell.swift in Sources */,
 				33D2727829824AD400EF9321 /* CollectionViewCell_1x4.swift in Sources */,
 				33D272BE2988054300EF9321 /* DetailViewController.swift in Sources */,

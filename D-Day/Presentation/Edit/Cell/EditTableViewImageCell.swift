@@ -112,6 +112,10 @@ class EditTableViewImageCell: UITableViewCell{
         delegate?.valueChanged(self.cell!, didChangeValue: button.image(for: .normal))
     }
     
+    func setToggle(){
+        toggle.isOn.toggle()
+    }
+    
     @objc func buttonTap(){
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "사진 보관함에서 선택", style: .default, handler: {_ in

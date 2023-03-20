@@ -48,8 +48,8 @@ class EditViewController: UIViewController{
 
 extension EditViewController: EditProtocol{
     func setNavigation(){
-        var leftCancelButton = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(leftCancelButtonTap))
-        var rightSaveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(rightSaveButtonTap))
+        let leftCancelButton = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(leftCancelButtonTap))
+        let rightSaveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(rightSaveButtonTap))
 
         navigationItem.leftBarButtonItem = leftCancelButton
         navigationItem.rightBarButtonItem = rightSaveButton
@@ -87,6 +87,17 @@ extension EditViewController: EditProtocol{
     
     func dismiss() {
         self.dismiss(animated: true)
+    }
+    
+    func setBgToggle(_ cell: EditViewController.CellList){
+        if cell == .backgroundColor{
+            guard let cell = tableView.visibleCells.filter({ $0.reuseIdentifier == "EditTableViewImageCell"}).first as? EditTableViewImageCell else {return}
+            cell.setToggle()
+        }
+        if cell == .backgroundImage{
+            guard let cell = tableView.visibleCells.filter({ $0.reuseIdentifier == "EditTableViewColorCell"}).first as? EditTableViewColorCell else {return}
+            cell.setToggle()
+        }
     }
 }
 

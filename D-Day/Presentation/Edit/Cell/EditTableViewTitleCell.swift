@@ -23,6 +23,7 @@ class EditTableViewTitleCell: UITableViewCell{
     
     lazy var colorWell: UIColorWell = {
         let colorWell = UIColorWell()
+        colorWell.supportsAlpha = false
 //        colorWell.contentVerticalAlignment = .center
 //        colorWell.contentHorizontalAlignment = .trailing
         colorWell.addTarget(self, action: #selector(colorWellValueChanged), for: .valueChanged)

@@ -20,6 +20,7 @@ class EditTableViewColorCell: UITableViewCell{
     
     lazy var colorWell: UIColorWell = {
         let colorWell = UIColorWell()
+        colorWell.supportsAlpha = false
         colorWell.contentVerticalAlignment = .center
         colorWell.contentHorizontalAlignment = .trailing
         colorWell.addTarget(self, action: #selector(colorWellValueChanged), for: .valueChanged)
@@ -77,6 +78,10 @@ class EditTableViewColorCell: UITableViewCell{
   
         colorWell.selectedColor = UIColor(hexCode: color)
         colorWell.sendActions(for: .valueChanged)
+    }
+    
+    func setToggle(){
+        toggle.isOn.toggle()
     }
     
     @objc func colorWellValueChanged(_ sender: UIColorWell){

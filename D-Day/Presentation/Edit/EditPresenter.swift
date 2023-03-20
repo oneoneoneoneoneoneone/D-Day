@@ -22,6 +22,7 @@ protocol EditProtocol{
     func setNavigation()
     func setLayout()
     
+    func setBgToggle(_ cell: EditViewController.CellList)
     func showCloseAlertController()
     func showToast(message: String)
     func dismiss()
@@ -88,11 +89,9 @@ final class EditPresenter: NSObject{
         //저장
         repository.editItem(saveItem)
         
-        //알림시간 불러오기
-        let alertTime = userDefaultsManager.getAlertTime()
-        
-        //알림 추가
-        userNotificationCenter.addNotificationRequest(by: item, alertTime: alertTime ?? AlertTime(isOn: true, day: 0, time: Date.now))
+        //알림추가
+        let alertData = userDefaultsManager.getAlertTime()
+        userNotificationCenter.addNotificationRequest(by: item, alertData: alertData)
         
         viewController.dismiss()
         delegate.selectItem(item.id)
@@ -115,6 +114,7 @@ extension EditPresenter: EditCellDelegate{
         case .backgroundColor:
             if value is Bool{
                 editItem.isBackgroundColor = value as! Bool
+                viewController.setBgToggle(cell)
             }
         case .backgroundImage:
             if value is UIImage{
@@ -122,6 +122,7 @@ extension EditPresenter: EditCellDelegate{
             }
             if value is Bool{
                 editItem.isBackgroundImage = value as! Bool
+                viewController.setBgToggle(cell)
             }
         case .isCircle:
             if value is Bool{

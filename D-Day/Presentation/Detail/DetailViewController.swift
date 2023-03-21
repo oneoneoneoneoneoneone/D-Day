@@ -24,7 +24,7 @@ class DetailViewController: UIViewController{
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
-        stackView.distribution = .fillEqually
+//        stackView.distribution = .fillEqually
         stackView.spacing = 10
         
         return stackView
@@ -128,11 +128,11 @@ extension DetailViewController: DetailProtocol{
     }
     
     func setLayout(){
-        [imageView, vStackView, vvStackView].forEach{
+        [vStackView, vvStackView].forEach{
             view.addSubview($0)
         }
         
-        [titleLabel, dDayLabel, dateLabel].forEach{
+        [imageView, titleLabel, dDayLabel, dateLabel].forEach{
             vStackView.addArrangedSubview($0)
         }
         
@@ -151,6 +151,17 @@ extension DetailViewController: DetailProtocol{
         }
         imageView.snp.makeConstraints{
             $0.top.leading.trailing.bottom.equalTo(vStackView)
+        }
+        titleLabel.snp.makeConstraints{
+            $0.top.equalTo(vStackView).inset(10)
+            $0.centerX.equalToSuperview()
+        }
+        dDayLabel.snp.makeConstraints{
+            $0.centerX.centerY.equalToSuperview()
+        }
+        dateLabel.snp.makeConstraints{
+            $0.top.equalTo(dDayLabel.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
         }
         
         vvStackView.snp.makeConstraints{
@@ -203,6 +214,9 @@ extension DetailViewController: DetailProtocol{
         activityItems.append(image)
         
         let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        //terminating with uncaught exception of type NSException
+        activityViewController.popoverPresentationController?.barButtonItem = UIBarButtonItem(customView: shareButton)
+        
         //제거할 공유타입
         activityViewController.excludedActivityTypes = [.addToReadingList, .assignToContact, .openInIBooks, .saveToCameraRoll]
         

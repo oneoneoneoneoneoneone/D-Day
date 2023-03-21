@@ -21,6 +21,8 @@ class CollectionViewCell_1x4: UICollectionViewCell{
         setLayout()
     }
     private func setAttribute(){
+        self.backgroundColor = .white
+        
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         circleView.contentMode = .scaleAspectFill

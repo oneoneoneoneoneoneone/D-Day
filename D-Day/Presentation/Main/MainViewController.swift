@@ -33,7 +33,7 @@ class MainViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(systemName: "plus"), for: .normal)
         //, withConfiguration: Image.SymbolConfiguration(pointSize: 28, weight: .regular)), for: .normal)
-        button.layer.backgroundColor = UIColor.systemBackground.cgColor
+        button.layer.backgroundColor = UIColor.white.cgColor
         button.layer.cornerRadius = 25
         button.layer.shadowOpacity = 0.1
         button.layer.shadowOffset = CGSize(width: 0, height: 3)

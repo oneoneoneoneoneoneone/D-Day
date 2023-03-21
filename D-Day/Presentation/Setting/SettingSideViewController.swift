@@ -10,8 +10,8 @@ import SideMenu
 import MessageUI
 
 class SettingSideViewController: UIViewController{
-    let menuHeader = ["알림", "화면", "지원", "백업"]
-    let menu = [["종료 알림", "알림 시간"], ["다크 모드", "위젯 테마"], ["email 문의", "리뷰 쓰기",], ["캘린더 가져오기", "백업", "로그인"]]
+    let menuHeader = ["알림", "화면", "지원"/*, "백업"*/]
+    let menu = [["종료 알림", "알림 시간"], ["다크 모드"/*, "위젯 테마"*/], ["email 문의", "리뷰 쓰기",]/*, ["캘린더 가져오기", "백업", "로그인"]*/]
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -169,7 +169,7 @@ extension SettingSideViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch menu[indexPath.section][indexPath.row]{         
+        switch menu[indexPath.section][indexPath.row]{
         case "email 문의":
             presentToSendEmail()
         case "리뷰 쓰기":

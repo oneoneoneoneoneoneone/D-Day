@@ -69,51 +69,53 @@
 
 
   ### 2. Realm Schema 변경
-  - 기존에 사용해본 로컬디비인 UserDefaults와 다르게, 저장하는 데이터 타입 내 컬럼에 대해 변경사항이 있을 경우에 버전을 올리고 관계 데이터를 추가하는 작업이 필요했습니다.
-    <details>
-    <summary><b>코드</b></summary>
-    <div markdown="1">
+  - 기존에 사용해본 로컬디비인 UserDefaults와 다르게 Class 파일 내 칼럼을 수정/삭제하고 빌드했을때 read하는 부분에서 오류가 발생되었습니다.
+    - 저장하는 데이터 타입 내 컬럼에 대해 변경사항이 있을 경우에 버전을 올리고 관계 데이터를 추가하는 작업이 필요하다는 점을 알게되었습니다.
+      <details>
+      <summary><b>코드</b></summary>
+      <div markdown="1">
 
-    - 현재는 스키마버전을 올리는 코드만 사용하고 있습니다.
-    ~~~Swift
-    //EditPresenter
-      let config = Realm.Configuration(fileURL: realmURL, schemaVersion: 5)
-      return try! Realm(configuration: config)
-    ~~~
+      - 현재는 스키마버전을 올리는 코드만 사용하고 있습니다.
+      ~~~Swift
+      //EditPresenter
+        let config = Realm.Configuration(fileURL: realmURL, schemaVersion: 5)
+        return try! Realm(configuration: config)
+      ~~~
 
-    </div>
-    </details>
+      </div>
+      </details>
 
 
 </br>
 
 
-  ### 3. 수정한 데이터를 저장했을 때 Realm 오류
-  - Realm에서 조회한 object는 단순 복제한 값이 아니라, core database에 연동 된 값이라는 것을 확인했습니다.
-  - 읽어온 값을 바로 수정하면 오류가 나기 때문에, 저장할 인스턴스를 추가하여 수정된 값을 치환한 후 저장하도록 수정했습니다.
-    <details>
-    <summary><b>코드</b></summary>
-    <div markdown="1">
+  ### 3. Realm 데이터 조회 후 수정했을 때 오류
+  - 수정/신규 화면에서 데이터를 저장할 때 Realm 오류가 발생되었습니다.
+    - Realm에서 조회한 object는 단순 복제한 값이 아니라, core database에 연동 된 값이라는 것을 확인했습니다.
+    - 읽어온 값을 바로 수정하면 오류가 나기 때문에, 저장할 인스턴스를 추가하여 수정된 값을 치환한 후 저장하도록 수정했습니다.
+      <details>
+      <summary><b>코드</b></summary>
+      <div markdown="1">
 
-    ~~~Swift
-    //EditPresenter
-      let saveItem = Item()
-        saveItem.id = item.id
-        saveItem.title = editItem.title
-        saveItem.titleColor = editItem.titleColor
-        saveItem.date = editItem.date
-        saveItem.isBackgroundColor = editItem.isBackgroundColor
-        saveItem.backgroundColor = editItem.backgroundColor
-        saveItem.isBackgroundImage = editItem.isBackgroundImage
-        saveItem.isCircle = editItem.isCircle
-        saveItem.memo = editItem.memo == textViewPlaceHolder ? "" : editItem.memo
+      ~~~Swift
+      //EditPresenter
+        let saveItem = Item()
+          saveItem.id = item.id
+          saveItem.title = editItem.title
+          saveItem.titleColor = editItem.titleColor
+          saveItem.date = editItem.date
+          saveItem.isBackgroundColor = editItem.isBackgroundColor
+          saveItem.backgroundColor = editItem.backgroundColor
+          saveItem.isBackgroundImage = editItem.isBackgroundImage
+          saveItem.isCircle = editItem.isCircle
+          saveItem.memo = editItem.memo == textViewPlaceHolder ? "" : editItem.memo
 
-        //저장
-        repository.editItem(saveItem)
-    ~~~
+          //저장
+          repository.editItem(saveItem)
+      ~~~
 
-    </div>
-    </details>
+      </div>
+      </details>
   
   
   </br>

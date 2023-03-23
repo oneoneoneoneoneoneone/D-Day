@@ -1,5 +1,5 @@
 # :pushpin: D-Day
-디데이 이벤트를 관리할 수 있는 앱을 만들고 앱스토어 출시까지 진행해본 프로젝트 입니다.
+디데이 이벤트를 관리할 수 있는 앱을 만들고 앱스토어 심사까지 진행해본 프로젝트 입니다.
 >제작 기간: 2023.01 ~ 2023.03</br>
 >참여 인원: 개인 프로젝트
 
@@ -25,26 +25,7 @@
 </br>
 
 
-### 2. 화면전환
-  
-- 기존에 navigationView.pop을 이용해 모든 화면을 연결했으나, 상세>수정을 반복하면 화면이 계속 쌓이고 홈으로 돌아가기 번거로워져서 Edit화면은 present로 띄우도록 수정했습니다. 새로운 item을 썼을 때는 Main화면에 id 값을 넘겨주고 해당 item의 상세화면을 띄우는 방식으로 화면을 설계했습니다.
-
-
-</br>
-
-
-### 3. 구조
-  
-- MVP..
-- delegate 패턴으로 화면간 데이터를 전달했습니다.
-- Cell에서 수정된 값을 TableView로 전달
-- Edit화면에서 생성한 item id를 Main에 전달
-  
-  
-</br>
-
-
-### 3. Repository
+### 2. Repository
 
 - **주요 데이터 Realm으로 저장** 
   - Repository.swift 코드 확인: [🔗](https://github.com/oneoneoneoneoneoneone/NAVER-WEBTOON-CloneCoding/blob/main/NaverWebtoonCloneCoding/Util/Repository.swift)
@@ -52,14 +33,6 @@
 - **설정값은 User Defaults로 저장** 
   - UserDefaultsManager.swift 코드 확인: [🔗](https://github.com/oneoneoneoneoneoneone/NAVER-WEBTOON-CloneCoding/blob/main/NaverWebtoonCloneCoding/Util/Repository.swift)
      
-
-</br>
-
- 
-### 3.4. 알림
-  
-- 
-
 
 </br>
 

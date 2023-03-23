@@ -8,9 +8,9 @@
 
 
 ## 기술 스택
-> UIKit / SnapKit </br>
-> Realm </br>
-> MVP Architecture </br>
+- UIKit / SnapKit
+- Realm
+- MVP Architecture
 
 
 </br>

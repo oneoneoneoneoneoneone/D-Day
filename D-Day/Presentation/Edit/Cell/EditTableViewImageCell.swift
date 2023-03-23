@@ -100,6 +100,7 @@ class EditTableViewImageCell: UITableViewCell{
     
     func setDate(isOn: Bool, id: String){
         toggle.isOn = isOn
+        toggle.sendActions(for: .valueChanged)
         
         self.id = id
         

@@ -115,6 +115,7 @@ extension EditPresenter: EditCellDelegate{
             if value is Bool{
                 editItem.isBackgroundColor = value as! Bool
                 viewController.setBgToggle(cell)
+                editItem.isBackgroundImage = !(value as! Bool)
             }
         case .backgroundImage:
             if value is UIImage{
@@ -123,6 +124,7 @@ extension EditPresenter: EditCellDelegate{
             if value is Bool{
                 editItem.isBackgroundImage = value as! Bool
                 viewController.setBgToggle(cell)
+                editItem.isBackgroundColor = !(value as! Bool)
             }
         case .isCircle:
             if value is Bool{

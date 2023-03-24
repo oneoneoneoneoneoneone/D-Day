@@ -122,7 +122,7 @@
 
 
   ### 4. 앱심사 반려 - ipad 오류 및 16.3.1 버전 오류
-  - ipad에서만 공유하기 UIActivityViewController를 띄웠을때 앱이 죽는 현상이 있었습니다.
+  - iPad에서 UIActivityViewController를 띄웠을때, iOS 16.3.1 버전에서 UIAlertController를 띄웠을때 앱이 죽는 현상이 있었습니다.
     - popoverPresentationController에 barButtonItem에 이벤트를 일으킨 버튼을 주어 해결했습니다.
 
       <details>

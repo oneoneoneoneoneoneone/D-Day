@@ -123,7 +123,7 @@
 
   ### 4. 앱심사 반려 - ipad 오류 및 16.3.1 버전 오류
   - iPad에서 UIActivityViewController를 띄웠을때, iOS 16.3.1 버전에서 UIAlertController를 띄웠을때 앱이 죽는 현상이 있었습니다.
-    - popoverPresentationController에 barButtonItem에 이벤트를 일으킨 버튼을 주어 해결했습니다.
+    - popoverPresentationController의 위치값을 주기위한 속성을 추가해 해결했습니다.
 
       <details>
       <summary><b>코드</b></summary>
@@ -131,7 +131,7 @@
 
       ~~~Swift
       //DetailViewController
-          activityViewController.popoverPresentationController?.barButtonItem = UIBarButtonItem(customView: shareButton)
+          alert.popoverPresentationController?.sourceView = button
       ~~~
 
       </div>

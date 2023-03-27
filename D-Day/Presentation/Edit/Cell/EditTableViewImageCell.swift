@@ -89,7 +89,46 @@ class EditTableViewImageCell: UITableViewCell{
         picker.cameraFlashMode = .off
         picker.delegate = self
         
-        window?.rootViewController?.presentedViewController?.present(picker, animated: true)
+        if checkCameraPermission(picker){
+            window?.rootViewController?.presentedViewController?.present(picker, animated: true)
+        }
+    }
+    
+    private func checkCameraPermission(_ picker: UIImagePickerController) -> Bool{
+        let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+        
+        switch status {
+        case .notDetermined:
+            // 권한 요청
+            AVCaptureDevice.requestAccess(for: .video) { grated in
+                if !grated {
+                    OperationQueue.main.schedule {
+                        picker.dismiss(animated: true)
+                    }
+                }
+            }
+            return true
+        case .authorized:
+            return true
+        default:
+            self.showCamaraPermissionAlertController()
+            return false
+        }
+    }
+
+    func showCamaraPermissionAlertController() {
+        let alertController = UIAlertController(title: "카메라 권한이 없습니다.", message: "설정앱에서 카메라 접근을 허용해주세요.\n권한 설정이 변경되면 앱이 다시 실행됩니다.", preferredStyle: .alert)
+        
+        let moveAction = UIAlertAction(title: "이동", style: .default){ _ in
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        
+        [moveAction, cancelAction].forEach{action in
+            alertController.addAction(action)
+        }
+        
+        window?.rootViewController?.presentedViewController?.present(alertController, animated: true)
     }
         
     func bind(delegate: EditCellDelegate, cell: EditViewController.CellList){
@@ -109,7 +148,7 @@ class EditTableViewImageCell: UITableViewCell{
             delegate?.valueChanged(self.cell!, didChangeValue: button.image(for: .normal))
             return
         }
-        button.setImage(Repository().loadImageFromDocumentDirectory(imageName: id), for: .normal)
+        button.setImage(image, for: .normal)
         delegate?.valueChanged(self.cell!, didChangeValue: button.image(for: .normal))
     }
     
@@ -119,6 +158,8 @@ class EditTableViewImageCell: UITableViewCell{
     
     @objc func buttonTap(){
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.popoverPresentationController?.sourceView = button
+        
         alert.addAction(UIAlertAction(title: "사진 보관함에서 선택", style: .default, handler: {_ in
             self.openLibrary()
         }))
@@ -145,5 +186,9 @@ extension EditTableViewImageCell: UINavigationControllerDelegate, UIImagePickerC
                 self.setImage(image: selectedImage)
             }
         }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }

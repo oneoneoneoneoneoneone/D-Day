@@ -53,7 +53,7 @@ struct Provider: IntentTimelineProvider {
     }
     
     func getItem(completion: @escaping(Item) -> ()){
-        let items = Repository().read()
+        let items = Repository().readItem()
         
         completion((items?.first)!)
     }

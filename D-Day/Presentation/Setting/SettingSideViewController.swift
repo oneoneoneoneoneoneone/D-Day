@@ -11,7 +11,7 @@ import MessageUI
 
 class SettingSideViewController: UIViewController{
     let menuHeader = ["알림", "화면", "지원"/*, "백업"*/]
-    let menu = [["종료 알림", "알림 시간"], ["다크 모드"/*, "위젯 테마"*/], ["email 문의", "리뷰 쓰기",]/*, ["캘린더 가져오기", "백업", "로그인"]*/]
+    let menu = [["종료 알림", "알림 시간"], ["다크 모드"/*, "위젯 테마"*/], ["email 문의"/*, "리뷰 쓰기"*/]/*, ["캘린더 가져오기", "백업", "로그인"]*/]
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -63,19 +63,19 @@ class SettingSideViewController: UIViewController{
             controller.mailComposeDelegate = self
             
             let bodyString = """
-                                     -------------------
-                                     
-                                     Device Model : \(self.getDeviceIdentifier())
-                                     Device OS : \(UIDevice.current.systemVersion)
-                                     App Version : \(self.getCurrentVersion())
-                                     
-                                     -------------------
-                                     
-                                     문의 내용 :
-                                     
-                                     """
+                             -------------------
+                             
+                             Device Model : \(self.getDeviceIdentifier())
+                             Device OS : \(UIDevice.current.systemVersion)
+                             App Version : \(self.getCurrentVersion())
+                             
+                             -------------------
+                             
+                             문의 내용 :
+                             
+                             """
                     
-            controller.setToRecipients(["hhhahahah@gmail.com"])
+            controller.setToRecipients(["0ne1_1@naver.com"])
             controller.setSubject("<D-Day>앱 문의")
             controller.setMessageBody(bodyString, isHTML: false)
             

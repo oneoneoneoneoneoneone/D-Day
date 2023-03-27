@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIColor{
+    
     convenience init(hex: Int, alpha: CGFloat = 1.0) {
         let r = CGFloat((hex >> 16) & 0xff) / 255
         let g = CGFloat((hex >> 08) & 0xff) / 255
@@ -15,6 +16,9 @@ extension UIColor{
         self.init(red: r, green: g, blue: b, alpha: alpha)
     }
     
+    /**
+     - Warning: 사용 안함
+     */
     convenience init(hexCode: String) {
         let hex = hexCode.trimmingCharacters(in: NSCharacterSet.alphanumerics.inverted)// alphanumericCharacterSet().invertedSet)
 //        let hex = hexCode.stringByTrimmingCharactersInSet(NSCharacterSet.alphanumericCharacterSet().invertedSet)

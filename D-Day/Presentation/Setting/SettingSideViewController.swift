@@ -8,10 +8,13 @@
 import UIKit
 import SideMenu
 import MessageUI
+import WidgetKit
 
 class SettingSideViewController: UIViewController{
-    let menuHeader = ["알림", "화면", "지원"/*, "백업"*/]
-    let menu = [["종료 알림", "알림 시간"], ["다크 모드"/*, "위젯 테마"*/], ["email 문의", "리뷰 쓰기"]/*, ["캘린더 가져오기", "백업", "로그인"]*/]
+    final let menuHeader = ["알림", "화면", "위젯", "지원"/*, "백업"*/]
+    final let menu = [["종료 알림", "알림 시간"], ["다크 모드"], ["잠금화면 콘텐츠 선택"], ["email 문의", "리뷰 쓰기"]/*, ["캘린더 가져오기", "백업", "로그인"]*/]
+    
+    let repository = Repository()
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -115,6 +118,23 @@ class SettingSideViewController: UIViewController{
         }
     }
     
+    private func presentToWidgetItemSelectView(){
+        let alertController = UIAlertController(title: "잠금화면 위젯에 사용할 항목을 선택하세요.", message: nil, preferredStyle: .alert)
+        
+        repository.readItem().forEach{item in
+            let checked = self.repository.getDefaultWidget() == item.id.stringValue
+            let action = UIAlertAction(title: "\(item.title) \(checked ? "✔️" : "")", style: .default){ _ in
+                self.repository.setDefaultWidget(id: item.id.stringValue)
+                Util.widgetReload()
+            }
+            
+            alertController.addAction(action)
+        }
+        alertController.addAction(UIAlertAction(title: "취소", style: .cancel))
+        
+        self.present(alertController, animated: true)
+    }
+    
 }
 
 extension SettingSideViewController: UITableViewDelegate, UITableViewDataSource{
@@ -159,6 +179,17 @@ extension SettingSideViewController: UITableViewDelegate, UITableViewDataSource{
             cell.selectionStyle = .none
             
             return cell
+        case "잠금화면 콘텐츠 선택":
+            let cell = tableView.dequeueReusableCell(withIdentifier: "default") ?? UITableViewCell(style: .default, reuseIdentifier: "default")
+            cell.textLabel?.text = menu[indexPath.section][indexPath.row]
+            cell.selectionStyle = .none
+            
+//            let selectedLabel = UILabe
+//            selectedButton
+//            selectedButton.addTarget(self, action: #selector(), for: .touchUpInside)
+//            cell.accessoryView = selectedButton
+            
+            return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "default") ?? UITableViewCell(style: .default, reuseIdentifier: "default")
             cell.textLabel?.text = menu[indexPath.section][indexPath.row]
@@ -174,6 +205,8 @@ extension SettingSideViewController: UITableViewDelegate, UITableViewDataSource{
             presentToSendEmail()
         case "리뷰 쓰기":
             presentToAppStoreReview()
+        case "잠금화면 콘텐츠 선택":
+            presentToWidgetItemSelectView()
         default:
             break
         }

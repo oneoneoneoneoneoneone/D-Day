@@ -18,6 +18,7 @@ struct Provider: IntentTimelineProvider {
     //본격적으로 위젯에 표시될
     func placeholder(in context: Context) -> SimpleEntry {
         return SimpleEntry(date: Date(),
+                           id: "",
                            title: "이벤트",
                            dday: "D-Day",
                            image: UIImage(),
@@ -33,11 +34,12 @@ struct Provider: IntentTimelineProvider {
         
         let entry = SimpleEntry(
             date: Date(),
+            id: "",
             title: "이벤트",
             dday: "D-Day",
             image: UIImage(),
             forColor: .label,
-            backColor: .systemBackground
+            backColor: .systemGray6
         )
         completion(entry)
     }
@@ -50,13 +52,18 @@ struct Provider: IntentTimelineProvider {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)! //언제 리로드할지
             
             let items = Array(Repository().readItem())
-            var item = items.filter{$0.id.stringValue == configuration.SelectedWidget?.identifier}.first ?? Item()
-            if items.filter({$0.id.stringValue == configuration.SelectedWidget?.identifier}).count < 1 {
-                item.title = "디데이를 선택해주세요."
+            var item = Item()
+            
+            if items.filter({$0.id.stringValue == configuration.SelectedWidget?.identifier}).count > 0{
+                item = items.filter{$0.id.stringValue == configuration.SelectedWidget?.identifier}.first ?? Item()
+            }
+            else{
+                item = items.filter{$0.id.stringValue == Repository().getDefaultWidget()}.first ?? Item()
             }
             
             let entry = SimpleEntry(
                 date: entryDate,
+                id: item.id.stringValue,
                 title: item.title,
                 dday: Util.numberOfDaysFromDate(from: item.date),
                 image: Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue) ?? UIImage(),
@@ -74,6 +81,7 @@ struct Provider: IntentTimelineProvider {
 //위젯 콘텐츠를 업데이트한 date정보 + 표시하고자하는 정보 : TimelineEntry
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    let id: String
     let title: String
     let dday: String
     let image: UIImage
@@ -106,49 +114,7 @@ struct D_DayWidgetEntryView : View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(entry.backColor))
-            
-        case .systemMedium:
-            ZStack{
-                Image(uiImage: entry.image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                HStack{
-                    Text(entry.title)
-                        .font(.title3)
-                        .padding(10)
-                    Spacer()
-                    Text(entry.dday)
-                        .font(.title)
-                        .padding(10)
-                }.foregroundColor(.init(entry.forColor))
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(entry.backColor))
-        case .systemLarge:
-            ZStack{
-                Image(uiImage: entry.image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                VStack{
-                    Text(entry.title)
-                        .font(.title3)
-                        .multilineTextAlignment(.center)
-                    Spacer().frame(height: 20)
-                    Text(entry.dday)
-                        .font(.title)
-                }.foregroundColor(.init(entry.forColor))
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(entry.backColor))
-//        case .systemExtraLarge:
-//            VStack{
-//                Text(entry.title)
-//                    .font(.title3)
-//                    .multilineTextAlignment(.center)
-//                Spacer().frame(height: 20)
-//                Text(entry.dday)
-//                    .font(.title)
-//            }
+            .widgetURL(URL(string: "open://detail?id=\(entry.id)"))
         case .accessoryCircular:
             VStack{
                 Text(entry.title.count > 3 ? String(entry.title[...entry.title.index(entry.title.startIndex, offsetBy:3)]) : entry.title)
@@ -157,18 +123,13 @@ struct D_DayWidgetEntryView : View {
                 Text(entry.dday)
                     .font(.callout)
             }
+            .widgetURL(URL(string: "open://detail?id=\(entry.id)"))
         case .accessoryInline:
             Text("\(entry.title)  \(entry.dday)")
                 .font(.caption)
-        case .accessoryRectangular:
-            HStack{
-                Text(entry.title)
-                    .font(.caption)
-                Text(entry.dday)
-                    .font(.callout)
-            }
+                .widgetURL(URL(string: "open://detail?id=\(entry.id)"))
         @unknown default:
-            Text("default")
+            Text("")
         }
     }
 }
@@ -186,7 +147,8 @@ struct D_DayWidget: Widget {
             D_DayWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("디데이 위젯")      //위젯 추가갤러리 - 이름
-        .description("하나의 디데이를 선택하여 위젯에 표시할 수 있습니다.")  //위젯 추가갤러리 - 설명
+        .description("한개의 디데이를 선택하여 위젯에 표시할 수 있습니다.")  //위젯 추가갤러리 - 설명
+        .supportedFamilies([.systemSmall, .accessoryCircular, .accessoryInline])
     }
 }
 
@@ -194,6 +156,7 @@ struct D_DayWidget: Widget {
 struct D_DayWidget_Previews: PreviewProvider {
     static var previews: some View {
         D_DayWidgetEntryView(entry: SimpleEntry(date: Date(),
+                                                id: "",
                                                 title: "이벤트",
                                                 dday: "D-Day",
                                                 image: UIImage(),

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import WidgetKit
 
 struct Util{    
     static func stringFromDate(date: Date) -> String{
@@ -29,5 +30,9 @@ struct Util{
         else{
             return "D-Day"
         }
+    }
+    
+    static func widgetReload(){
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }

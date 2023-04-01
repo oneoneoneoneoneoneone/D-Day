@@ -112,4 +112,12 @@ class Repository: RepositoryType{
             }
         }
     }
+    
+    func setDefaultWidget(id: String!){
+        UserDefaults(suiteName: appGroupId)?.setValue(id, forKey: "defaultWidget")
+    }
+
+    func getDefaultWidget() -> String!{
+        return UserDefaults(suiteName: appGroupId)?.string(forKey: "defaultWidget")
+    }
 }

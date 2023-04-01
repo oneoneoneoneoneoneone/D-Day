@@ -11,7 +11,7 @@ import RealmSwift
 
 //main
 protocol EditDelegate{
-    func selectItem(_ id: ObjectId)
+    func selectItem(_ id: String)
 }
 protocol EditCellDelegate{
     func valueChanged(_ cell: EditViewController.CellList, didChangeValue value: Any?)
@@ -93,8 +93,16 @@ final class EditPresenter: NSObject{
         let alertData = userDefaultsManager.getAlertTime()
         userNotificationCenter.addNotificationRequest(by: item, alertData: alertData)
         
+        //기본 위젯
+        if repository.getDefaultWidget() == nil {
+            repository.setDefaultWidget(id: item.id.stringValue)
+        }
+        
+        //위젯 새로고침
+        Util.widgetReload()
+        
         viewController.dismiss()
-        delegate.selectItem(item.id)
+        delegate.selectItem(item.id.stringValue)
     }
 }
 

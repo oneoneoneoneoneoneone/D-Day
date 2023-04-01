@@ -16,7 +16,7 @@ protocol MainProtocol{
     
     func presentToSideMenu()
     func presentToEditViewController()
-    func presentToDetailViewController(id: ObjectId)
+    func presentToDetailViewController(id: String)
     
     func showToast(message: String)
 }
@@ -101,7 +101,7 @@ final class MainPresenter: NSObject{
 }
 
 extension MainPresenter: EditDelegate{
-    func selectItem(_ id: ObjectId) {
+    func selectItem(_ id: String) {
         viewController.presentToDetailViewController(id: id)
     }
 }
@@ -110,7 +110,7 @@ extension MainPresenter: EditDelegate{
 //MARK: UICollectionViewDelegate & DataSource method
 extension MainPresenter: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewController.presentToDetailViewController(id: items[indexPath.row].id)
+        viewController.presentToDetailViewController(id: items[indexPath.row].id.stringValue)
     }
 }
 

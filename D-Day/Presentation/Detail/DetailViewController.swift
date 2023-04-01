@@ -11,7 +11,7 @@ import RealmSwift
 
 class DetailViewController: UIViewController{
     private lazy var presenter = DetailPresenter(viewController: self, id: id)
-    private let id: ObjectId
+    private let id: String
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -91,7 +91,7 @@ class DetailViewController: UIViewController{
         return button
     }()
     
-    init(id: ObjectId) {
+    init(id: String) {
         self.id = id
 
         super.init(nibName: nil, bundle: nil)

@@ -29,10 +29,10 @@ final class DetailPresenter{
     
     private let userNotificationCenter = UNUserNotificationCenter.current()
     
-    private let id: ObjectId
+    private let id: String
     private var item = Item()
     
-    init(viewController: DetailProtocol, repository: Repository = Repository(), id: ObjectId) {
+    init(viewController: DetailProtocol, repository: Repository = Repository(), id: String) {
         self.viewController = viewController
         self.repository = repository
         self.id = id
@@ -44,7 +44,7 @@ final class DetailPresenter{
     }
     
     func viewWillAppear(){
-        self.item = repository.readItem().filter{$0.id == id}.first ?? Item()
+        self.item = repository.readItem().filter{$0.id.stringValue == id}.first ?? Item()
         let image = repository.loadImageFromDocumentDirectory(imageName: item.id.stringValue)
         
         viewController.setData(item: item, image: image)
@@ -65,6 +65,10 @@ final class DetailPresenter{
     }
     
     func deleteItem(){
+        //기본 위젯
+        if repository.getDefaultWidget() == self.item.id.stringValue {
+            repository.setDefaultWidget(id: nil)
+        }
         //알림
         self.userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [self.item.id.stringValue])
         //이미지

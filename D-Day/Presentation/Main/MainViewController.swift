@@ -128,7 +128,7 @@ extension MainViewController: MainProtocol{
         present(editViewController, animated: true)
     }
     
-    func presentToDetailViewController(id: ObjectId) {
+    func presentToDetailViewController(id: String) {
         let detailViewController = DetailViewController(id: id)
         
         self.navigationController?.pushViewController(detailViewController, animated: true)

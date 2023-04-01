@@ -10,7 +10,7 @@ import RealmSwift
 import UIKit
 
 protocol RepositoryType{
-    func readItem() -> Results<Item>!
+    func readItem() -> [Item]!
     func editItem(_ data: Item)
     func deleteItem(_ data: Item)
 }
@@ -24,15 +24,15 @@ class Repository: RepositoryType{
     //MARK: Realm
     private var realm: Realm{
         let realmURL = container?.appendingPathComponent(defaultRealmPath)
-        let config = Realm.Configuration(fileURL: realmURL, schemaVersion: 5)
+        let config = Realm.Configuration(fileURL: realmURL, schemaVersion: 5, objectTypes: [Item.self])
         
         return try! Realm(configuration: config)
     }
     
-    func readItem() -> Results<Item>!{
+    func readItem() -> [Item]!{
         //        print(realm.configuration.fileURL!)
         
-        return realm.objects(Item.self)
+        return Array(realm.objects(Item.self))
     }
     
     func editItem(_ data: Item) {

@@ -57,6 +57,7 @@ class UserDefaultsManager{
     }
 
     func getIsDarkMode() -> Bool!{
-        return UserDefaults.standard.bool(forKey: "isDarkMode") as! Bool
+        return UserDefaults.standard.bool(forKey: "isDarkMode")
     }
+    
 }

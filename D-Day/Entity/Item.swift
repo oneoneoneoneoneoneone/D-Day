@@ -26,9 +26,3 @@ class Item: Object{
 enum Repeat: Int, PersistableEnum{
     case none, week, mount, year
 }
-
-class WidgetItem: Object{
-    @Persisted var id: String = ""
-    @Persisted var title: String = ""
-    @Persisted var dDay: String = ""
-}

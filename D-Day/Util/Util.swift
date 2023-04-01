@@ -9,31 +9,25 @@ import Foundation
 import UIKit
 
 struct Util{    
-    static func StringFromDate(date: Date) -> String{
+    static func stringFromDate(date: Date) -> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         
         return dateFormatter.string(from: date)
     }
     
-    static func NumberOfDaysFromDate(from: Date, to: Date = Date.now) -> String{
+    static func numberOfDaysFromDate(from: Date, to: Date = Date.now) -> String{
         let calendar = NSCalendar.current
         let numberOfDays = calendar.dateComponents([.day], from: from, to: to)
         
         if numberOfDays.day! > 0{
-            return "+\(numberOfDays.day!)"
+            return "D+\(numberOfDays.day!)"
         }
         else if numberOfDays.day! < 0{
-            return "\(numberOfDays.day!)"
+            return "D\(numberOfDays.day!)"
         }
         else{
-            return "-Day"
+            return "D-Day"
         }
-    }
-    
-    static func showToast(view: UIView, message: String){
-        //남아있는 토스트뷰 지우기
-        ToastView().removeToast(view: view)
-        ToastView().showToast(view: view, message: message)
     }
 }

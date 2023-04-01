@@ -173,9 +173,9 @@ extension DetailViewController: DetailProtocol{
     func setData(item: Item, image: UIImage!){
         titleLabel.text = item.title
         titleLabel.textColor = UIColor(hexCode: item.titleColor)
-        dDayLabel.text = "D\(Util.NumberOfDaysFromDate(from: item.date))"
+        dDayLabel.text = Util.numberOfDaysFromDate(from: item.date)
         dDayLabel.textColor = UIColor(hexCode: item.titleColor)
-        dateLabel.text = Util.StringFromDate(date: item.date)
+        dateLabel.text = Util.stringFromDate(date: item.date)
         memoLabel.text = item.memo
         
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@ imageView.frame.height = 0.....

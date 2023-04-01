@@ -58,7 +58,7 @@ struct Provider: IntentTimelineProvider {
             let entry = SimpleEntry(
                 date: entryDate,
                 title: item.title,
-                dday: Util.NumberOfDaysFromDate(from: item.date),
+                dday: Util.numberOfDaysFromDate(from: item.date),
                 image: Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue) ?? UIImage(),
                 forColor: UIColor(hexCode: item.titleColor),
                 backColor: UIColor(hexCode: item.backgroundColor)

@@ -11,7 +11,7 @@ import MessageUI
 
 class SettingSideViewController: UIViewController{
     let menuHeader = ["알림", "화면", "지원"/*, "백업"*/]
-    let menu = [["종료 알림", "알림 시간"], ["다크 모드"/*, "위젯 테마"*/], ["email 문의"/*, "리뷰 쓰기"*/]/*, ["캘린더 가져오기", "백업", "로그인"]*/]
+    let menu = [["종료 알림", "알림 시간"], ["다크 모드"/*, "위젯 테마"*/], ["email 문의", "리뷰 쓰기"]/*, ["캘린더 가져오기", "백업", "로그인"]*/]
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -104,7 +104,7 @@ class SettingSideViewController: UIViewController{
     }
     
     private func presentToAppStoreReview(){
-        if let appstoreURL = URL(string: "https://apps.apple.com/app/id1108187098") {
+        if let appstoreURL = URL(string: "https://apps.apple.com/app/id6445882140") {
             var components = URLComponents(url: appstoreURL, resolvingAgainstBaseURL: false)
             components?.queryItems = [URLQueryItem(name: "action", value: "write-review")]
             guard let writeReviewURL = components?.url else {

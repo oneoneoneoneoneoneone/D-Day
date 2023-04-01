@@ -82,7 +82,8 @@ extension EditViewController: EditProtocol{
     }
         
     func showToast(message: String) {
-        Util.showToast(view: self.view, message: message)
+        ToastView().removeToast(view: view)
+        ToastView().showToast(view: view, message: message)
     }
     
     func dismiss() {

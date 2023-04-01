@@ -136,7 +136,8 @@ extension MainViewController: MainProtocol{
     }
     
     func showToast(message: String) {
-        Util.showToast(view: self.view, message: message)
+        ToastView().removeToast(view: view)
+        ToastView().showToast(view: view, message: message)
     }
 }
 

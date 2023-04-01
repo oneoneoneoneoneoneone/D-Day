@@ -44,7 +44,7 @@ final class DetailPresenter{
     }
     
     func viewWillAppear(){
-        self.item = repository.readItem().filter(NSPredicate(format: "id = %@", id )).first ?? Item()
+        self.item = repository.readItem().filter{$0.id == id}.first ?? Item()
         let image = repository.loadImageFromDocumentDirectory(imageName: item.id.stringValue)
         
         viewController.setData(item: item, image: image)
@@ -57,7 +57,7 @@ final class DetailPresenter{
     func shareButtonTap(){
         guard let image = viewController.transformToImage() else {return}
         
-        viewController.showShareActivityViewController(title: item.title, date: Util.StringFromDate(date: item.date), image: image)
+        viewController.showShareActivityViewController(title: item.title, date: Util.stringFromDate(date: item.date), image: image)
     }
     
     func deleteButtonTap(){

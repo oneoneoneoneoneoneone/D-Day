@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "33AE1F682994CDEB008A67A5"
-               BuildableName = "D-DayWidget.appex"
-               BlueprintName = "D-DayWidget"
+               BlueprintIdentifier = "33619F7F29D5C2C2007F44A9"
+               BuildableName = "Intent.appex"
+               BlueprintName = "Intent"
                ReferencedContainer = "container:D-Day.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,6 +32,20 @@
                BlueprintIdentifier = "33D2725C298233E600EF9321"
                BuildableName = "D-Day.app"
                BlueprintName = "D-Day"
+               ReferencedContainer = "container:D-Day.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "33AE1F682994CDEB008A67A5"
+               BuildableName = "D-DayWidget.appex"
+               BlueprintName = "D-DayWidget"
                ReferencedContainer = "container:D-Day.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -57,18 +71,8 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.springboard">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "33AE1F682994CDEB008A67A5"
-            BuildableName = "D-DayWidget.appex"
-            BlueprintName = "D-DayWidget"
-            ReferencedContainer = "container:D-Day.xcodeproj">
-         </BuildableReference>
-      </RemoteRunnable>
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "33D2725C298233E600EF9321"
@@ -76,24 +80,7 @@
             BlueprintName = "D-Day"
             ReferencedContainer = "container:D-Day.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "_XCWidgetKind"
-            value = ""
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "_XCWidgetDefaultView"
-            value = "timeline"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "_XCWidgetFamily"
-            value = "medium"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

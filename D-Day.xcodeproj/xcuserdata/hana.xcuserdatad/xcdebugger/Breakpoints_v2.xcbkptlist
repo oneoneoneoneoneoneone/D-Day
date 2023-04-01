@@ -7,63 +7,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "45234ED9-3F8B-4D3D-BB37-9C1CD2BC9916"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "D-Day/Presentation/Edit/Cell/EditTableViewImageCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "checkCameraPermission(_:)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D0EDC187-68EC-4DFC-8B6D-0E5C9489B1B7"
+            uuid = "9823D526-3E22-4C0E-A0AC-7000F9E0D26F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "D-Day/Presentation/Edit/Cell/EditTableViewImageCell.swift"
+            filePath = "D-DayWidget/D_DayWidget.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "showCamaraPermissionAlertController()"
-            landmarkType = "9">
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "getTimeline(for:in:completion:)"
+            landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "D0EDC187-68EC-4DFC-8B6D-0E5C9489B1B7 - 2e9bcae821a2d150"
+                  uuid = "9823D526-3E22-4C0E-A0AC-7000F9E0D26F - a482e3db22246996"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "D_Day.EditTableViewImageCell.showCamaraPermissionAlertController() -&gt; ()"
-                  moduleName = "D-Day"
+                  symbolName = "D_DayWidget.Provider.getTimeline(for: D_DayWidget.WidgetIntent, in: WidgetKit.TimelineProviderContext, completion: (WidgetKit.Timeline&lt;D_DayWidget.SimpleEntry&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "D-DayWidget"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hana/Programming/Xcode/Project/D-Day/D-Day/Presentation/Edit/Cell/EditTableViewImageCell.swift"
+                  urlString = "file:///Users/hana/Programming/Xcode/Project/D-Day/D-DayWidget/D_DayWidget.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "120"
-                  endingLineNumber = "120"
-                  offsetFromSymbolStart = "192">
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "2864">
                </Location>
                <Location
-                  uuid = "D0EDC187-68EC-4DFC-8B6D-0E5C9489B1B7 - d28eccc9f91dff8d"
+                  uuid = "9823D526-3E22-4C0E-A0AC-7000F9E0D26F - d908db3ab3b5fcfb"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.UIAlertAction) -&gt; () in D_Day.EditTableViewImageCell.showCamaraPermissionAlertController() -&gt; ()"
-                  moduleName = "D-Day"
+                  symbolName = "D_DayWidget.Provider.__preview__getTimeline(for: D_DayWidget.WidgetIntent, in: WidgetKit.TimelineProviderContext, completion: (WidgetKit.Timeline&lt;D_DayWidget.SimpleEntry&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "D_DayWidget.1.preview-thunk.dylib"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hana/Programming/Xcode/Project/D-Day/D-Day/Presentation/Edit/Cell/EditTableViewImageCell.swift"
+                  urlString = "file:///Users/hana/Programming/Xcode/Project/D-Day/D-DayWidget/D_DayWidget.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "121"
-                  endingLineNumber = "121"
-                  offsetFromSymbolStart = "160">
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "3108">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -71,33 +55,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A320AADE-E909-447A-BB94-A3D1DF30B485"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "D-Day/Presentation/Edit/Cell/EditTableViewImageCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "openCamera()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "148D8CF7-04DB-4B51-8AB6-834EC3484ECA"
+            uuid = "B31B472F-E9D1-4DD8-9621-8CE71F96FD64"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "D-Day/Presentation/Edit/Cell/EditTableViewImageCell.swift"
+            filePath = "D-DayWidget/D_DayWidget.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "openCamera()"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "getTimeline(for:in:completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B31B472F-E9D1-4DD8-9621-8CE71F96FD64 - a482e3db22246eaf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "D_DayWidget.Provider.getTimeline(for: D_DayWidget.WidgetIntent, in: WidgetKit.TimelineProviderContext, completion: (WidgetKit.Timeline&lt;D_DayWidget.SimpleEntry&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "D-DayWidget"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hana/Programming/Xcode/Project/D-Day/D-DayWidget/D_DayWidget.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "1404">
+               </Location>
+               <Location
+                  uuid = "B31B472F-E9D1-4DD8-9621-8CE71F96FD64 - d908db3ab3b5fbc2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "D_DayWidget.Provider.__preview__getTimeline(for: D_DayWidget.WidgetIntent, in: WidgetKit.TimelineProviderContext, completion: (WidgetKit.Timeline&lt;D_DayWidget.SimpleEntry&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "D_DayWidget.1.preview-thunk.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hana/Programming/Xcode/Project/D-Day/D-DayWidget/D_DayWidget.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "1532">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

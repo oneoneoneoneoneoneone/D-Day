@@ -12,6 +12,5 @@ import SwiftUI
 struct D_DayWidgetBundle: WidgetBundle {
     var body: some Widget {
         D_DayWidget()
-//        D_DayWidgetLiveActivity()
     }
 }

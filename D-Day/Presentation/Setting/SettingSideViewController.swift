@@ -12,7 +12,8 @@ import WidgetKit
 
 class SettingSideViewController: UIViewController{
     final let menuHeader = ["알림", "화면", "위젯", "지원"/*, "백업"*/]
-    final let menu = [["종료 알림", "알림 시간"], ["다크 모드"], ["잠금화면 콘텐츠 선택"], ["email 문의", "리뷰 쓰기"]/*, ["캘린더 가져오기", "백업", "로그인"]*/]
+    final let menu = [["❗️알림 허용이 꺼진 상태", "디데이 알림", "알림 시간"], ["다크 모드"], ["잠금화면 디데이 선택"], ["email 문의", "리뷰 쓰기"]/*, ["캘린더 가져오기", "백업", "로그인"]*/]
+    var isAlarmPermission = true
     
     let repository = Repository()
     
@@ -37,6 +38,10 @@ class SettingSideViewController: UIViewController{
         view.addSubview(tableView)
         tableView.snp.makeConstraints{
             $0.edges.equalToSuperview()
+        }
+        
+        checkAlarmPermission{isHidden in
+            self.isAlarmPermission = isHidden
         }
     }
     
@@ -135,9 +140,25 @@ class SettingSideViewController: UIViewController{
         self.present(alertController, animated: true)
     }
     
+    private func checkAlarmPermission(completionHandler: @escaping((Bool)->Void)){
+        UNUserNotificationCenter.current().getNotificationSettings{settings in
+            switch settings.authorizationStatus {
+            case .authorized:
+                completionHandler(true)
+            default:
+                completionHandler(false)
+            }
+        }
+    }
+    
+    @objc private func openSttingApp(){
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+    }
+    
 }
 
 extension SettingSideViewController: UITableViewDelegate, UITableViewDataSource{
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         menu.count
     }
@@ -153,15 +174,32 @@ extension SettingSideViewController: UITableViewDelegate, UITableViewDataSource{
         return header
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch menu[indexPath.section][indexPath.row]{
+        case "❗️알림 허용이 꺼진 상태":
+        if isAlarmPermission {
+            return 0
+        }
+        else {
+            return 60
+        }
+        default: return 40
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch menu[indexPath.section][indexPath.row]{
-//        case "종료 일주일 전 알림":
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "AlertToggleCell") ?? AlertToggleCell()
-//            cell.textLabel?.text = menu[indexPath.section][indexPath.row]
-//            cell.selectionStyle = .none
-//
-//            return cell
-        case "종료 알림":
+        case "❗️알림 허용이 꺼진 상태":
+            let cell = tableView.dequeueReusableCell(withIdentifier: "default") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "default")
+            cell.textLabel?.text = menu[indexPath.section][indexPath.row]
+            cell.detailTextLabel?.text = "  설정에서 켜기"
+            cell.detailTextLabel?.textColor = .blue
+            cell.isHidden = isAlarmPermission
+            
+            cell.selectionStyle = .none
+
+            return cell
+        case "디데이 알림":
             let cell = tableView.dequeueReusableCell(withIdentifier: "AlertToggleCell") ?? AlertToggleCell()
             cell.textLabel?.text = menu[indexPath.section][indexPath.row]
             cell.selectionStyle = .none
@@ -179,15 +217,10 @@ extension SettingSideViewController: UITableViewDelegate, UITableViewDataSource{
             cell.selectionStyle = .none
             
             return cell
-        case "잠금화면 콘텐츠 선택":
+        case "잠금화면 디데이 선택":
             let cell = tableView.dequeueReusableCell(withIdentifier: "default") ?? UITableViewCell(style: .default, reuseIdentifier: "default")
             cell.textLabel?.text = menu[indexPath.section][indexPath.row]
             cell.selectionStyle = .none
-            
-//            let selectedLabel = UILabe
-//            selectedButton
-//            selectedButton.addTarget(self, action: #selector(), for: .touchUpInside)
-//            cell.accessoryView = selectedButton
             
             return cell
         default:
@@ -201,12 +234,14 @@ extension SettingSideViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch menu[indexPath.section][indexPath.row]{
+        case "❗️알림 허용이 꺼진 상태":
+            openSttingApp()
+        case "잠금화면 디데이 선택":
+            presentToWidgetItemSelectView()
         case "email 문의":
             presentToSendEmail()
         case "리뷰 쓰기":
             presentToAppStoreReview()
-        case "잠금화면 콘텐츠 선택":
-            presentToWidgetItemSelectView()
         default:
             break
         }

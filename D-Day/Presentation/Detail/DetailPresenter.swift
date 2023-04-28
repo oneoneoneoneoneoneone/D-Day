@@ -26,8 +26,7 @@ protocol DetailProtocol{
 final class DetailPresenter{
     private let viewController: DetailProtocol
     private let repository: Repository
-    
-    private let userNotificationCenter = UNUserNotificationCenter.current()
+    private let notificationCenter = NotificationCenterManager()
     
     private let id: String
     private var item = Item()
@@ -70,7 +69,7 @@ final class DetailPresenter{
             repository.setDefaultWidget(id: nil)
         }
         //알림
-        self.userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [self.item.id.stringValue])
+        notificationCenter.remove(self.item.id.stringValue)
         //이미지
         repository.deleteImageToDocumentDirectory(imageName: self.item.id.stringValue)
         //item

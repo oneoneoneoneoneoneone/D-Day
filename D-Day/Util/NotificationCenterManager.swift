@@ -8,8 +8,10 @@
 import Foundation
 import UserNotifications
 
-extension UNUserNotificationCenter{
-    //알럿이 켜지면 요청이 추가됨
+class NotificationCenterManager{
+    private let notificationCenter = UNUserNotificationCenter.current()
+    
+    ///알럿이 켜지면 요청이 추가됨
     func addNotificationRequest(by item: Item, alertData: AlertData){
         if !alertData.isOn {
             return
@@ -30,14 +32,14 @@ extension UNUserNotificationCenter{
         
         //UNUserNotificationCenter에 추가
         let request = UNNotificationRequest(identifier: item.id.stringValue, content: content, trigger: trigger)
-        self.add(request, withCompletionHandler: nil)
+        notificationCenter.add(request, withCompletionHandler: nil)
         
         print("addNotificationRequest 완 - \(item.title)")
     }
     
     ///알림 시간 변경(전체)
     func editNotificationTime(by items: [Item], alertData: AlertData){
-        self.removeAllDeliveredNotifications()
+        notificationCenter.removeAllDeliveredNotifications()
         
         if alertData.isOn {
             items.forEach{
@@ -46,4 +48,7 @@ extension UNUserNotificationCenter{
         }
     }
     
+    func remove(_ id: String){
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [id])
+    }
 }

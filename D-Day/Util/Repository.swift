@@ -9,13 +9,16 @@ import Foundation
 import RealmSwift
 import UIKit
 
-protocol RepositoryType{
+protocol RepositoryProtocol{
     func readItem() -> [Item]!
     func editItem(_ data: Item)
     func deleteItem(_ data: Item)
+    
+    func setDefaultWidget(id: String!)
+    func getDefaultWidget() -> String!
 }
 
-class Repository: RepositoryType{
+class Repository: RepositoryProtocol{
     private final let appGroupId = "group.D-Day"
     private final let defaultRealmPath = "default.realm"
     private lazy var container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupId)
@@ -24,7 +27,7 @@ class Repository: RepositoryType{
     //MARK: Realm
     private var realm: Realm{
         let realmURL = container?.appendingPathComponent(defaultRealmPath)
-        let config = Realm.Configuration(fileURL: realmURL, schemaVersion: 5, objectTypes: [Item.self])
+        let config = Realm.Configuration(fileURL: realmURL, schemaVersion: 6, objectTypes: [Item.self])
         
         return try! Realm(configuration: config)
     }
@@ -42,7 +45,7 @@ class Repository: RepositoryType{
                 item.title = data.title
                 item.titleColor = data.titleColor
                 item.date = data.date
-//                item.isStartCount = data.isStartCount
+                item.isStartCount = data.isStartCount
                 item.backgroundColor = data.backgroundColor
                 item.isBackgroundColor = data.isBackgroundColor
                 item.isBackgroundImage = data.isBackgroundImage

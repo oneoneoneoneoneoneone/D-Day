@@ -113,7 +113,7 @@ extension MainViewController: MainProtocol{
     }
     
     func presentToSideMenu(){
-        let SetingVC = SettingSideViewController()
+        let SetingVC = SettingViewController()
         // rootViewController에 SideMenu화면 VC를 삽입
         let sideMenuNav = SideMenuNavigationController(rootViewController: SetingVC)
 //        setUpSideMenuNavigationVC(vc: self, menuNavVC: sideMenuNav)

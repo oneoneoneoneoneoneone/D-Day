@@ -13,12 +13,10 @@ import UserNotifications
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-    var userNotificationCenter = UNUserNotificationCenter.current()
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        UNUserNotificationCenter.current().delegate = self
+        let userNotificationCenter = UNUserNotificationCenter.current()
+        userNotificationCenter.delegate = self
         
         //앱 설치 후 실행시 user에게 알림을 승인받음
         let authrizationOptions = UNAuthorizationOptions(arrayLiteral: [.alert, .badge, .sound])

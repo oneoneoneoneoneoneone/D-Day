@@ -27,20 +27,22 @@
 		33619F9029D5C60B007F44A9 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D272DD2990CE8500EF9321 /* Repository.swift */; };
 		33619F9129D5C613007F44A9 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D2728229824D7D00EF9321 /* Item.swift */; };
 		33619F9529D5C81B007F44A9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 33619F9429D5C81B007F44A9 /* RealmSwift */; };
-		3369E8C329B9BD7D001E004C /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3369E8C229B9BD7D001E004C /* UIColor.swift */; };
+		3369E8C329B9BD7D001E004C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3369E8C229B9BD7D001E004C /* UIColor+.swift */; };
 		3369E8C529BA25F6001E004C /* AlertData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3369E8C429BA25F6001E004C /* AlertData.swift */; };
 		3369E8C729BA2CA0001E004C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3369E8C629BA2CA0001E004C /* UserDefaultsManager.swift */; };
-		3373C551299CFAC600E5758A /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373C550299CFAC600E5758A /* UNUserNotificationCenter.swift */; };
+		3373C551299CFAC600E5758A /* NotificationCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373C550299CFAC600E5758A /* NotificationCenterManager.swift */; };
 		338F755D29D5CF010090D25A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 338F755C29D5CF010090D25A /* Realm */; };
 		338F755F29D5CF060090D25A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 338F755E29D5CF060090D25A /* Realm */; };
 		339D1FBA299CC0A400FEE6DB /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 339D1FB9299CC0A400FEE6DB /* SideMenu */; };
-		339D1FBC299CC0C900FEE6DB /* SettingSideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339D1FBB299CC0C900FEE6DB /* SettingSideViewController.swift */; };
+		339D1FBC299CC0C900FEE6DB /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339D1FBB299CC0C900FEE6DB /* SettingViewController.swift */; };
 		33AE1F6C2994CDEB008A67A5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AE1F6B2994CDEB008A67A5 /* WidgetKit.framework */; };
 		33AE1F6E2994CDEB008A67A5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AE1F6D2994CDEB008A67A5 /* SwiftUI.framework */; };
 		33AE1F712994CDEB008A67A5 /* D_DayWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AE1F702994CDEB008A67A5 /* D_DayWidgetBundle.swift */; };
 		33AE1F752994CDEB008A67A5 /* D_DayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AE1F742994CDEB008A67A5 /* D_DayWidget.swift */; };
 		33AE1F782994CDED008A67A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33AE1F772994CDED008A67A5 /* Assets.xcassets */; };
 		33AE1F7E2994CDED008A67A5 /* D-DayWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 33AE1F692994CDEB008A67A5 /* D-DayWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		33B4BD8629FB659500120319 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3369E8C229B9BD7D001E004C /* UIColor+.swift */; };
+		33B4BD8829FB8D7200120319 /* EditCellList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B4BD8729FB8D7200120319 /* EditCellList.swift */; };
 		33BEF24C29C3176B0096486A /* AlertToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEF24B29C3176B0096486A /* AlertToggleCell.swift */; };
 		33BEF24E29C318A80096486A /* AlertTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEF24D29C318A80096486A /* AlertTimeCell.swift */; };
 		33BEF25029C89EAD0096486A /* DarkModeToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEF24F29C89EAD0096486A /* DarkModeToggleCell.swift */; };
@@ -60,13 +62,14 @@
 		33D272BB2988051900EF9321 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D272BA2988051900EF9321 /* EditViewController.swift */; };
 		33D272BE2988054300EF9321 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D272BD2988054300EF9321 /* DetailViewController.swift */; };
 		33D272DE2990CE8500EF9321 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D272DD2990CE8500EF9321 /* Repository.swift */; };
+		33D957FF29FAC2F00016B1F6 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D957FE29FAC2F00016B1F6 /* UIViewController+.swift */; };
+		33D9580529FAC4000016B1F6 /* SettingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D9580429FAC4000016B1F6 /* SettingPresenter.swift */; };
+		33D9580629FAD92E0016B1F6 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3369E8C229B9BD7D001E004C /* UIColor+.swift */; };
 		33DDD9BF29B0D42200C8F0C9 /* EditPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DDD9BE29B0D42200C8F0C9 /* EditPresenter.swift */; };
 		33DDD9C129B0D96C00C8F0C9 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DDD9C029B0D96C00C8F0C9 /* DetailPresenter.swift */; };
 		33DDD9C829B6040400C8F0C9 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DDD9C729B6040400C8F0C9 /* ToastView.swift */; };
 		33F51B5029D78BB40021884F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D27288298394F400EF9321 /* Util.swift */; };
 		33F51B5129D78DB70021884F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D27288298394F400EF9321 /* Util.swift */; };
-		33F51B5229D7AFDD0021884F /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3369E8C229B9BD7D001E004C /* UIColor.swift */; };
-		33F51B5329D7AFDD0021884F /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3369E8C229B9BD7D001E004C /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,11 +117,11 @@
 		33619F8129D5C2C2007F44A9 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		33619F8429D5C2C2007F44A9 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		33619F8629D5C2C2007F44A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3369E8C229B9BD7D001E004C /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		3369E8C229B9BD7D001E004C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		3369E8C429BA25F6001E004C /* AlertData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertData.swift; sourceTree = "<group>"; };
 		3369E8C629BA2CA0001E004C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
-		3373C550299CFAC600E5758A /* UNUserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNUserNotificationCenter.swift; sourceTree = "<group>"; };
-		339D1FBB299CC0C900FEE6DB /* SettingSideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSideViewController.swift; sourceTree = "<group>"; };
+		3373C550299CFAC600E5758A /* NotificationCenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterManager.swift; sourceTree = "<group>"; };
+		339D1FBB299CC0C900FEE6DB /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		33AE1F692994CDEB008A67A5 /* D-DayWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "D-DayWidget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33AE1F6B2994CDEB008A67A5 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		33AE1F6D2994CDEB008A67A5 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -126,6 +129,7 @@
 		33AE1F742994CDEB008A67A5 /* D_DayWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = D_DayWidget.swift; sourceTree = "<group>"; };
 		33AE1F772994CDED008A67A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33AE1F792994CDED008A67A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		33B4BD8729FB8D7200120319 /* EditCellList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCellList.swift; sourceTree = "<group>"; };
 		33BEF24B29C3176B0096486A /* AlertToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertToggleCell.swift; sourceTree = "<group>"; };
 		33BEF24D29C318A80096486A /* AlertTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTimeCell.swift; sourceTree = "<group>"; };
 		33BEF24F29C89EAD0096486A /* DarkModeToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeToggleCell.swift; sourceTree = "<group>"; };
@@ -148,6 +152,8 @@
 		33D272BA2988051900EF9321 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		33D272BD2988054300EF9321 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		33D272DD2990CE8500EF9321 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		33D957FE29FAC2F00016B1F6 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		33D9580429FAC4000016B1F6 /* SettingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPresenter.swift; sourceTree = "<group>"; };
 		33DDD9BE29B0D42200C8F0C9 /* EditPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPresenter.swift; sourceTree = "<group>"; };
 		33DDD9C029B0D96C00C8F0C9 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		33DDD9C729B6040400C8F0C9 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
@@ -216,7 +222,6 @@
 		3369E8C129B9BD5F001E004C /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				3369E8C229B9BD7D001E004C /* UIColor.swift */,
 				33DDD9C729B6040400C8F0C9 /* ToastView.swift */,
 			);
 			path = Custom;
@@ -297,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				33D2728229824D7D00EF9321 /* Item.swift */,
+				33B4BD8729FB8D7200120319 /* EditCellList.swift */,
 				3369E8C429BA25F6001E004C /* AlertData.swift */,
 			);
 			path = Entity;
@@ -308,7 +314,7 @@
 				33D27288298394F400EF9321 /* Util.swift */,
 				33D272DD2990CE8500EF9321 /* Repository.swift */,
 				3369E8C629BA2CA0001E004C /* UserDefaultsManager.swift */,
-				3373C550299CFAC600E5758A /* UNUserNotificationCenter.swift */,
+				3373C550299CFAC600E5758A /* NotificationCenterManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -316,6 +322,7 @@
 		33D2728A298399A800EF9321 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				33D9580229FAC2FF0016B1F6 /* Extension */,
 				3369E8C129B9BD5F001E004C /* Custom */,
 				33DDD9C629B1B5A700C8F0C9 /* Main */,
 				33D272BF2988056800EF9321 /* Detail */,
@@ -347,12 +354,30 @@
 		33D272C2298805CC00EF9321 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				339D1FBB299CC0C900FEE6DB /* SettingSideViewController.swift */,
+				339D1FBB299CC0C900FEE6DB /* SettingViewController.swift */,
+				33D9580429FAC4000016B1F6 /* SettingPresenter.swift */,
+				33D9580329FAC3EF0016B1F6 /* Cell */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		33D9580229FAC2FF0016B1F6 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				33D957FE29FAC2F00016B1F6 /* UIViewController+.swift */,
+				3369E8C229B9BD7D001E004C /* UIColor+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		33D9580329FAC3EF0016B1F6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
 				33BEF24D29C318A80096486A /* AlertTimeCell.swift */,
 				33BEF24B29C3176B0096486A /* AlertToggleCell.swift */,
 				33BEF24F29C89EAD0096486A /* DarkModeToggleCell.swift */,
 			);
-			path = Setting;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		33DDD9C629B1B5A700C8F0C9 /* Main */ = {
@@ -513,8 +538,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33B4BD8629FB659500120319 /* UIColor+.swift in Sources */,
 				33619F9129D5C613007F44A9 /* Item.swift in Sources */,
-				33F51B5329D7AFDD0021884F /* UIColor.swift in Sources */,
 				33F51B5129D78DB70021884F /* Util.swift in Sources */,
 				33619F8E29D5C2D4007F44A9 /* D_DayWidget.intentdefinition in Sources */,
 				33619F8529D5C2C2007F44A9 /* IntentHandler.swift in Sources */,
@@ -527,8 +552,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33D9580629FAD92E0016B1F6 /* UIColor+.swift in Sources */,
 				332D1CF2299945A900239C46 /* Repository.swift in Sources */,
-				33F51B5229D7AFDD0021884F /* UIColor.swift in Sources */,
 				33F51B5029D78BB40021884F /* Util.swift in Sources */,
 				33C487832996074400792ABB /* Item.swift in Sources */,
 				332D1CFF29994B3D00239C46 /* D_DayWidget.intentdefinition in Sources */,
@@ -548,10 +573,11 @@
 				335B086A29BAF13E008458E8 /* EditTableViewImageCell.swift in Sources */,
 				33D272BB2988051900EF9321 /* EditViewController.swift in Sources */,
 				3369E8C529BA25F6001E004C /* AlertData.swift in Sources */,
-				339D1FBC299CC0C900FEE6DB /* SettingSideViewController.swift in Sources */,
+				33B4BD8829FB8D7200120319 /* EditCellList.swift in Sources */,
+				339D1FBC299CC0C900FEE6DB /* SettingViewController.swift in Sources */,
 				3369E8C729BA2CA0001E004C /* UserDefaultsManager.swift in Sources */,
 				33D272DE2990CE8500EF9321 /* Repository.swift in Sources */,
-				3369E8C329B9BD7D001E004C /* UIColor.swift in Sources */,
+				3369E8C329B9BD7D001E004C /* UIColor+.swift in Sources */,
 				33BEF24E29C318A80096486A /* AlertTimeCell.swift in Sources */,
 				335B086D29BAF13E008458E8 /* EditTableViewColorCell.swift in Sources */,
 				335B086C29BAF13E008458E8 /* EditTableViewMemoCell.swift in Sources */,
@@ -567,8 +593,10 @@
 				33BEF25029C89EAD0096486A /* DarkModeToggleCell.swift in Sources */,
 				335B086E29BAF13E008458E8 /* EditTableViewSegmentCell.swift in Sources */,
 				33D2727829824AD400EF9321 /* CollectionViewCell_1x4.swift in Sources */,
+				33D957FF29FAC2F00016B1F6 /* UIViewController+.swift in Sources */,
 				33D272BE2988054300EF9321 /* DetailViewController.swift in Sources */,
-				3373C551299CFAC600E5758A /* UNUserNotificationCenter.swift in Sources */,
+				33D9580529FAC4000016B1F6 /* SettingPresenter.swift in Sources */,
+				3373C551299CFAC600E5758A /* NotificationCenterManager.swift in Sources */,
 				335B086B29BAF13E008458E8 /* EditTableViewDateCell.swift in Sources */,
 				33D27263298233E600EF9321 /* SceneDelegate.swift in Sources */,
 				33D2728029824B0900EF9321 /* CollectionViewCell_1x1.swift in Sources */,
@@ -852,7 +880,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "D-Day/D-Day.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4QNJWH8J8Y;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -868,7 +896,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "hana.D-Day";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -888,7 +916,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "D-Day/D-Day.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4QNJWH8J8Y;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -904,7 +932,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "hana.D-Day";
 				PRODUCT_NAME = "$(TARGET_NAME)";

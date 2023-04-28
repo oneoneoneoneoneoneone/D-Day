@@ -9,7 +9,7 @@ import UIKit
 
 class EditTableViewToggleCell: UITableViewCell{
     private var delegate: EditCellDelegate?
-    private var cell: EditViewController.CellList?
+    private var cell: EditCellList?
     
     let label: UILabel = {
         let label = UILabel()
@@ -17,12 +17,12 @@ class EditTableViewToggleCell: UITableViewCell{
         
         return label
     }()
-    
-    lazy var toggle: UISwitch = {
-        let toggle = UISwitch()
-        toggle.addTarget(self, action: #selector(toggleValueChanged), for: .valueChanged)
+   
+    lazy var segment: UISegmentedControl = {
+        let segment = UISegmentedControl()
+        segment.addTarget(self, action: #selector(segmentValueChanged), for: .valueChanged)
         
-        return toggle
+        return segment
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -35,7 +35,7 @@ class EditTableViewToggleCell: UITableViewCell{
     }
     
     func setLayout(){
-        [label, toggle].forEach{
+        [label, segment].forEach{
             contentView.addSubview($0)
         }
         
@@ -43,24 +43,29 @@ class EditTableViewToggleCell: UITableViewCell{
             $0.leading.equalToSuperview().inset(10)
             $0.centerY.equalToSuperview()
         }
-        toggle.snp.makeConstraints{
+        segment.snp.makeConstraints{
             $0.trailing.equalToSuperview().inset(10)
             $0.centerY.equalToSuperview()
+            $0.width.equalTo(130)
         }
     }
     
-    func bind(delegate: EditCellDelegate, cell: EditViewController.CellList){
+    func bind(delegate: EditCellDelegate, cell: EditCellList){
         self.delegate = delegate
         self.cell = cell
         label.text = cell.text
+        
+        for i in 0..<cell.subText.count{
+            segment.insertSegment(withTitle: cell.subText[i], at: i, animated: true)
+        }
     }
     
-    func setDate(isOn: Bool){        
-        toggle.isOn = isOn
-        toggle.sendActions(for: .valueChanged)
+    func setDate(value: Bool){
+        segment.selectedSegmentIndex = value ? 1 : 0
+        segment.sendActions(for: .valueChanged)
     }
     
-    @objc func toggleValueChanged(_ sender: UISwitch){
-        delegate?.valueChanged(self.cell!, didChangeValue: sender.isOn)
+    @objc func segmentValueChanged(_ sender: UISegmentedControl){
+        delegate?.valueChanged(self.cell!, didChangeValue: sender.selectedSegmentIndex == 1 ? true : false)
     }
 }

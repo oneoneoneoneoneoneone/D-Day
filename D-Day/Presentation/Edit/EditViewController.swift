@@ -90,7 +90,7 @@ extension EditViewController: EditProtocol{
         self.dismiss(animated: true)
     }
     
-    func setBgToggle(_ cell: EditViewController.CellList){
+    func setBgToggle(_ cell: EditCellList){
         if cell == .backgroundColor{
             guard let cell = tableView.visibleCells.filter({ $0.reuseIdentifier == "EditTableViewImageCell"}).first as? EditTableViewImageCell else {return}
             cell.setToggle()
@@ -109,50 +109,5 @@ extension EditViewController{
     
     @objc func rightSaveButtonTap(){
         presenter.rightSaveButtonTap()
-    }
-}
-
-extension EditViewController{
-    enum CellType: Int, CaseIterable{
-        case main = 0
-        case view = 1
-        case ext = 2
-    }
-
-    enum CellList: CaseIterable{
-        case title, date, backgroundColor, backgroundImage, isCircle, memo
-        // isStartCount, repeatCode
-
-        var section: CellType{
-            switch self{
-            case.title, .date://, .isStartCount, .repeatCode:
-                return .main
-            case .backgroundColor, .backgroundImage, .isCircle:
-                return .view
-            case .memo:
-                return .ext
-            }
-        }
-
-        var text: String{
-            switch self{
-            case .title:
-                return "제목을 입력해주세요."
-            case .date:
-                return "날짜"
-//            case .isStartCount:
-//                return "시작일"
-//            case .repeatCode:
-//                return "반복"
-            case .backgroundColor:
-                return "배경색"
-            case .backgroundImage:
-                return "배경이미지"
-            case .isCircle:
-                return "동그랗게"
-            case .memo:
-                return "메모"
-            }
-        }
     }
 }

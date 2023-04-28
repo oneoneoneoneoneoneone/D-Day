@@ -15,7 +15,7 @@ class Item: Object{
     @Persisted var titleColor: String = "FF000000"
     @Persisted var memo: String = ""
     @Persisted var date: Date = Date.now
-//    @Persisted var isStartCount: Bool = false
+    @Persisted var isStartCount: Bool = false
 //    @Persisted var repeatCode: Repeat.RawValue
     @Persisted var backgroundColor: String = "FFFFFFFF"
     @Persisted var isBackgroundColor: Bool = true

@@ -9,7 +9,7 @@ import UIKit
 
 class EditTableViewMemoCell: UITableViewCell{
     private var delegate: EditCellDelegate?
-    private var cell: EditViewController.CellList?
+    private var cell: EditCellList?
     
     lazy var textView: UITextView = {
         let textView = UITextView()
@@ -46,7 +46,7 @@ class EditTableViewMemoCell: UITableViewCell{
         }
     }
     
-    func bind(delegate: EditCellDelegate, cell: EditViewController.CellList){
+    func bind(delegate: EditCellDelegate, cell: EditCellList){
         self.delegate = delegate
         self.cell = cell
     }

@@ -9,7 +9,7 @@ import UIKit
 
 class EditTableViewTitleCell: UITableViewCell{
     private var delegate: EditCellDelegate?
-    private var cell: EditViewController.CellList?
+    private var cell: EditCellList?
     
     lazy var textField: UITextField = {
         let textField = UITextField()
@@ -56,7 +56,7 @@ class EditTableViewTitleCell: UITableViewCell{
         }
     }
     
-    func bind(delegate: EditCellDelegate, cell: EditViewController.CellList){
+    func bind(delegate: EditCellDelegate, cell: EditCellList){
         self.delegate = delegate
         self.cell = cell
         textField.placeholder = cell.text

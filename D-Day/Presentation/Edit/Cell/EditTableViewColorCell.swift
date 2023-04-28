@@ -9,7 +9,7 @@ import UIKit
 
 class EditTableViewColorCell: UITableViewCell{
     private var delegate: EditCellDelegate?
-    private var cell: EditViewController.CellList?
+    private var cell: EditCellList?
     
     let label: UILabel = {
         let label = UILabel()
@@ -64,7 +64,7 @@ class EditTableViewColorCell: UITableViewCell{
         }
     }
     
-    func bind(delegate: EditCellDelegate, cell: EditViewController.CellList){
+    func bind(delegate: EditCellDelegate, cell: EditCellList){
         self.delegate = delegate
         self.cell = cell
         label.text = cell.text

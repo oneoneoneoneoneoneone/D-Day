@@ -10,7 +10,7 @@ import PhotosUI
 
 class EditTableViewImageCell: UITableViewCell{
     private var delegate: EditCellDelegate?
-    private var cell: EditViewController.CellList?
+    private var cell: EditCellList?
     var id = ""
     
     let label: UILabel = {
@@ -131,7 +131,7 @@ class EditTableViewImageCell: UITableViewCell{
         window?.rootViewController?.presentedViewController?.present(alertController, animated: true)
     }
         
-    func bind(delegate: EditCellDelegate, cell: EditViewController.CellList){
+    func bind(delegate: EditCellDelegate, cell: EditCellList){
         self.delegate = delegate
         self.cell = cell
         label.text = cell.text

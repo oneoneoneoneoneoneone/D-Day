@@ -14,15 +14,15 @@ protocol EditDelegate{
     func selectItem(_ id: String)
 }
 protocol EditCellDelegate{
-    func valueChanged(_ cell: EditViewController.CellList, didChangeValue value: Any?)
-    func valueChanged(_ cell: EditViewController.CellList, didChangeValue value: UIColor?)
+    func valueChanged(_ cell: EditCellList, didChangeValue value: Any?)
+    func valueChanged(_ cell: EditCellList, didChangeValue value: UIColor?)
 }
 
 protocol EditProtocol{
     func setNavigation()
     func setLayout()
     
-    func setBgToggle(_ cell: EditViewController.CellList)
+    func setBgToggle(_ cell: EditCellList)
     func showCloseAlertController()
     func showToast(message: String)
     func dismiss()
@@ -33,10 +33,10 @@ final class EditPresenter: NSObject{
     private let delegate: EditDelegate
     private let userDefaultsManager: UserDefaultsManager
     private let repository: Repository
-    private let userNotificationCenter = UNUserNotificationCenter.current()
+    private let notificationCenter = NotificationCenterManager()
     
     final let textViewPlaceHolder = "메모를 입력해주세요."
-    private final let cellList = EditViewController.CellList.allCases
+    private final let cellList = EditCellList.allCases
     
     private let item: Item
     
@@ -80,6 +80,7 @@ final class EditPresenter: NSObject{
         saveItem.title = editItem.title
         saveItem.titleColor = editItem.titleColor
         saveItem.date = editItem.date
+        saveItem.isStartCount = editItem.isStartCount
         saveItem.isBackgroundColor = editItem.isBackgroundColor
         saveItem.backgroundColor = editItem.backgroundColor
         saveItem.isBackgroundImage = editItem.isBackgroundImage
@@ -91,7 +92,7 @@ final class EditPresenter: NSObject{
         
         //알림추가
         let alertData = userDefaultsManager.getAlertTime()
-        userNotificationCenter.addNotificationRequest(by: item, alertData: alertData)
+        notificationCenter.addNotificationRequest(by: item, alertData: alertData)
         
         //기본 위젯
         if repository.getDefaultWidget() == nil {
@@ -109,7 +110,7 @@ final class EditPresenter: NSObject{
 
 extension EditPresenter: EditCellDelegate{
     
-    func valueChanged(_ cell: EditViewController.CellList, didChangeValue value: Any?) {
+    func valueChanged(_ cell: EditCellList, didChangeValue value: Any?) {
         switch cell{
         case .title:
             if value is String{
@@ -118,6 +119,10 @@ extension EditPresenter: EditCellDelegate{
         case .date:
             if value is Date{
                 editItem.date = value as! Date
+            }
+        case .isStartCount:
+            if value is Bool{
+                editItem.isStartCount = value as! Bool
             }
         case .backgroundColor:
             if value is Bool{
@@ -145,7 +150,7 @@ extension EditPresenter: EditCellDelegate{
         }
     }
     
-    func valueChanged(_ cell: EditViewController.CellList, didChangeValue value: UIColor?) {
+    func valueChanged(_ cell: EditCellList, didChangeValue value: UIColor?) {
         switch cell{
         case .title:
             editItem.titleColor = value?.rgbString ?? "FF000000"
@@ -209,6 +214,13 @@ extension EditPresenter: UITableViewDataSource{
             cell.setDate(date: item.date)
 
             return cell
+        case .isStartCount:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewToggleCell", for: indexPath) as! EditTableViewToggleCell
+            cell.selectionStyle = .none
+            cell.bind(delegate: self, cell: cellList[row])
+            cell.setDate(value: item.isStartCount)
+
+            return cell
         case .backgroundColor:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewColorCell", for: indexPath) as! EditTableViewColorCell
             cell.selectionStyle = .none
@@ -227,7 +239,7 @@ extension EditPresenter: UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewToggleCell", for: indexPath) as! EditTableViewToggleCell
             cell.selectionStyle = .none
             cell.bind(delegate: self, cell: cellList[row])
-            cell.setDate(isOn: item.isCircle)
+            cell.setDate(value: item.isCircle)
 
             return cell
         case .memo:

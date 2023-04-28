@@ -9,7 +9,7 @@ import UIKit
 
 class EditTableViewDateCell: UITableViewCell{
     private var delegate: EditCellDelegate?
-    private var cell: EditViewController.CellList?
+    private var cell: EditCellList?
     
     let label: UILabel = {
         let label = UILabel()
@@ -51,7 +51,7 @@ class EditTableViewDateCell: UITableViewCell{
         }
     }
     
-    func bind(delegate: EditCellDelegate, cell: EditViewController.CellList){
+    func bind(delegate: EditCellDelegate, cell: EditCellList){
         self.delegate = delegate
         self.cell = cell
         label.text = cell.text

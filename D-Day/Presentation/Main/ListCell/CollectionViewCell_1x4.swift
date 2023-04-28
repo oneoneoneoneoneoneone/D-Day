@@ -66,7 +66,7 @@ class CollectionViewCell_1x4: UICollectionViewCell{
     }
     
     func setData(item: Item){
-        d_DayLabel.text = Util.numberOfDaysFromDate(from: item.date)
+        d_DayLabel.text = Util.numberOfDaysFromDate(isStartCount: item.isStartCount, from: item.date)
         d_DayLabel.textColor = UIColor(hexCode: item.titleColor)
         titleLabel.text = item.title
         titleLabel.textColor = UIColor(hexCode: item.titleColor)

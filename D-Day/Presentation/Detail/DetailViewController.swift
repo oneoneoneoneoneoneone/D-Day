@@ -20,7 +20,7 @@ class DetailViewController: UIViewController{
         
         return imageView
     }()
-    private let vStackView: UIStackView = {
+    private let topStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
@@ -49,7 +49,7 @@ class DetailViewController: UIViewController{
         return label
     }()
     
-    private let vvStackView: UIStackView = {
+    private let bottomStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
@@ -66,11 +66,12 @@ class DetailViewController: UIViewController{
         return label
     }()
     
-    private let hStackView: UIStackView = {
+    private let buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fillEqually
+        stackView.spacing = 10
         
         return stackView
     }()
@@ -84,7 +85,7 @@ class DetailViewController: UIViewController{
     }()
     private lazy var deleteButton: UIButton = {
         let button = UIButton()
-        button.setTitle("삭제", for: .normal)
+        button.setTitle(NSLocalizedString("삭제", comment: ""), for: .normal)
         button.setTitleColor(.red, for: .normal)
         button.addTarget(self, action: #selector(deleteButtonTap), for: .touchUpInside)
         
@@ -118,42 +119,42 @@ class DetailViewController: UIViewController{
 //MARK: DetailProtocol Method
 extension DetailViewController: DetailProtocol{
     func setNavigation(){
-        let rightEditButton = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(rightEditButtonTap))
-        
+        let rightEditButton = UIBarButtonItem(title: NSLocalizedString("수정", comment: ""), style: .plain, target: self, action: #selector(rightEditButtonTap))
         navigationItem.rightBarButtonItem = rightEditButton
         
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
         navigationItem.backAction = UIAction(handler: {_ in
             self.navigationController?.popViewController(animated: true)
         })
     }
     
     func setLayout(){
-        [vStackView, vvStackView].forEach{
+        [topStackView, bottomStackView].forEach{
             view.addSubview($0)
         }
         
         [imageView, titleLabel, dDayLabel, dateLabel].forEach{
-            vStackView.addArrangedSubview($0)
+            topStackView.addArrangedSubview($0)
         }
         
-        [memoLabel, hStackView].forEach{
-            vvStackView.addArrangedSubview($0)
+        [memoLabel, buttonStackView].forEach{
+            bottomStackView.addArrangedSubview($0)
         }
         
         [shareButton, deleteButton].forEach{
-            hStackView.addArrangedSubview($0)
+            buttonStackView.addArrangedSubview($0)
         }
         
-        vStackView.snp.makeConstraints{
+        topStackView.snp.makeConstraints{
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(view.snp.width)
         }
         imageView.snp.makeConstraints{
-            $0.top.leading.trailing.bottom.equalTo(vStackView)
+            $0.top.leading.trailing.bottom.equalTo(topStackView)
         }
         titleLabel.snp.makeConstraints{
-            $0.top.equalTo(vStackView).inset(10)
+            $0.top.equalTo(topStackView).inset(10)
             $0.centerX.equalToSuperview()
         }
         dDayLabel.snp.makeConstraints{
@@ -164,8 +165,8 @@ extension DetailViewController: DetailProtocol{
             $0.centerX.equalToSuperview()
         }
         
-        vvStackView.snp.makeConstraints{
-            $0.top.equalTo(vStackView.snp.bottom)
+        bottomStackView.snp.makeConstraints{
+            $0.top.equalTo(topStackView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
@@ -196,12 +197,12 @@ extension DetailViewController: DetailProtocol{
     }
     
     func showDeleteAlertController(){
-        let alert = UIAlertController(title: "삭제하시겠습니까?", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .destructive, handler: {_ in
+        let alert = UIAlertController(title: NSLocalizedString("삭제하시겠습니까?", comment: ""), message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("삭제", comment: ""), style: .destructive, handler: {_ in
             self.presenter.deleteItem()
             self.navigationController?.popToRootViewController(animated: true)
         }))
-        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("취소", comment: ""), style: .cancel))
         
         self.present(alert, animated: true)
     }
@@ -227,13 +228,13 @@ extension DetailViewController: DetailProtocol{
     ///현재 화면 캡쳐
     func transformToImage() -> UIImage? {
         //비트맵 기반 그래픽 컨텍스트를 만들음
-        UIGraphicsBeginImageContextWithOptions(vStackView.bounds.size, vStackView.isOpaque, 0.0)
+        UIGraphicsBeginImageContextWithOptions(topStackView.bounds.size, topStackView.isOpaque, 0.0)
         defer{
             UIGraphicsEndImageContext()
         }
         //UIGraphicsBeginImageContextWithOptions.. 변수로 치환한 것도 아닌데.. 어케 이어지는..
         if let context = UIGraphicsGetCurrentContext(){
-            vStackView.layer.render(in: context)
+            topStackView.layer.render(in: context)
             return UIGraphicsGetImageFromCurrentImageContext()
         }
         return nil

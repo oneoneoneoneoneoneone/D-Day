@@ -48,16 +48,15 @@ class EditViewController: UIViewController{
 
 extension EditViewController: EditProtocol{
     func setNavigation(){
-        let leftCancelButton = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(leftCancelButtonTap))
-        let rightSaveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(rightSaveButtonTap))
+        let leftCancelButton = UIBarButtonItem(title: NSLocalizedString("취소", comment: ""), style: .plain, target: self, action: #selector(leftCancelButtonTap))
+        let rightSaveButton = UIBarButtonItem(title: NSLocalizedString("저장", comment: ""), style: .plain, target: self, action: #selector(rightSaveButtonTap))
 
         navigationItem.leftBarButtonItem = leftCancelButton
         navigationItem.rightBarButtonItem = rightSaveButton
-        navigationController?.navigationBar.tintColor = .label
-        navigationController?.navigationBar.backgroundColor = .systemGray6
     }
 
     func setLayout(){
+        view.backgroundColor = .systemGray6
         view.addSubview(tableView)
 
         tableView.snp.makeConstraints{
@@ -67,12 +66,12 @@ extension EditViewController: EditProtocol{
     }
     
     func showCloseAlertController() {
-        let alertController = UIAlertController(title: "작성중인 내용이 있습니다. 닫으시겠습니까?", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("작성중인 내용이 있습니다. 닫으시겠습니까?", comment: ""), message: nil, preferredStyle: .alert)
         
-        let closeAction = UIAlertAction(title: "닫기", style: .destructive){ [weak self] _ in
+        let closeAction = UIAlertAction(title: NSLocalizedString("닫기", comment: ""), style: .destructive){ [weak self] _ in
             self?.dismiss(animated: true)
         }
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("계속 작성하기", comment: ""), style: .cancel)
         
         [closeAction, cancelAction].forEach{action in
             alertController.addAction(action)
@@ -110,4 +109,5 @@ extension EditViewController{
     @objc func rightSaveButtonTap(){
         presenter.rightSaveButtonTap()
     }
+    
 }

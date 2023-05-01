@@ -19,7 +19,7 @@ struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         return SimpleEntry(date: Date(),
                            id: "",
-                           title: "이벤트",
+                           title: "EVENT",
                            dday: "D-Day",
                            image: UIImage(),
                            forColor: .label,
@@ -35,7 +35,7 @@ struct Provider: IntentTimelineProvider {
         let entry = SimpleEntry(
             date: Date(),
             id: "",
-            title: "이벤트",
+            title: "EVENT",
             dday: "D-Day",
             image: UIImage(),
             forColor: .label,
@@ -132,7 +132,8 @@ struct D_DayWidgetEntryView : View {
             Text("\(entry.title)  \(entry.dday)")
                 .font(.caption)
                 .widgetURL(URL(string: "open://detail?id=\(entry.id)"))
-        @unknown default:
+//        @unknown default:
+        default:
             Text("")
         }
     }
@@ -150,8 +151,8 @@ struct D_DayWidget: Widget {
         ){ entry in
             D_DayWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("디데이 위젯")      //위젯 추가갤러리 - 이름
-        .description("한개의 디데이를 선택하여 위젯에 표시할 수 있습니다.")  //위젯 추가갤러리 - 설명
+        .configurationDisplayName(NSLocalizedString("디데이 위젯", comment: ""))      //위젯 추가갤러리 - 이름
+        .description(NSLocalizedString("한개의 디데이를 선택하여 위젯에 표시할 수 있습니다.", comment: ""))  //위젯 추가갤러리 - 설명
         .supportedFamilies([.systemSmall, .accessoryCircular, .accessoryInline, .accessoryRectangular])
     }
 }

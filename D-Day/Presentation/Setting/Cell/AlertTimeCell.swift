@@ -15,7 +15,7 @@ class AlertTimeCell: UITableViewCell{
     lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .time
-        datePicker.locale = Locale(identifier: "ko")
+//        datePicker.locale = Locale(identifier: "ko")
         datePicker.preferredDatePickerStyle = .automatic
         datePicker.minuteInterval = 30
         

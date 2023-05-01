@@ -35,7 +35,7 @@ final class EditPresenter: NSObject{
     private let repository: Repository
     private let notificationCenter = NotificationCenterManager()
     
-    final let textViewPlaceHolder = "메모를 입력해주세요."
+    final let textViewPlaceHolder = EditCellList.memo.subText.first
     private final let cellList = EditCellList.allCases
     
     private let item: Item
@@ -63,11 +63,11 @@ final class EditPresenter: NSObject{
     
     func rightSaveButtonTap(){
         if editItem.title == "" {
-            viewController.showToast(message: "제목을 입력해주세요.")
+            viewController.showToast(message: EditCellList.title.text)
             return
         }
         if editItem.isBackgroundImage && image == UIImage(systemName: "photo"){
-            viewController.showToast(message: "배경이미지를 선택해주세요.")
+            viewController.showToast(message: EditCellList.backgroundImage.subText.first!)
             return
         }
         

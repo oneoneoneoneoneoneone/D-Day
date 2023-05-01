@@ -8,7 +8,6 @@
 import UIKit
 import SnapKit
 import SideMenu
-import RealmSwift
 
 class MainViewController: UIViewController {
     private lazy var presenter = MainPresenter(viewController: self)
@@ -33,7 +32,9 @@ class MainViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(systemName: "plus"), for: .normal)
         //, withConfiguration: Image.SymbolConfiguration(pointSize: 28, weight: .regular)), for: .normal)
-        button.layer.backgroundColor = UIColor.white.cgColor
+        button.backgroundColor = .systemBackground
+        button.layer.borderWidth = 0.1
+        button.layer.borderColor = UIColor.white.cgColor
         button.layer.cornerRadius = 25
         button.layer.shadowOpacity = 0.1
         button.layer.shadowOffset = CGSize(width: 0, height: 3)
@@ -157,53 +158,5 @@ extension MainViewController{
     
     @objc func addButtonTap(){
         presenter.addButtonTap()
-    }
-}
-
-//MARK: enum
-extension MainViewController{
-    enum DisplayStyle{
-        case x11, x22, x14, x24
-        
-        var id: String{
-            switch self{
-            case .x11:
-                return "CollectionViewCell_1x1"
-            case .x22:
-                return "CollectionViewCell_2x2"
-            case .x14:
-                return "CollectionViewCell_1x4"
-            case .x24:
-                return "CollectionViewCell_2x4"
-            }
-        }
-        
-        var title: String{
-            switch self{
-            case .x11:
-                return "1X1"
-            case .x22:
-                return "2X2"
-            case .x14:
-                return "1X4"
-            case .x24:
-                return "2X4"
-            }
-        }
-    }
-    
-    enum AlertAction{
-        case title, dateDesc, dateAsc
-        
-        var title: String{
-            switch self{
-            case .title:
-                return "제목"
-            case .dateDesc:
-                return "완료날짜가 가까운"
-            case .dateAsc:
-                return "완료날짜가 먼"
-            }
-        }
     }
 }

@@ -1,0 +1,12 @@
+/* 
+  InfoPlist.strings
+  D-Day
+
+  Created by hana on 2023/05/01.
+  
+*/
+//CFBundleDisplayName = "D-Day";
+//CFBundleName = "D-Day";
+
+"NSCameraUsageDescription" = "레이블의 배경 이미지를 선택하기 위해 카메라를 사용합니다.";
+"NSPhotoLibraryUsageDescription" = "레이블의 배경 이미지를 선택하기 위해 포토 라이브러리를 사용합니다.";

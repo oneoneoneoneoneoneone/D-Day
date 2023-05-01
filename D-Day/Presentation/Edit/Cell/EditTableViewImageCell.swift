@@ -23,8 +23,8 @@ class EditTableViewImageCell: UITableViewCell{
     lazy var button: UIButton = {
         let button = UIButton()
         button.tintColor = .systemGray
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .center
+        button.contentHorizontalAlignment = .center
         button.imageView?.contentMode = .scaleAspectFill
         button.sizeToFit()
         button.addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
@@ -116,13 +116,16 @@ class EditTableViewImageCell: UITableViewCell{
         }
     }
 
-    func showCamaraPermissionAlertController() {
-        let alertController = UIAlertController(title: "카메라 권한이 없습니다.", message: "설정앱에서 카메라 접근을 허용해주세요.\n권한 설정이 변경되면 앱이 다시 실행됩니다.", preferredStyle: .alert)
+    private func showCamaraPermissionAlertController() {
+        let alertController = UIAlertController(
+            title: NSLocalizedString("카메라 권한이 없습니다.", comment: ""),
+            message: NSLocalizedString("설정앱에서 카메라 접근을 허용해주세요.\n권한 설정이 변경되면 앱이 다시 실행됩니다.", comment: ""),
+            preferredStyle: .alert)
         
-        let moveAction = UIAlertAction(title: "이동", style: .default){ _ in
+        let moveAction = UIAlertAction(title: NSLocalizedString("이동", comment: ""), style: .default){ _ in
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         }
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("취소", comment: ""), style: .cancel)
         
         [moveAction, cancelAction].forEach{action in
             alertController.addAction(action)
@@ -144,7 +147,7 @@ class EditTableViewImageCell: UITableViewCell{
         self.id = id
         
         guard let image = Repository().loadImageFromDocumentDirectory(imageName: id) else {
-            button.setImage(UIImage(systemName: "photo"), for: .normal)
+            button.setImage(UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(pointSize: 80, weight: .light)), for: .normal)
             delegate?.valueChanged(self.cell!, didChangeValue: button.image(for: .normal))
             return
         }
@@ -160,13 +163,13 @@ class EditTableViewImageCell: UITableViewCell{
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.popoverPresentationController?.sourceView = button
         
-        alert.addAction(UIAlertAction(title: "사진 보관함에서 선택", style: .default, handler: {_ in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("사진 보관함에서 선택", comment: ""), style: .default, handler: {_ in
             self.openLibrary()
         }))
-        alert.addAction(UIAlertAction(title: "카메라로 촬영", style: .default, handler: {_ in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("카메라로 촬영", comment: ""), style: .default, handler: {_ in
             self.openCamera()
         }))
-        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("취소", comment: ""), style: .cancel))
 
         window?.rootViewController?.presentedViewController?.present(alert, animated: true)
     }

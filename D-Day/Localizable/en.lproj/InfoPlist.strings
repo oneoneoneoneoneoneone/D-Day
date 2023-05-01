@@ -1,0 +1,12 @@
+/* 
+  InfoPlist.strings
+  D-Day
+
+  Created by hana on 2023/05/01.
+  
+*/
+//CFBundleDisplayName = "D-Day";
+//CFBundleName = "D-Day";
+
+"NSCameraUsageDescription" = "Use the camera to select a background image for the label.";
+"NSPhotoLibraryUsageDescription" = "Use the photo library to select a background image for a label.";

@@ -21,7 +21,7 @@ class EditTableViewDateCell: UITableViewCell{
     lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
-        datePicker.locale = Locale(identifier: "ko")
+//        datePicker.locale = Locale(identifier: "ko")
         datePicker.preferredDatePickerStyle = .wheels
         
         datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)

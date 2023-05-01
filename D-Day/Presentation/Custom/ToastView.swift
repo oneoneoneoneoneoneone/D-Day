@@ -49,7 +49,7 @@ class ToastView: UIView{
         
         self.snp.makeConstraints{
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(40)
+            $0.bottom.equalToSuperview().inset(45)
         }
         
         UIView.animate(withDuration: 0.5, delay: 0.8, options: .curveEaseOut, animations: {

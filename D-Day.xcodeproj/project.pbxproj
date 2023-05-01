@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3322DB5B29FEE4CF00580FE8 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D27288298394F400EF9321 /* Util.swift */; };
+		3322DB5C29FEE4DF00580FE8 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3369E8C229B9BD7D001E004C /* UIColor+.swift */; };
+		3322DB5D29FEE5B900580FE8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 33CEDDAC29FE8FDD0088CD14 /* Localizable.strings */; };
+		3322DB5E29FEE5BA00580FE8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 33CEDDAC29FE8FDD0088CD14 /* Localizable.strings */; };
+		3322DB6329FEE68300580FE8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3322DB6729FEE68300580FE8 /* InfoPlist.strings */; };
+		3322DB7229FF9D1A00580FE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D27269298233E700EF9321 /* Assets.xcassets */; };
+		3322DB7929FFA88700580FE8 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33619F8429D5C2C2007F44A9 /* IntentHandler.swift */; };
 		332D1CF2299945A900239C46 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D272DD2990CE8500EF9321 /* Repository.swift */; };
-		332D1CFF29994B3D00239C46 /* D_DayWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 332D1CFE29994B3D00239C46 /* D_DayWidget.intentdefinition */; };
 		333BBE35299A52BA000AEC91 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 333BBE34299A52BA000AEC91 /* SnapKit */; };
 		333BBE38299A52D2000AEC91 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 333BBE37299A52D2000AEC91 /* RealmSwift */; };
 		333BBE3D299A52F9000AEC91 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 333BBE3C299A52F9000AEC91 /* RealmSwift */; };
@@ -22,7 +28,6 @@
 		33619F8229D5C2C2007F44A9 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33619F8129D5C2C2007F44A9 /* Intents.framework */; };
 		33619F8529D5C2C2007F44A9 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33619F8429D5C2C2007F44A9 /* IntentHandler.swift */; };
 		33619F8929D5C2C2007F44A9 /* Intent.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 33619F8029D5C2C2007F44A9 /* Intent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		33619F8E29D5C2D4007F44A9 /* D_DayWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 332D1CFE29994B3D00239C46 /* D_DayWidget.intentdefinition */; };
 		33619F8F29D5C5D7007F44A9 /* D_DayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AE1F742994CDEB008A67A5 /* D_DayWidget.swift */; };
 		33619F9029D5C60B007F44A9 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D272DD2990CE8500EF9321 /* Repository.swift */; };
 		33619F9129D5C613007F44A9 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D2728229824D7D00EF9321 /* Item.swift */; };
@@ -39,19 +44,19 @@
 		33AE1F6E2994CDEB008A67A5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AE1F6D2994CDEB008A67A5 /* SwiftUI.framework */; };
 		33AE1F712994CDEB008A67A5 /* D_DayWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AE1F702994CDEB008A67A5 /* D_DayWidgetBundle.swift */; };
 		33AE1F752994CDEB008A67A5 /* D_DayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AE1F742994CDEB008A67A5 /* D_DayWidget.swift */; };
-		33AE1F782994CDED008A67A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33AE1F772994CDED008A67A5 /* Assets.xcassets */; };
 		33AE1F7E2994CDED008A67A5 /* D-DayWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 33AE1F692994CDEB008A67A5 /* D-DayWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		33B4BD8629FB659500120319 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3369E8C229B9BD7D001E004C /* UIColor+.swift */; };
-		33B4BD8829FB8D7200120319 /* EditCellList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B4BD8729FB8D7200120319 /* EditCellList.swift */; };
+		33B4BD8829FB8D7200120319 /* EditEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B4BD8729FB8D7200120319 /* EditEnum.swift */; };
 		33BEF24C29C3176B0096486A /* AlertToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEF24B29C3176B0096486A /* AlertToggleCell.swift */; };
 		33BEF24E29C318A80096486A /* AlertTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEF24D29C318A80096486A /* AlertTimeCell.swift */; };
 		33BEF25029C89EAD0096486A /* DarkModeToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEF24F29C89EAD0096486A /* DarkModeToggleCell.swift */; };
 		33C487832996074400792ABB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D2728229824D7D00EF9321 /* Item.swift */; };
+		33CEDDAF29FE96ED0088CD14 /* MainEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CEDDAE29FE96ED0088CD14 /* MainEnum.swift */; };
+		33CEDDB729FEC1CB0088CD14 /* D_DayWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 33CEDDBA29FEC1CB0088CD14 /* D_DayWidget.intentdefinition */; };
+		33CEDDB829FEC1CB0088CD14 /* D_DayWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 33CEDDBA29FEC1CB0088CD14 /* D_DayWidget.intentdefinition */; };
+		33CEDDC029FEC87A0088CD14 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CEDDBF29FEC87A0088CD14 /* UIView+.swift */; };
 		33D27261298233E600EF9321 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D27260298233E600EF9321 /* AppDelegate.swift */; };
 		33D27263298233E600EF9321 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D27262298233E600EF9321 /* SceneDelegate.swift */; };
 		33D27265298233E600EF9321 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D27264298233E600EF9321 /* MainViewController.swift */; };
-		33D2726A298233E700EF9321 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D27269298233E700EF9321 /* Assets.xcassets */; };
-		33D2726D298233E700EF9321 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33D2726B298233E700EF9321 /* LaunchScreen.storyboard */; };
 		33D2727829824AD400EF9321 /* CollectionViewCell_1x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D2727729824AD400EF9321 /* CollectionViewCell_1x4.swift */; };
 		33D2727A29824AE200EF9321 /* CollectionViewCell_2x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D2727929824AE200EF9321 /* CollectionViewCell_2x4.swift */; };
 		33D2727C29824AF000EF9321 /* CollectionViewCell_2x2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D2727B29824AF000EF9321 /* CollectionViewCell_2x2.swift */; };
@@ -69,7 +74,6 @@
 		33DDD9C129B0D96C00C8F0C9 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DDD9C029B0D96C00C8F0C9 /* DetailPresenter.swift */; };
 		33DDD9C829B6040400C8F0C9 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DDD9C729B6040400C8F0C9 /* ToastView.swift */; };
 		33F51B5029D78BB40021884F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D27288298394F400EF9321 /* Util.swift */; };
-		33F51B5129D78DB70021884F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D27288298394F400EF9321 /* Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,7 +109,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		332D1CFE29994B3D00239C46 /* D_DayWidget.intentdefinition */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.intentdefinition; path = D_DayWidget.intentdefinition; sourceTree = "<group>"; };
+		3322DB5729FEDF9F00580FE8 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
+		3322DB5A29FEE3EB00580FE8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/D_DayWidget.strings; sourceTree = "<group>"; };
+		3322DB6629FEE68300580FE8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3322DB6829FEE68700580FE8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3322DB6929FEE81900580FE8 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		335B086229BAF13E008458E8 /* EditTableViewImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewImageCell.swift; sourceTree = "<group>"; };
 		335B086329BAF13E008458E8 /* EditTableViewDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewDateCell.swift; sourceTree = "<group>"; };
 		335B086429BAF13E008458E8 /* EditTableViewMemoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewMemoCell.swift; sourceTree = "<group>"; };
@@ -116,7 +124,6 @@
 		33619F8029D5C2C2007F44A9 /* Intent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Intent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		33619F8129D5C2C2007F44A9 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		33619F8429D5C2C2007F44A9 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
-		33619F8629D5C2C2007F44A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3369E8C229B9BD7D001E004C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		3369E8C429BA25F6001E004C /* AlertData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertData.swift; sourceTree = "<group>"; };
 		3369E8C629BA2CA0001E004C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -128,20 +135,24 @@
 		33AE1F702994CDEB008A67A5 /* D_DayWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = D_DayWidgetBundle.swift; sourceTree = "<group>"; };
 		33AE1F742994CDEB008A67A5 /* D_DayWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = D_DayWidget.swift; sourceTree = "<group>"; };
 		33AE1F772994CDED008A67A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		33AE1F792994CDED008A67A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		33B4BD8729FB8D7200120319 /* EditCellList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCellList.swift; sourceTree = "<group>"; };
+		33B4BD8729FB8D7200120319 /* EditEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEnum.swift; sourceTree = "<group>"; };
 		33BEF24B29C3176B0096486A /* AlertToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertToggleCell.swift; sourceTree = "<group>"; };
 		33BEF24D29C318A80096486A /* AlertTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTimeCell.swift; sourceTree = "<group>"; };
 		33BEF24F29C89EAD0096486A /* DarkModeToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeToggleCell.swift; sourceTree = "<group>"; };
 		33C4877F299606EF00792ABB /* D-Day.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "D-Day.entitlements"; sourceTree = "<group>"; };
 		33C487802996070A00792ABB /* D-DayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "D-DayWidget.entitlements"; sourceTree = "<group>"; };
+		33CEDDAB29FE8FDD0088CD14 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		33CEDDAD29FE90070088CD14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		33CEDDAE29FE96ED0088CD14 /* MainEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainEnum.swift; sourceTree = "<group>"; };
+		33CEDDBF29FEC87A0088CD14 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		33CEDDE529FED43D0088CD14 /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = ko; path = ko.lproj/D_DayWidget.intentdefinition; sourceTree = "<group>"; };
+		33CEDDE629FED4A30088CD14 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33D2725D298233E600EF9321 /* D-Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "D-Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33D27260298233E600EF9321 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33D27262298233E600EF9321 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		33D27264298233E600EF9321 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		33D27269298233E700EF9321 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33D2726C298233E700EF9321 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		33D2726E298233E700EF9321 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33D2727729824AD400EF9321 /* CollectionViewCell_1x4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell_1x4.swift; sourceTree = "<group>"; };
 		33D2727929824AE200EF9321 /* CollectionViewCell_2x4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell_2x4.swift; sourceTree = "<group>"; };
 		33D2727B29824AF000EF9321 /* CollectionViewCell_2x2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell_2x2.swift; sourceTree = "<group>"; };
@@ -214,7 +225,7 @@
 			children = (
 				33F51B4029D610090021884F /* Intent.entitlements */,
 				33619F8429D5C2C2007F44A9 /* IntentHandler.swift */,
-				33619F8629D5C2C2007F44A9 /* Info.plist */,
+				3322DB5729FEDF9F00580FE8 /* info.plist */,
 			);
 			path = Intent;
 			sourceTree = "<group>";
@@ -241,13 +252,31 @@
 			isa = PBXGroup;
 			children = (
 				33C487802996070A00792ABB /* D-DayWidget.entitlements */,
-				332D1CFE29994B3D00239C46 /* D_DayWidget.intentdefinition */,
+				33CEDDBA29FEC1CB0088CD14 /* D_DayWidget.intentdefinition */,
 				33AE1F702994CDEB008A67A5 /* D_DayWidgetBundle.swift */,
 				33AE1F742994CDEB008A67A5 /* D_DayWidget.swift */,
 				33AE1F772994CDED008A67A5 /* Assets.xcassets */,
-				33AE1F792994CDED008A67A5 /* Info.plist */,
+				33CEDDE629FED4A30088CD14 /* Info.plist */,
 			);
 			path = "D-DayWidget";
+			sourceTree = "<group>";
+		};
+		33CEDDEA29FED5A20088CD14 /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+				3322DB6729FEE68300580FE8 /* InfoPlist.strings */,
+				33CEDDAC29FE8FDD0088CD14 /* Localizable.strings */,
+			);
+			path = Localizable;
+			sourceTree = "<group>";
+		};
+		33CEDDEB29FED5CB0088CD14 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				33D27260298233E600EF9321 /* AppDelegate.swift */,
+				33D27262298233E600EF9321 /* SceneDelegate.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 		33D27254298233E600EF9321 = {
@@ -275,14 +304,14 @@
 			isa = PBXGroup;
 			children = (
 				33C4877F299606EF00792ABB /* D-Day.entitlements */,
-				33D27260298233E600EF9321 /* AppDelegate.swift */,
-				33D27262298233E600EF9321 /* SceneDelegate.swift */,
+				33CEDDEB29FED5CB0088CD14 /* Delegate */,
 				33D2728A298399A800EF9321 /* Presentation */,
 				33D272872983941500EF9321 /* Util */,
 				33D2728429824D8400EF9321 /* Entity */,
 				33D27269298233E700EF9321 /* Assets.xcassets */,
 				33D2726B298233E700EF9321 /* LaunchScreen.storyboard */,
-				33D2726E298233E700EF9321 /* Info.plist */,
+				33CEDDEA29FED5A20088CD14 /* Localizable */,
+				3322DB6929FEE81900580FE8 /* info.plist */,
 			);
 			path = "D-Day";
 			sourceTree = "<group>";
@@ -302,7 +331,6 @@
 			isa = PBXGroup;
 			children = (
 				33D2728229824D7D00EF9321 /* Item.swift */,
-				33B4BD8729FB8D7200120319 /* EditCellList.swift */,
 				3369E8C429BA25F6001E004C /* AlertData.swift */,
 			);
 			path = Entity;
@@ -337,6 +365,7 @@
 			children = (
 				33D272BA2988051900EF9321 /* EditViewController.swift */,
 				33DDD9BE29B0D42200C8F0C9 /* EditPresenter.swift */,
+				33B4BD8729FB8D7200120319 /* EditEnum.swift */,
 				335B086129BAF13E008458E8 /* Cell */,
 			);
 			path = Edit;
@@ -366,6 +395,7 @@
 			children = (
 				33D957FE29FAC2F00016B1F6 /* UIViewController+.swift */,
 				3369E8C229B9BD7D001E004C /* UIColor+.swift */,
+				33CEDDBF29FEC87A0088CD14 /* UIView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -385,6 +415,7 @@
 			children = (
 				33D272B52986CC8800EF9321 /* MainPresenter.swift */,
 				33D27264298233E600EF9321 /* MainViewController.swift */,
+				33CEDDAE29FE96ED0088CD14 /* MainEnum.swift */,
 				33D2728129824B0E00EF9321 /* ListCell */,
 			);
 			path = Main;
@@ -488,6 +519,7 @@
 			knownRegions = (
 				ko,
 				Base,
+				en,
 			);
 			mainGroup = 33D27254298233E600EF9321;
 			packageReferences = (
@@ -518,7 +550,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33AE1F782994CDED008A67A5 /* Assets.xcassets in Resources */,
+				3322DB5E29FEE5BA00580FE8 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,8 +558,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33D2726D298233E700EF9321 /* LaunchScreen.storyboard in Resources */,
-				33D2726A298233E700EF9321 /* Assets.xcassets in Resources */,
+				3322DB5D29FEE5B900580FE8 /* Localizable.strings in Resources */,
+				3322DB7229FF9D1A00580FE8 /* Assets.xcassets in Resources */,
+				3322DB6329FEE68300580FE8 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,13 +571,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33B4BD8629FB659500120319 /* UIColor+.swift in Sources */,
 				33619F9129D5C613007F44A9 /* Item.swift in Sources */,
-				33F51B5129D78DB70021884F /* Util.swift in Sources */,
-				33619F8E29D5C2D4007F44A9 /* D_DayWidget.intentdefinition in Sources */,
+				3322DB5B29FEE4CF00580FE8 /* Util.swift in Sources */,
+				33CEDDB829FEC1CB0088CD14 /* D_DayWidget.intentdefinition in Sources */,
 				33619F8529D5C2C2007F44A9 /* IntentHandler.swift in Sources */,
 				33619F8F29D5C5D7007F44A9 /* D_DayWidget.swift in Sources */,
 				33619F9029D5C60B007F44A9 /* Repository.swift in Sources */,
+				3322DB5C29FEE4DF00580FE8 /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,8 +589,9 @@
 				332D1CF2299945A900239C46 /* Repository.swift in Sources */,
 				33F51B5029D78BB40021884F /* Util.swift in Sources */,
 				33C487832996074400792ABB /* Item.swift in Sources */,
-				332D1CFF29994B3D00239C46 /* D_DayWidget.intentdefinition in Sources */,
+				33CEDDB729FEC1CB0088CD14 /* D_DayWidget.intentdefinition in Sources */,
 				33AE1F712994CDEB008A67A5 /* D_DayWidgetBundle.swift in Sources */,
+				3322DB7929FFA88700580FE8 /* IntentHandler.swift in Sources */,
 				33AE1F752994CDEB008A67A5 /* D_DayWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -571,9 +605,10 @@
 				33DDD9C829B6040400C8F0C9 /* ToastView.swift in Sources */,
 				335B087129BAF13E008458E8 /* EditTableViewTitleCell.swift in Sources */,
 				335B086A29BAF13E008458E8 /* EditTableViewImageCell.swift in Sources */,
+				33CEDDAF29FE96ED0088CD14 /* MainEnum.swift in Sources */,
 				33D272BB2988051900EF9321 /* EditViewController.swift in Sources */,
 				3369E8C529BA25F6001E004C /* AlertData.swift in Sources */,
-				33B4BD8829FB8D7200120319 /* EditCellList.swift in Sources */,
+				33B4BD8829FB8D7200120319 /* EditEnum.swift in Sources */,
 				339D1FBC299CC0C900FEE6DB /* SettingViewController.swift in Sources */,
 				3369E8C729BA2CA0001E004C /* UserDefaultsManager.swift in Sources */,
 				33D272DE2990CE8500EF9321 /* Repository.swift in Sources */,
@@ -589,6 +624,7 @@
 				33D2727C29824AF000EF9321 /* CollectionViewCell_2x2.swift in Sources */,
 				33D27265298233E600EF9321 /* MainViewController.swift in Sources */,
 				33DDD9C129B0D96C00C8F0C9 /* DetailPresenter.swift in Sources */,
+				33CEDDC029FEC87A0088CD14 /* UIView+.swift in Sources */,
 				33D27261298233E600EF9321 /* AppDelegate.swift in Sources */,
 				33BEF25029C89EAD0096486A /* DarkModeToggleCell.swift in Sources */,
 				335B086E29BAF13E008458E8 /* EditTableViewSegmentCell.swift in Sources */,
@@ -619,6 +655,33 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3322DB6729FEE68300580FE8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3322DB6629FEE68300580FE8 /* ko */,
+				3322DB6829FEE68700580FE8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		33CEDDAC29FE8FDD0088CD14 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				33CEDDAB29FE8FDD0088CD14 /* ko */,
+				33CEDDAD29FE90070088CD14 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		33CEDDBA29FEC1CB0088CD14 /* D_DayWidget.intentdefinition */ = {
+			isa = PBXVariantGroup;
+			children = (
+				33CEDDE529FED43D0088CD14 /* ko */,
+				3322DB5A29FEE3EB00580FE8 /* en */,
+			);
+			name = D_DayWidget.intentdefinition;
+			sourceTree = "<group>";
+		};
 		33D2726B298233E700EF9321 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -638,7 +701,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4QNJWH8J8Y;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Intent/Info.plist;
+				INFOPLIST_FILE = Intent/info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Intent;
 				INFOPLIST_KEY_NSCameraUsageDescription = "레이블의 배경 이미지를 선택하기 위해 카메라를 사용합니다.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -648,7 +711,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "hana.D-Day.Intent";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -666,7 +729,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4QNJWH8J8Y;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Intent/Info.plist;
+				INFOPLIST_FILE = Intent/info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Intent;
 				INFOPLIST_KEY_NSCameraUsageDescription = "레이블의 배경 이미지를 선택하기 위해 카메라를 사용합니다.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -676,7 +739,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "hana.D-Day.Intent";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -689,12 +752,10 @@
 		33AE1F802994CDED008A67A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "D-DayWidget/D-DayWidget.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4QNJWH8J8Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "D-DayWidget/Info.plist";
@@ -708,7 +769,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "hana.D-Day.D-DayWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -722,12 +783,10 @@
 		33AE1F812994CDED008A67A5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "D-DayWidget/D-DayWidget.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4QNJWH8J8Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "D-DayWidget/Info.plist";
@@ -741,7 +800,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "hana.D-Day.D-DayWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -756,6 +815,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -804,8 +865,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "레이블의 배경 이미지를 선택하기 위해 카메라를 사용합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "레이블의 배경 이미지를 선택하기 위해 포토 라이브러리를 사용합니다.";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INTENTS_CODEGEN_LANGUAGE = Swift;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -819,6 +882,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -861,8 +926,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "레이블의 배경 이미지를 선택하기 위해 카메라를 사용합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "레이블의 배경 이미지를 선택하기 위해 포토 라이브러리를 사용합니다.";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INTENTS_CODEGEN_LANGUAGE = Swift;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -877,7 +944,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "D-Day/D-Day.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -885,9 +952,11 @@
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "D-Day/Info.plist";
-				INFOPLIST_KEY_NSCameraUsageDescription = "레이블의 배경 이미지를 선택하기 위해 카메라를 사용합니다.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "레이블의 배경 이미지를 선택하기 위해 포토 라이브러리를 사용합니다.";
+				INFOPLIST_KEY_CFBundleDisplayName = "D-Day";
+				INFOPLIST_KEY_NSCameraUsageDescription = INFOPLIST_KEY_NSCameraUsageDescription;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = INFOPLIST_KEY_NSPhotoLibraryUsageDescription;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -913,7 +982,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "D-Day/D-Day.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -921,9 +990,11 @@
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "D-Day/Info.plist";
-				INFOPLIST_KEY_NSCameraUsageDescription = "레이블의 배경 이미지를 선택하기 위해 카메라를 사용합니다.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "레이블의 배경 이미지를 선택하기 위해 포토 라이브러리를 사용합니다.";
+				INFOPLIST_KEY_CFBundleDisplayName = "D-Day";
+				INFOPLIST_KEY_NSCameraUsageDescription = INFOPLIST_KEY_NSCameraUsageDescription;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = INFOPLIST_KEY_NSPhotoLibraryUsageDescription;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

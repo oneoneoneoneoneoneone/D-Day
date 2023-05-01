@@ -39,9 +39,8 @@ class SettingPresenter{
         repository?.readItem().forEach{item in
             let isChecked = repository?.getDefaultWidget() == item.id.stringValue
             actionElement.updateValue("\(item.title) \(isChecked ? "✔️" : "")", forKey: item.id.stringValue)
-            
-            viewController?.presentToWidgetItemSelectView(actionElement)
         }
+        viewController?.presentToWidgetItemSelectView(actionElement)
     }
     
     ///잠금화면 디데이 선택 cell 선택

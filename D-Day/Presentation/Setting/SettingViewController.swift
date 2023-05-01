@@ -13,7 +13,7 @@ class SettingViewController: UIViewController{
     private lazy var presenter = SettingPresenter(viewController: self)
         
     final let menuHeader = ["알림", "화면", "위젯", "지원"/*, "백업"*/]
-    final let menu = [["❗️알림 허용이 꺼진 상태", "디데이 알림", "알림 시간"], ["다크 모드"], ["잠금화면 디데이 선택"], ["email 문의", "리뷰 쓰기"]/*, ["캘린더 가져오기", "백업", "로그인"]*/]
+    final let menu = [["❗️알림 허용이 꺼진 상태", "디데이 알림", "알림 시간"], ["다크 모드"], ["잠금화면 디데이 선택"], ["Email 문의", "리뷰 쓰기"]/*, ["캘린더 가져오기", "백업", "로그인"]*/]
     var isAlarmPermission = true
     
     lazy var tableView: UITableView = {
@@ -47,7 +47,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") ?? UITableViewHeaderFooterView()
-        header.textLabel?.text = menuHeader[section]
+        header.textLabel?.text = NSLocalizedString(menuHeader[section], comment: "")
         
         return header
     }
@@ -69,8 +69,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource{
         switch menu[indexPath.section][indexPath.row]{
         case "❗️알림 허용이 꺼진 상태":
             let cell = tableView.dequeueReusableCell(withIdentifier: "default") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "default")
-            cell.textLabel?.text = menu[indexPath.section][indexPath.row]
-            cell.detailTextLabel?.text = "  설정에서 켜기"
+            cell.textLabel?.text = NSLocalizedString(menu[indexPath.section][indexPath.row], comment: "")
+            cell.detailTextLabel?.text = NSLocalizedString("  설정에서 켜기", comment: "")
             cell.detailTextLabel?.textColor = .blue
             cell.isHidden = isAlarmPermission
             
@@ -79,31 +79,31 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource{
             return cell
         case "디데이 알림":
             let cell = tableView.dequeueReusableCell(withIdentifier: "AlertToggleCell") ?? AlertToggleCell()
-            cell.textLabel?.text = menu[indexPath.section][indexPath.row]
+            cell.textLabel?.text = NSLocalizedString(menu[indexPath.section][indexPath.row], comment: "")
             cell.selectionStyle = .none
             
             return cell
         case "알림 시간":
             let cell = tableView.dequeueReusableCell(withIdentifier: "AlertTimeCell") ?? AlertTimeCell()
-            cell.textLabel?.text = menu[indexPath.section][indexPath.row]
+            cell.textLabel?.text = NSLocalizedString(menu[indexPath.section][indexPath.row], comment: "")
             cell.selectionStyle = .none
             
             return cell
         case "다크 모드":
             let cell = tableView.dequeueReusableCell(withIdentifier: "DarkModeToggleCell") ?? DarkModeToggleCell()
-            cell.textLabel?.text = menu[indexPath.section][indexPath.row]
+            cell.textLabel?.text = NSLocalizedString(menu[indexPath.section][indexPath.row], comment: "")
             cell.selectionStyle = .none
             
             return cell
         case "잠금화면 디데이 선택":
             let cell = tableView.dequeueReusableCell(withIdentifier: "default") ?? UITableViewCell(style: .default, reuseIdentifier: "default")
-            cell.textLabel?.text = menu[indexPath.section][indexPath.row]
+            cell.textLabel?.text = NSLocalizedString(menu[indexPath.section][indexPath.row], comment: "")
             cell.selectionStyle = .none
             
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "default") ?? UITableViewCell(style: .default, reuseIdentifier: "default")
-            cell.textLabel?.text = menu[indexPath.section][indexPath.row]
+            cell.textLabel?.text = NSLocalizedString(menu[indexPath.section][indexPath.row], comment: "")
             cell.selectionStyle = .none
             
             return cell
@@ -116,7 +116,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource{
             presenter.turnOnAlarmCellDidSelect()
         case "잠금화면 디데이 선택":
             presenter.selectLockScreenItemCellDidSelect()
-        case "email 문의":
+        case "Email 문의":
             presenter.emailInquiryCellDidSelect()
         case "리뷰 쓰기":
             presenter.writeReviewCellDidSelect()
@@ -161,27 +161,30 @@ extension SettingViewController: SettingProtocol{
                              
                              -------------------
                              
-                             문의 내용 :
+                             \(NSLocalizedString("문의 내용", comment: "")) :
                              
                              """
                     
             controller.setToRecipients([email])
-            controller.setSubject("<D-Day>앱 문의")
+            controller.setSubject("<D-Day>\(NSLocalizedString("앱 문의", comment: ""))")
             controller.setMessageBody(bodyString, isHTML: false)
             
             self.present(controller, animated: true, completion: nil)
         }
         else {
             print("메일 보내기 실패")
-            let sendMailErrorAlert = UIAlertController(title: "메일 전송 실패", message: "메일을 보내려면 'Mail' 앱이 필요합니다. App Store에서 해당 앱을 복원하거나 이메일 설정을 확인하고 다시 시도해주세요.", preferredStyle: .alert)
+            let sendMailErrorAlert = UIAlertController(
+                title: NSLocalizedString("메일 전송 실패", comment: ""),
+                message: NSLocalizedString("메일을 보내려면 'Mail' 앱이 필요합니다. 앱스토어에서 해당 앱을 복원하거나 이메일 설정을 확인하고 다시 시도해주세요.", comment: ""),
+                preferredStyle: .alert)
             
-            let goAppStoreAction = UIAlertAction(title: "App Store로 이동하기", style: .default) { _ in
+            let goAppStoreAction = UIAlertAction(title: NSLocalizedString("앱스토어로 이동하기", comment: ""), style: .default) { _ in
                 // 앱스토어로 이동하기(Mail)
                 if let url = URL(string: "https://apps.apple.com/kr/app/mail/id1108187098"), UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }
             }
-            let cancleAction = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+            let cancleAction = UIAlertAction(title: NSLocalizedString("취소", comment: ""), style: .destructive, handler: nil)
             sendMailErrorAlert.addAction(goAppStoreAction)
             sendMailErrorAlert.addAction(cancleAction)
             
@@ -202,7 +205,7 @@ extension SettingViewController: SettingProtocol{
     }
     
     func presentToWidgetItemSelectView(_ actionElement: [String:String]){
-        let alertController = UIAlertController(title: "잠금화면 위젯에 사용할 항목을 선택하세요.", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("잠금화면 위젯에 보여질 항목을 선택하세요.", comment: ""), message: nil, preferredStyle: .alert)
         
         actionElement.forEach{ action in
             let action = UIAlertAction(title: action.value, style: .default){ [weak self] _ in
@@ -210,7 +213,7 @@ extension SettingViewController: SettingProtocol{
             }
             alertController.addAction(action)
         }
-        alertController.addAction(UIAlertAction(title: "취소", style: .cancel))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("취소", comment: ""), style: .cancel))
         
         self.present(alertController, animated: true)
     }

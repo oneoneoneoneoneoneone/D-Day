@@ -1,0 +1,84 @@
+/* 
+  Localizable.strings
+  D-Day
+
+  Created by hana on 2023/04/30.
+  
+*/
+
+
+//Mark: Main
+
+"제목 순으로 보여집니다." = "It is displayed in order of title.";
+"완료 날짜가 가까운 순으로 보여집니다." = "Completion dates are displayed in distant order.";
+"완료 날짜가 먼 순으로 보여집니다." = "Completion dates are displayed in close order.";
+
+"1X1 크기로 보여집니다." = "Displayed in 1x1 size.";
+"2X2 크기로 보여집니다." = "Displayed in 2x2 size.";
+"1X4 크기로 보여집니다." = "Displayed in 1x4 size.";
+"2X4 크기로 보여집니다." = "Displayed in 2x4 size.";
+
+//Mark: Edit
+
+"취소" = "Cencel";
+"저장" = "Save";
+"작성중인 내용이 있습니다. 닫으시겠습니까?" = "Are you sure you want to discard your changes";
+"계속 작성하기" = "Keep Editing";
+"닫기" = "Discard Changeds";
+
+"제목을 입력해주세요." = "Please enter a title.";
+"날짜" = "Date";
+"날짜 카운트" = "Date Count";
+"배경 색" = "Background Color";
+"배경 이미지" = "Background Image";
+"배경 스타일" = "Background Style";
+"메모" = "Notes";
+
+"디데이" = "D-Day";
+"기념일" = "Anniv";
+"기본" = "Basics";
+"동그랗게" = "Round";
+"배경 이미지를 선택해주세요." = "Please select a background image.";
+"메모를 입력해주세요." = "Please enter notes.";
+
+"카메라 권한이 없습니다." = "You do not have camera permission.";
+"설정앱에서 카메라 접근을 허용해주세요.\n권한 설정이 변경되면 앱이 다시 실행됩니다." = "Please allow camera access in the settings app.\nIf permission settings change, the app will run again.";
+"이동" = "Move";
+"사진 보관함에서 선택" = "Select from Photo Library";
+"카메라로 촬영" = "Taking a picture with a Camera";
+
+//Mark: Detail
+
+"삭제" = "Delete";
+"수정" = "Edit";
+"삭제하시겠습니까?" = "Are you sure you want to delete it?";
+
+//Mark: Setting
+
+"알림" = "Notifications";
+"화면" = "Screen";
+"위젯" = "Widget";
+"지원" = "Support";
+"백업" = "backup";
+"❗️알림 허용이 꺼진 상태" = "❗️Allow notifications turned off";
+"디데이 알림" = "Turn on";
+"알림 시간" = "Time";
+"다크 모드" = "Dark mode";
+"잠금화면 디데이 선택" = "Select Lock Screen D-Day";
+"Email 문의" = "Email inquiry";
+"리뷰 쓰기" = "Write a review";
+"캘린더 가져오기" = "";
+"로그인" = "";
+"  설정에서 켜기" = "  Turn on in Settings";
+
+"문의 내용" = "Contact details";
+"앱 문의" = "Application inquiry";
+"메일 전송 실패" = "Mail transfer failed";
+"메일을 보내려면 'Mail' 앱이 필요합니다. 앱스토어에서 해당 앱을 복원하거나 이메일 설정을 확인하고 다시 시도해주세요." = "The 'Mail' app is required to send mail. Please restore the app from the App Store or check your email settings and try again.";
+"앱스토어로 이동하기" = "Go to the App Store";
+"잠금화면 위젯에 보여질 항목을 선택하세요." = "Select the items that will appear in the Lock Screen widget.";
+
+//Mark: Widget
+
+"디데이 위젯" = "D-Day Widget";
+"한개의 디데이를 선택하여 위젯에 표시할 수 있습니다." = "You can select one D-Day to display.";

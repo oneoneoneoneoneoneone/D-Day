@@ -11,6 +11,8 @@ class EditTableViewMemoCell: UITableViewCell{
     private var delegate: EditCellDelegate?
     private var cell: EditCellList?
     
+    final let textViewPlaceHolder = EditCellList.memo.subText.first
+    
     lazy var textView: UITextView = {
         let textView = UITextView()
         textView.layer.borderWidth = 1.0
@@ -24,8 +26,6 @@ class EditTableViewMemoCell: UITableViewCell{
         
         return textView
     }()
-    
-    var textViewPlaceHolder = "메모를 입력해주세요."
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -78,8 +78,4 @@ extension EditTableViewMemoCell: UITextViewDelegate{
     func textViewDidChange(_ textView: UITextView) {
         delegate?.valueChanged(self.cell!, didChangeValue: textView.text)
     }
-    
-//    func textViewDidChangeSelection(_ textView: UITextView) {
-//        delegate?.valueChanged(self.cell!, didChangeValue: textView.text)
-//    }
 }

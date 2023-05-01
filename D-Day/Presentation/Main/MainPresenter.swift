@@ -27,8 +27,8 @@ final class MainPresenter: NSObject{
     private let repository: Repository
     
     
-    private let DisplayList = [MainViewController.DisplayStyle.x11, MainViewController.DisplayStyle.x22, MainViewController.DisplayStyle.x14, MainViewController.DisplayStyle.x24]
-    private let SortList = [MainViewController.AlertAction.title, MainViewController.AlertAction.dateDesc, MainViewController.AlertAction.dateAsc]
+    private let DisplayList = [DisplayStyle.x11, DisplayStyle.x22, DisplayStyle.x14, DisplayStyle.x24]
+    private let SortList = [SortStyle.title, SortStyle.dateDesc, SortStyle.dateAsc]
     private var currentDisplayIndex = 0
     private var currentSortIndex = 0
     
@@ -78,7 +78,7 @@ final class MainPresenter: NSObject{
         userDefaultsManager.setCurrentDisplay(index: currentDisplayIndex)
         
         viewController.reloadCollectionView()
-        viewController.showToast(message: "\(DisplayList[currentDisplayIndex].title)로 보여집니다.")
+        viewController.showToast(message: DisplayList[currentDisplayIndex].message)
     }
     
     func rightSortButtonTap(){
@@ -88,7 +88,7 @@ final class MainPresenter: NSObject{
         setSort()
         
         viewController.reloadCollectionView()
-        viewController.showToast(message: "\(SortList[currentSortIndex].title)순으로 보여집니다.")
+        viewController.showToast(message: SortList[currentSortIndex].message)
     }
     
     func rightSettingButtonTap(){

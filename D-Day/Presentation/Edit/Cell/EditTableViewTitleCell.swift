@@ -13,19 +13,14 @@ class EditTableViewTitleCell: UITableViewCell{
     
     lazy var textField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "제목을 입력하세요."
         textField.delegate = self
-        
-//        textField.addTarget(self, action: #selector(textFieldValueChanged), for: .valueChanged)
-        
+                
         return textField
     }()
     
     lazy var colorWell: UIColorWell = {
         let colorWell = UIColorWell()
         colorWell.supportsAlpha = false
-//        colorWell.contentVerticalAlignment = .center
-//        colorWell.contentHorizontalAlignment = .trailing
         colorWell.addTarget(self, action: #selector(colorWellValueChanged), for: .valueChanged)
         
         return colorWell

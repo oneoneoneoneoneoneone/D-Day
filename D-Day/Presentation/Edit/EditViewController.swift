@@ -21,7 +21,8 @@ class EditViewController: UIViewController{
         tableView.register(EditTableViewColorCell.self, forCellReuseIdentifier: "EditTableViewColorCell")
         tableView.register(EditTableViewImageCell.self, forCellReuseIdentifier: "EditTableViewImageCell")
         tableView.register(EditTableViewMemoCell.self, forCellReuseIdentifier: "EditTableViewMenoCell")
-
+        tableView.register(EditTableViewPresentButtonCell.self, forCellReuseIdentifier: "EditTableViewPresentButtonCell")
+        
         tableView.delegate = presenter
         tableView.dataSource = presenter
 

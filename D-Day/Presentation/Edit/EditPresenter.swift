@@ -143,6 +143,10 @@ extension EditPresenter: EditCellDelegate{
             if value is Bool{
                 editItem.isCircle = value as! Bool
             }
+        case .textAttribute:
+            if value is List<TextAttributes>{
+                editItem.textAttributes = value as! List<TextAttributes>
+            }
         case .memo:
             if value is String{
                 editItem.memo = value as! String
@@ -240,6 +244,13 @@ extension EditPresenter: UITableViewDataSource{
             cell.selectionStyle = .none
             cell.bind(delegate: self, cell: cellList[row])
             cell.setDate(value: item.isCircle)
+
+            return cell
+        case .textAttribute:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewPresentButtonCell", for: indexPath) as! EditTableViewPresentButtonCell
+            cell.selectionStyle = .none
+            cell.bind(delegate: self, cell: cellList[row])
+            cell.setData(textAttributes: item.textAttributes, id: item.id.stringValue)
 
             return cell
         case .memo:

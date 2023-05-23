@@ -27,7 +27,7 @@ class Repository: RepositoryProtocol{
     //MARK: Realm
     private var realm: Realm{
         let realmURL = container?.appendingPathComponent(defaultRealmPath)
-        let config = Realm.Configuration(fileURL: realmURL, schemaVersion: 6, objectTypes: [Item.self])
+        let config = Realm.Configuration(fileURL: realmURL, schemaVersion: 7, objectTypes: [Item.self, TextAttributes.self])
         
         return try! Realm(configuration: config)
     }

@@ -66,7 +66,7 @@ class EditTableViewPresentButtonCell: UITableViewCell{
     }
     
     @objc func buttonTap(){
-        let textAttributesViewController = EditTextAttributesViewController(id: id, title: title, dday: dday, background: background)
+        let textAttributesViewController = TextAttributesViewController(id: id, title: title, dday: dday, background: background)
         window?.rootViewController?.presentedViewController?.present(textAttributesViewController, animated: true)
     }
 }

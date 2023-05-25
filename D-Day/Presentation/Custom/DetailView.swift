@@ -11,7 +11,6 @@ class DetailView: UIView{
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
         
         return imageView
     }()
@@ -45,11 +44,16 @@ class DetailView: UIView{
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        self.clipsToBounds = true
         
         setLayout()
     }
     
-    func setData(title: Title, dday: DDay, background: Background, image: UIImage){
+    func setData(title: Title?, dday: DDay?, background: Background?, image: UIImage?){
+        guard let title = title,
+              let dday = dday,
+              let background = background else {return}
+        
         titleLabel.text = title.text
         titleLabel.textColor = UIColor(hexCode: title.color)
         dDayLabel.text = Util.numberOfDaysFromDate(isStartCount: dday.isStartCount, from: dday.date)
@@ -62,8 +66,6 @@ class DetailView: UIView{
         if background.isImage{
             imageView.image = image
         }
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@ imageView.frame.height = 0.....
-//        imageView.layer.cornerRadius = item.isCircle ? (imageView.frame.height)/2 : 0
     }
     
     func setLayout(){

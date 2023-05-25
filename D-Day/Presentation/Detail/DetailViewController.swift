@@ -120,8 +120,9 @@ extension DetailViewController: DetailProtocol{
         }
     }
     
-    func setData(item: Item, image: UIImage){
-        detailView.setData(title: item.title!, dday: item.dday!, background: item.background!, image: image)
+    func setData(item: Item, image: UIImage?){
+        detailView.setData(title: item.title, dday: item.dday, background: item.background, image: image)
+        detailView.layer.cornerRadius = item.background!.isCircle ? (view.frame.width)/2 : 0
         memoLabel.text = item.memo
     }
 

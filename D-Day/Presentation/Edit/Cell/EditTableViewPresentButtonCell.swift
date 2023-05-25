@@ -11,6 +11,11 @@ import RealmSwift
 class EditTableViewPresentButtonCell: UITableViewCell{
     private var delegate: EditCellDelegate?
     private var cell: EditCellList?
+    
+    private var title = Title()
+    private var dday = DDay()
+    private var background = Background()
+    private var id = ""
         
     lazy var button: UIButton = {
         let button = UIButton()
@@ -49,15 +54,19 @@ class EditTableViewPresentButtonCell: UITableViewCell{
         button.setTitle(cell.text, for: [])
     }
     
-    func setData(textAttributes: List<TextAttributes>, id: String){
-        //title x, y, isHidden
-        //dday x, y, isHidden
-        //date x, y, isHidden
-        //image
+    func setData(id: String?, title: Title?, dday: DDay?, background: Background?){
+        guard let id = id,
+              let title = title,
+              let dday = dday,
+              let background = background else { return }
+        self.id = id
+        self.title = title
+        self.dday = dday
+        self.background = background
     }
     
     @objc func buttonTap(){
-        let textAttributesViewController = EditTextAttributesViewController()
+        let textAttributesViewController = EditTextAttributesViewController(id: id, title: title, dday: dday, background: background)
         window?.rootViewController?.presentedViewController?.present(textAttributesViewController, animated: true)
     }
 }

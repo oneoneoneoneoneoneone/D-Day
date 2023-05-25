@@ -51,7 +51,7 @@ struct Provider: IntentTimelineProvider {
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)! //언제 리로드할지
             
-            let items = Array(Repository().readItem())
+            let items = Repository().readItem()
             var item = Item()
             
             if items.filter({$0.id.stringValue == configuration.SelectedWidget?.identifier}).count > 0{

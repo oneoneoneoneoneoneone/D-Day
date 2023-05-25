@@ -10,12 +10,12 @@ import RealmSwift
 import UIKit
 
 protocol RepositoryProtocol{
-    func readItem() -> [Item]!
+    func readItem() -> [Item]
     func editItem(_ data: Item)
     func deleteItem(_ data: Item)
     
-    func setDefaultWidget(id: String!)
-    func getDefaultWidget() -> String!
+    func setDefaultWidget(id: String?)
+    func getDefaultWidget() -> String?
 }
 
 class Repository: RepositoryProtocol{
@@ -25,69 +25,80 @@ class Repository: RepositoryProtocol{
     
     
     //MARK: Realm
-    private var realm: Realm{
-        let realmURL = container?.appendingPathComponent(defaultRealmPath)
-        let config = Realm.Configuration(
-            fileURL: realmURL,
-            schemaVersion: 14,
-            migrationBlock: {migration, oldSchemaVersion in
-                if oldSchemaVersion < 9{    //마지막으로 실행된 스키마 버전이 새스키마 버전보다 작은 경우
-                    migration.enumerateObjects(ofType: Item.className()){ oldObject, newObject in
-                        let tempTitle = Title()
-                        tempTitle.text = oldObject?["title"] as? String ?? Title().text
-                        tempTitle.color = oldObject?["titleColor"] as? String ?? Title().color
-                        let tempDday = DDay()
-                        tempDday.date = oldObject?["date"] as? Date ?? DDay().date
-                        tempDday.isStartCount = oldObject?["isStartCount"] as? Bool ?? DDay().isStartCount
-                        let tempBg = Background()
-                        tempBg.color = oldObject?["backgroundColor"] as? String ?? Background().color
-                        tempBg.isColor = oldObject?["isBackgroundColor"] as? Bool ?? Background().isColor
-                        tempBg.isImage = oldObject?["isBackgroundImage"] as? Bool ?? Background().isImage
-                        tempBg.isCircle = oldObject?["isCircle"] as? Bool ?? Background().isCircle
-                        
-                        newObject?["title"] = tempTitle
-                        newObject?["dday"] = tempDday
-                        newObject?["background"] = tempBg
+    private var realm: Realm?{
+        do{
+            let realmURL = container?.appendingPathComponent(defaultRealmPath)
+            let config = Realm.Configuration(
+                fileURL: realmURL,
+                schemaVersion: 14,
+                migrationBlock: {migration, oldSchemaVersion in
+                    if oldSchemaVersion < 9{    //마지막으로 실행된 스키마 버전이 새스키마 버전보다 작은 경우
+                        migration.enumerateObjects(ofType: Item.className()){ oldObject, newObject in
+                            let tempTitle = Title()
+                            tempTitle.text = oldObject?["title"] as? String ?? Title().text
+                            tempTitle.color = oldObject?["titleColor"] as? String ?? Title().color
+                            let tempDday = DDay()
+                            tempDday.date = oldObject?["date"] as? Date ?? DDay().date
+                            tempDday.isStartCount = oldObject?["isStartCount"] as? Bool ?? DDay().isStartCount
+                            let tempBg = Background()
+                            tempBg.color = oldObject?["backgroundColor"] as? String ?? Background().color
+                            tempBg.isColor = oldObject?["isBackgroundColor"] as? Bool ?? Background().isColor
+                            tempBg.isImage = oldObject?["isBackgroundImage"] as? Bool ?? Background().isImage
+                            tempBg.isCircle = oldObject?["isCircle"] as? Bool ?? Background().isCircle
+                            
+                            newObject?["title"] = tempTitle
+                            newObject?["dday"] = tempDday
+                            newObject?["background"] = tempBg
+                        }
                     }
-                }
-            },
-            objectTypes: [Item.self, Title.self, DDay.self, Background.self, TextAttributes.self])
-        
-        
-        Realm.Configuration.defaultConfiguration = config
-        
-        
-        
-        return try! Realm(configuration: config)
+                },
+                objectTypes: [Item.self, Title.self, DDay.self, Background.self, TextAttributes.self])
+            
+            Realm.Configuration.defaultConfiguration = config
+            
+            return try Realm(configuration: config)
+        }catch{
+            print(error)
+            return nil
+        }
     }
     
-    func readItem() -> [Item]!{
-        print(realm.configuration.fileURL!)
+    func readItem() -> [Item]{
+        guard let realm = realm else { return [] }
+        print(realm.configuration.fileURL ?? "")
         
         return Array(realm.objects(Item.self))
     }
     
     func editItem(_ data: Item) {
-        if let item = realm.objects(Item.self).filter(NSPredicate(format: "id = %@", data.id )).first{
-            //수정
-            try! realm.write{
-                item.title!.text = data.title!.text
-                item.dday = data.dday
-                item.background = data.background
-                item.memo = data.memo
+        do{
+            if let item = realm?.objects(Item.self).filter(NSPredicate(format: "id = %@", data.id )).first{
+                //수정
+                try realm?.write{
+                    item.title!.text = data.title!.text
+                    item.dday = data.dday
+                    item.background = data.background
+                    item.memo = data.memo
+                }
             }
-        }
-        else{
-            //생성
-            try! realm.write{
-                realm.add(data)
+            else{
+                //생성
+                try realm?.write{
+                    realm?.add(data)
+                }
             }
+        }catch{
+            print(error)
         }
     }
     
     func deleteItem(_ data: Item) {
-        try! realm.write{
-            realm.delete(data)
+        do{
+            try realm?.write{
+                realm?.delete(data)
+            }
+        }catch{
+            print(error)
         }
     }
     
@@ -140,11 +151,11 @@ class Repository: RepositoryProtocol{
         }
     }
     
-    func setDefaultWidget(id: String!){
+    func setDefaultWidget(id: String?){
         UserDefaults(suiteName: appGroupId)?.setValue(id, forKey: "defaultWidget")
     }
 
-    func getDefaultWidget() -> String!{
+    func getDefaultWidget() -> String?{
         return UserDefaults(suiteName: appGroupId)?.string(forKey: "defaultWidget")
     }
 }

@@ -27,7 +27,7 @@ class IntentHandler: INExtension, WidgetIntentHandling {
 }
 
 func getItem() -> [Item]{
-    let items = Repository().readItem()!
+    let items = Repository().readItem()
 
     return Array(items)
 }

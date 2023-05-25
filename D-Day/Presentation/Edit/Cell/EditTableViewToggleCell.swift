@@ -60,12 +60,13 @@ class EditTableViewToggleCell: UITableViewCell{
         }
     }
     
-    func setDate(value: Bool){
-        segment.selectedSegmentIndex = value ? 1 : 0
+    func setData(isOn: Bool?){
+        guard let isOn = isOn else { return }
+        segment.selectedSegmentIndex = isOn ? 1 : 0
         segment.sendActions(for: .valueChanged)
     }
     
     @objc func segmentValueChanged(_ sender: UISegmentedControl){
-        delegate?.valueChanged(self.cell!, didChangeValue: sender.selectedSegmentIndex == 1 ? true : false)
+        delegate?.valueChanged(self.cell, didChangeValue: sender.selectedSegmentIndex == 1 ? true : false)
     }
 }

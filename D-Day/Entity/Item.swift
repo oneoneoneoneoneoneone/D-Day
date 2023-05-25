@@ -15,6 +15,15 @@ class Item: Object{
     @Persisted var dday: DDay?
     @Persisted var background: Background?
     @Persisted var memo: String = ""
+    
+    convenience init(id: String, title: Title? = Title(), dday: DDay? = DDay(), background: Background? = Background(), memo: String = "") {
+        self.init()
+        
+        self.title = title
+        self.dday = dday
+        self.background = background
+        self.memo = memo
+    }
 }
 
 class Title: Object{

@@ -57,28 +57,25 @@ class EditTableViewTitleCell: UITableViewCell{
         textField.placeholder = cell.text
     }
     
-    func setDate(text: String, color: String?){
+    func setData(text: String?, color: String?){
+        guard let text = text else { return }
         textField.text = text
-        delegate?.valueChanged(self.cell!, didChangeValue: textField.text)
+        delegate?.valueChanged(self.cell, didChangeValue: textField.text)
         
         guard let color = color, color != "" else { return }
         
         colorWell.selectedColor = UIColor(hexCode: color)
         colorWell.sendActions(for: .valueChanged)
     }
-    
-//    @objc func textFieldValueChanged(_ sender: UITextField){
-//        delegate?.valueChanged(self.cell!, didChangeValue: sender.text)
-//    }
-    
+        
     @objc func colorWellValueChanged(_ sender: UIColorWell){
-        delegate?.valueChanged(self.cell!, didChangeValue: sender.selectedColor)
+        delegate?.valueChanged(self.cell, didChangeValue: sender.selectedColor)
     }
 }
 
 
 extension EditTableViewTitleCell: UITextFieldDelegate{
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        delegate?.valueChanged(self.cell!, didChangeValue: textField.text)
+        delegate?.valueChanged(self.cell, didChangeValue: textField.text)
     }
 }

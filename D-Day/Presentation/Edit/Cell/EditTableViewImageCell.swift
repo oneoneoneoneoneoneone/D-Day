@@ -71,7 +71,7 @@ class EditTableViewImageCell: UITableViewCell{
     private func setImage(image: UIImage){
         button.setImage(image, for: .normal)
         
-        delegate?.valueChanged(self.cell!, didChangeValue: image)
+        delegate?.valueChanged(self.cell, didChangeValue: image)
     }
     
     private func openLibrary(){
@@ -101,7 +101,7 @@ class EditTableViewImageCell: UITableViewCell{
         case .notDetermined:
             // 권한 요청
             AVCaptureDevice.requestAccess(for: .video) { grated in
-                if !grated {
+                if grated == false {
                     OperationQueue.main.schedule {
                         picker.dismiss(animated: true)
                     }
@@ -140,19 +140,20 @@ class EditTableViewImageCell: UITableViewCell{
         label.text = cell.text
     }
     
-    func setDate(isOn: Bool, id: String){
+    func setData(isOn: Bool?, id: String?){
+        guard let isOn = isOn else{ return }
+        
         toggle.isOn = isOn
         toggle.sendActions(for: .valueChanged)
         
+        guard let id = id else{ return }
         self.id = id
-        
         guard let image = Repository().loadImageFromDocumentDirectory(imageName: id) else {
             button.setImage(UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(pointSize: 80, weight: .light)), for: .normal)
-            delegate?.valueChanged(self.cell!, didChangeValue: button.image(for: .normal))
             return
         }
         button.setImage(image, for: .normal)
-        delegate?.valueChanged(self.cell!, didChangeValue: button.image(for: .normal))
+        delegate?.valueChanged(self.cell, didChangeValue: button.image(for: .normal))
     }
     
     func setToggle(){
@@ -175,7 +176,7 @@ class EditTableViewImageCell: UITableViewCell{
     }
     
     @objc func toggleValueChanged(_ sender: UISwitch){
-        delegate?.valueChanged(self.cell!, didChangeValue: sender.isOn)
+        delegate?.valueChanged(self.cell, didChangeValue: sender.isOn)
     }
 }
 

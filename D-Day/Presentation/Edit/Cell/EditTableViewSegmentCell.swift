@@ -64,12 +64,12 @@ class EditTableViewSegmentCell: UITableViewCell{
         label.text = cell.text
     }
     
-    func setDate(value: Int){
+    func setData(value: Int){
         segment.selectedSegmentIndex = value
         segment.sendActions(for: .valueChanged)
     }
     
     @objc func segmentValueChanged(_ sender: UISegmentedControl){
-        delegate?.valueChanged(self.cell!, didChangeValue: sender.selectedSegmentIndex)
+        delegate?.valueChanged(self.cell, didChangeValue: sender.selectedSegmentIndex)
     }
 }

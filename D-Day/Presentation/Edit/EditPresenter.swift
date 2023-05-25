@@ -35,13 +35,12 @@ final class EditPresenter: NSObject{
     private let repository: Repository
     private let notificationCenter = NotificationCenterManager()
     
-    final let textViewPlaceHolder = EditCellList.memo.subText.first
-    private final let cellList = EditCellList.allCases
-    
     private let item: Item
-    
     private let editItem = Item(id: "")
     private var image: UIImage?
+    
+    final let textViewPlaceHolder = EditCellList.memo.subText.first
+    private final let cellList = EditCellList.allCases
 
     init(viewController: EditProtocol, delegate: EditDelegate, userDefaultsManager: UserDefaultsManager = UserDefaultsManager(), repository: Repository = Repository(), item: Item) {
         self.viewController = viewController
@@ -204,7 +203,7 @@ extension EditPresenter: UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        				let row = indexPath.row + cellList.filter{ cell in
+        let row = indexPath.row + cellList.filter{ cell in
             cell.section.rawValue < indexPath.section
         }.count
 

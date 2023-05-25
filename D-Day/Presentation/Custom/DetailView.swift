@@ -49,16 +49,23 @@ class DetailView: UIView{
         setLayout()
     }
     
-    func setData(title: Title?, dday: DDay?, background: Background?, image: UIImage?){
-        guard let title = title,
-              let dday = dday,
-              let background = background else {return}
+    func setTitle(_ data: Title?){
+        guard let title = data else {return}
         
         titleLabel.text = title.text
         titleLabel.textColor = UIColor(hexCode: title.color)
+    }
+    
+    func setDday(_ data: DDay?){
+        guard let dday = data else {return}
+        
         dDayLabel.text = Util.numberOfDaysFromDate(isStartCount: dday.isStartCount, from: dday.date)
-        dDayLabel.textColor = UIColor(hexCode: title.color)
+        dDayLabel.textColor = titleLabel.textColor
         dateLabel.text = Util.stringFromDate(date: dday.date)
+    }
+    
+    func setBackground(_ data: Background?, image: UIImage?){
+        guard let background = data else {return}
         
         if background.isColor{
             imageView.backgroundColor = UIColor(hexCode: background.color)

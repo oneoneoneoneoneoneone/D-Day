@@ -56,6 +56,6 @@ enum Repeat: Int, PersistableEnum{
     case none, week, mount, year
 }
 
-enum ItemText: Int, PersistableEnum{
+enum DDayText: Int, PersistableEnum{
     case dday, date
 }

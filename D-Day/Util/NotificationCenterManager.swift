@@ -19,13 +19,13 @@ class NotificationCenterManager{
         
         //알림 내용
         let content = UNMutableNotificationContent()
-        content.title = item.title
+        content.title = item.title!.text
         content.body = "D-Day"
         content.sound = .default
         content.badge = 1        //생성된 뱃지는 SceneDelegate에서
         
         //트리거 설정
-        var component = Calendar.current.dateComponents([.year, .month, .day], from: item.date)//.addingTimeInterval(TimeInterval(25450)))//-86400)))
+        var component = Calendar.current.dateComponents([.year, .month, .day], from: item.dday!.date)//.addingTimeInterval(TimeInterval(25450)))//-86400)))
         component.hour = Calendar.current.dateComponents([.hour], from: alertData.time).hour
         component.minute = Calendar.current.dateComponents([.minute], from: alertData.time).minute
         let trigger = UNCalendarNotificationTrigger(dateMatching: component, repeats: false)
@@ -34,7 +34,7 @@ class NotificationCenterManager{
         let request = UNNotificationRequest(identifier: item.id.stringValue, content: content, trigger: trigger)
         notificationCenter.add(request, withCompletionHandler: nil)
         
-        print("addNotificationRequest 완 - \(item.title)")
+        print("addNotificationRequest 완 - \(item.title!)")
     }
     
     ///알림 시간 변경(전체)

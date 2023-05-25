@@ -64,11 +64,11 @@ struct Provider: IntentTimelineProvider {
             let entry = SimpleEntry(
                 date: entryDate,
                 id: item.id.stringValue,
-                title: item.title,
-                dday: Util.numberOfDaysFromDate(isStartCount: item.isStartCount, from: item.date),
+                title: item.title!.text,
+                dday: Util.numberOfDaysFromDate(isStartCount: item.dday!.isStartCount, from: item.dday!.date),
                 image: Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue) ?? UIImage(),
-                forColor: UIColor(hexCode: item.titleColor),
-                backColor: UIColor(hexCode: item.backgroundColor)
+                forColor: UIColor(hexCode: item.title!.color),
+                backColor: UIColor(hexCode: item.background!.color)
             )
             entries.append(entry)
             

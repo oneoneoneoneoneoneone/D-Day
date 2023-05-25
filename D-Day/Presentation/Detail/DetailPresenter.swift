@@ -13,7 +13,7 @@ import RealmSwift
 protocol DetailProtocol{
     func setNavigation()
     func setLayout()
-    func setData(item: Item, image: UIImage!)
+    func setData(item: Item, image: UIImage)
     
     func presentToEditViewController(item: Item)
     func showShareActivityViewController(title: String, date: String, image: UIImage)
@@ -44,7 +44,7 @@ final class DetailPresenter{
     
     func viewWillAppear(){
         self.item = repository.readItem().filter{$0.id.stringValue == id}.first ?? Item()
-        let image = repository.loadImageFromDocumentDirectory(imageName: item.id.stringValue)
+        guard let image = repository.loadImageFromDocumentDirectory(imageName: item.id.stringValue) else {return}
         
         viewController.setData(item: item, image: image)
     }
@@ -56,7 +56,7 @@ final class DetailPresenter{
     func shareButtonTap(){
         guard let image = viewController.transformToImage() else {return}
         
-        viewController.showShareActivityViewController(title: item.title, date: Util.stringFromDate(date: item.date), image: image)
+        viewController.showShareActivityViewController(title: item.title!.text, date: Util.stringFromDate(date: item.dday!.date), image: image)
     }
     
     func deleteButtonTap(){

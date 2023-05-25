@@ -47,23 +47,23 @@ class CollectionViewCell_1x1: UICollectionViewCell{
     }
     
     func setData(item: Item){
-        d_DayLabel.text = Util.numberOfDaysFromDate(isStartCount: item.isStartCount, from: item.date)
-        d_DayLabel.textColor = UIColor(hexCode: item.titleColor)
+        d_DayLabel.text = Util.numberOfDaysFromDate(isStartCount: item.dday!.isStartCount, from: item.dday!.date)
+        d_DayLabel.textColor = UIColor(hexCode: item.title!.color)
 //        titleLabel.text = item.title
 //        titleLabel.textColor = UIColor(hexCode: item.titleColor)
         
-        if item.isCircle{
+        if item.background!.isCircle{
             imageView.layer.cornerRadius = frame.height/2
         }
         else{
             imageView.layer.cornerRadius = 0
         }
         
-        if item.isBackgroundColor{
-            imageView.backgroundColor = UIColor(hexCode: item.backgroundColor)
+        if item.background!.isColor{
+            imageView.backgroundColor = UIColor(hexCode: item.background!.color)
             imageView.image = nil
         }
-        if item.isBackgroundImage{
+        if item.background!.isImage{
             imageView.image = Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue)
             imageView.backgroundColor = nil
         }

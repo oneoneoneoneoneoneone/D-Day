@@ -62,11 +62,11 @@ final class EditPresenter: NSObject{
     }
     
     func rightSaveButtonTap(){
-        if editItem.title == "" {
+        if editItem.title!.text == "" {
             viewController.showToast(message: EditCellList.title.text)
             return
         }
-        if editItem.isBackgroundImage && image == UIImage(systemName: "photo"){
+        if editItem.background!.isImage && image == UIImage(systemName: "photo"){
             viewController.showToast(message: EditCellList.backgroundImage.subText.first!)
             return
         }
@@ -78,13 +78,8 @@ final class EditPresenter: NSObject{
         let saveItem = Item()
         saveItem.id = item.id
         saveItem.title = editItem.title
-        saveItem.titleColor = editItem.titleColor
-        saveItem.date = editItem.date
-        saveItem.isStartCount = editItem.isStartCount
-        saveItem.isBackgroundColor = editItem.isBackgroundColor
-        saveItem.backgroundColor = editItem.backgroundColor
-        saveItem.isBackgroundImage = editItem.isBackgroundImage
-        saveItem.isCircle = editItem.isCircle
+        saveItem.dday = editItem.dday
+        saveItem.background = editItem.background
         saveItem.memo = editItem.memo == textViewPlaceHolder ? "" : editItem.memo
         
         //저장
@@ -114,38 +109,41 @@ extension EditPresenter: EditCellDelegate{
         switch cell{
         case .title:
             if value is String{
-                editItem.title = value as! String
+                editItem.title!.text = value as! String
             }
         case .date:
             if value is Date{
-                editItem.date = value as! Date
+                editItem.dday!.date = value as! Date
             }
         case .isStartCount:
             if value is Bool{
-                editItem.isStartCount = value as! Bool
+                editItem.dday!.isStartCount = value as! Bool
             }
         case .backgroundColor:
             if value is Bool{
-                editItem.isBackgroundColor = value as! Bool
+                editItem.background!.isColor = value as! Bool
                 viewController.setBgToggle(cell)
-                editItem.isBackgroundImage = !(value as! Bool)
+                editItem.background!.isImage = !(value as! Bool)
             }
         case .backgroundImage:
             if value is UIImage{
                 image = value as! UIImage
             }
             if value is Bool{
-                editItem.isBackgroundImage = value as! Bool
+                editItem.background!.isImage = value as! Bool
                 viewController.setBgToggle(cell)
-                editItem.isBackgroundColor = !(value as! Bool)
+                editItem.background!.isColor = !(value as! Bool)
             }
         case .isCircle:
             if value is Bool{
-                editItem.isCircle = value as! Bool
+                editItem.background!.isCircle = value as! Bool
             }
         case .textAttribute:
+            if value is TextAttributes{
+                editItem.title!.textAttributes = value as! TextAttributes
+            }
             if value is List<TextAttributes>{
-                editItem.textAttributes = value as! List<TextAttributes>
+                editItem.dday!.textAttributes = value as! List<TextAttributes>
             }
         case .memo:
             if value is String{
@@ -157,9 +155,9 @@ extension EditPresenter: EditCellDelegate{
     func valueChanged(_ cell: EditCellList, didChangeValue value: UIColor?) {
         switch cell{
         case .title:
-            editItem.titleColor = value?.rgbString ?? "FF000000"
+            editItem.title!.color = value?.rgbString ?? "FF000000"
         case .backgroundColor:
-            editItem.backgroundColor = value?.rgbString ?? "FFFFFFFF"
+            editItem.background!.color = value?.rgbString ?? "FFFFFFFF"
         default: break
         }
     }
@@ -208,49 +206,49 @@ extension EditPresenter: UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewTitleCell", for: indexPath) as! EditTableViewTitleCell
             cell.selectionStyle = .none
             cell.bind(delegate: self, cell: cellList[row])
-            cell.setDate(text: item.title, color: item.titleColor)
+            cell.setDate(text: item.title!.text, color: item.title!.color)
 
             return cell
         case .date:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewDateCell", for: indexPath) as! EditTableViewDateCell
             cell.selectionStyle = .none
             cell.bind(delegate: self, cell: cellList[row])
-            cell.setDate(date: item.date)
+            cell.setDate(date: item.dday!.date)
 
             return cell
         case .isStartCount:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewToggleCell", for: indexPath) as! EditTableViewToggleCell
             cell.selectionStyle = .none
             cell.bind(delegate: self, cell: cellList[row])
-            cell.setDate(value: item.isStartCount)
+            cell.setDate(value: item.dday!.isStartCount)
 
             return cell
         case .backgroundColor:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewColorCell", for: indexPath) as! EditTableViewColorCell
             cell.selectionStyle = .none
             cell.bind(delegate: self, cell: cellList[row])
-            cell.setDate(isOn: item.isBackgroundColor, color: item.backgroundColor)
+            cell.setDate(isOn: item.background!.isColor, color: item.background!.color)
 
             return cell
         case .backgroundImage:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewImageCell", for: indexPath) as! EditTableViewImageCell
             cell.selectionStyle = .none
             cell.bind(delegate: self, cell: cellList[row])
-            cell.setDate(isOn: item.isBackgroundImage, id: item.id.stringValue)
+            cell.setDate(isOn: item.background!.isImage, id: item.id.stringValue)
 
             return cell
         case .isCircle:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewToggleCell", for: indexPath) as! EditTableViewToggleCell
             cell.selectionStyle = .none
             cell.bind(delegate: self, cell: cellList[row])
-            cell.setDate(value: item.isCircle)
+            cell.setDate(value: item.background!.isCircle)
 
             return cell
         case .textAttribute:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewPresentButtonCell", for: indexPath) as! EditTableViewPresentButtonCell
             cell.selectionStyle = .none
             cell.bind(delegate: self, cell: cellList[row])
-            cell.setData(textAttributes: item.textAttributes, id: item.id.stringValue)
+            cell.setData(id: item.id.stringValue, title: item.title!, dday: item.dday!, background: item.background!)
 
             return cell
         case .memo:

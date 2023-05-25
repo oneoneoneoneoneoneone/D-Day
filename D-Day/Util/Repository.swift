@@ -27,13 +27,42 @@ class Repository: RepositoryProtocol{
     //MARK: Realm
     private var realm: Realm{
         let realmURL = container?.appendingPathComponent(defaultRealmPath)
-        let config = Realm.Configuration(fileURL: realmURL, schemaVersion: 7, objectTypes: [Item.self, TextAttributes.self])
+        let config = Realm.Configuration(
+            fileURL: realmURL,
+            schemaVersion: 14,
+            migrationBlock: {migration, oldSchemaVersion in
+                if oldSchemaVersion < 9{    //마지막으로 실행된 스키마 버전이 새스키마 버전보다 작은 경우
+                    migration.enumerateObjects(ofType: Item.className()){ oldObject, newObject in
+                        let tempTitle = Title()
+                        tempTitle.text = oldObject?["title"] as? String ?? Title().text
+                        tempTitle.color = oldObject?["titleColor"] as? String ?? Title().color
+                        let tempDday = DDay()
+                        tempDday.date = oldObject?["date"] as? Date ?? DDay().date
+                        tempDday.isStartCount = oldObject?["isStartCount"] as? Bool ?? DDay().isStartCount
+                        let tempBg = Background()
+                        tempBg.color = oldObject?["backgroundColor"] as? String ?? Background().color
+                        tempBg.isColor = oldObject?["isBackgroundColor"] as? Bool ?? Background().isColor
+                        tempBg.isImage = oldObject?["isBackgroundImage"] as? Bool ?? Background().isImage
+                        tempBg.isCircle = oldObject?["isCircle"] as? Bool ?? Background().isCircle
+                        
+                        newObject?["title"] = tempTitle
+                        newObject?["dday"] = tempDday
+                        newObject?["background"] = tempBg
+                    }
+                }
+            },
+            objectTypes: [Item.self, Title.self, DDay.self, Background.self, TextAttributes.self])
+        
+        
+        Realm.Configuration.defaultConfiguration = config
+        
+        
         
         return try! Realm(configuration: config)
     }
     
     func readItem() -> [Item]!{
-        //        print(realm.configuration.fileURL!)
+        print(realm.configuration.fileURL!)
         
         return Array(realm.objects(Item.self))
     }
@@ -42,14 +71,9 @@ class Repository: RepositoryProtocol{
         if let item = realm.objects(Item.self).filter(NSPredicate(format: "id = %@", data.id )).first{
             //수정
             try! realm.write{
-                item.title = data.title
-                item.titleColor = data.titleColor
-                item.date = data.date
-                item.isStartCount = data.isStartCount
-                item.backgroundColor = data.backgroundColor
-                item.isBackgroundColor = data.isBackgroundColor
-                item.isBackgroundImage = data.isBackgroundImage
-                item.isCircle = data.isCircle
+                item.title!.text = data.title!.text
+                item.dday = data.dday
+                item.background = data.background
                 item.memo = data.memo
             }
         }

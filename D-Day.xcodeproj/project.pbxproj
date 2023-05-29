@@ -50,6 +50,15 @@
 		33BEF24E29C318A80096486A /* AlertTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEF24D29C318A80096486A /* AlertTimeCell.swift */; };
 		33BEF25029C89EAD0096486A /* DarkModeToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEF24F29C89EAD0096486A /* DarkModeToggleCell.swift */; };
 		33C487832996074400792ABB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D2728229824D7D00EF9321 /* Item.swift */; };
+		33C503B52A24C256008F53A0 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503B42A24C256008F53A0 /* DetailView.swift */; };
+		33C503B72A24C262008F53A0 /* EditTableViewPresentButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503B62A24C262008F53A0 /* EditTableViewPresentButtonCell.swift */; };
+		33C503C02A24C26C008F53A0 /* TextAttributesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503BA2A24C26C008F53A0 /* TextAttributesPresenter.swift */; };
+		33C503C12A24C26C008F53A0 /* TextAttributesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503BB2A24C26C008F53A0 /* TextAttributesEnum.swift */; };
+		33C503C22A24C26C008F53A0 /* TextAttributesColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503BD2A24C26C008F53A0 /* TextAttributesColorCell.swift */; };
+		33C503C32A24C26C008F53A0 /* TextAttributesSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503BE2A24C26C008F53A0 /* TextAttributesSwitchCell.swift */; };
+		33C503C42A24C26C008F53A0 /* TextAttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503BF2A24C26C008F53A0 /* TextAttributesViewController.swift */; };
+		33C503C72A24C285008F53A0 /* List+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503C52A24C285008F53A0 /* List+.swift */; };
+		33C503C82A24C285008F53A0 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503C62A24C285008F53A0 /* Array+.swift */; };
 		33CEDDAF29FE96ED0088CD14 /* MainEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CEDDAE29FE96ED0088CD14 /* MainEnum.swift */; };
 		33CEDDB729FEC1CB0088CD14 /* D_DayWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 33CEDDBA29FEC1CB0088CD14 /* D_DayWidget.intentdefinition */; };
 		33CEDDB829FEC1CB0088CD14 /* D_DayWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 33CEDDBA29FEC1CB0088CD14 /* D_DayWidget.intentdefinition */; };
@@ -141,6 +150,15 @@
 		33BEF24F29C89EAD0096486A /* DarkModeToggleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeToggleCell.swift; sourceTree = "<group>"; };
 		33C4877F299606EF00792ABB /* D-Day.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "D-Day.entitlements"; sourceTree = "<group>"; };
 		33C487802996070A00792ABB /* D-DayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "D-DayWidget.entitlements"; sourceTree = "<group>"; };
+		33C503B42A24C256008F53A0 /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		33C503B62A24C262008F53A0 /* EditTableViewPresentButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewPresentButtonCell.swift; sourceTree = "<group>"; };
+		33C503BA2A24C26C008F53A0 /* TextAttributesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAttributesPresenter.swift; sourceTree = "<group>"; };
+		33C503BB2A24C26C008F53A0 /* TextAttributesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAttributesEnum.swift; sourceTree = "<group>"; };
+		33C503BD2A24C26C008F53A0 /* TextAttributesColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAttributesColorCell.swift; sourceTree = "<group>"; };
+		33C503BE2A24C26C008F53A0 /* TextAttributesSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAttributesSwitchCell.swift; sourceTree = "<group>"; };
+		33C503BF2A24C26C008F53A0 /* TextAttributesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAttributesViewController.swift; sourceTree = "<group>"; };
+		33C503C52A24C285008F53A0 /* List+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "List+.swift"; sourceTree = "<group>"; };
+		33C503C62A24C285008F53A0 /* Array+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		33CEDDAB29FE8FDD0088CD14 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		33CEDDAD29FE90070088CD14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		33CEDDAE29FE96ED0088CD14 /* MainEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainEnum.swift; sourceTree = "<group>"; };
@@ -209,6 +227,7 @@
 		335B086129BAF13E008458E8 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				33C503B62A24C262008F53A0 /* EditTableViewPresentButtonCell.swift */,
 				335B086229BAF13E008458E8 /* EditTableViewImageCell.swift */,
 				335B086329BAF13E008458E8 /* EditTableViewDateCell.swift */,
 				335B086429BAF13E008458E8 /* EditTableViewMemoCell.swift */,
@@ -233,6 +252,7 @@
 		3369E8C129B9BD5F001E004C /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				33C503B42A24C256008F53A0 /* DetailView.swift */,
 				33DDD9C729B6040400C8F0C9 /* ToastView.swift */,
 			);
 			path = Custom;
@@ -259,6 +279,34 @@
 				33CEDDE629FED4A30088CD14 /* Info.plist */,
 			);
 			path = "D-DayWidget";
+			sourceTree = "<group>";
+		};
+		33C503B82A24C26C008F53A0 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				33C503B92A24C26C008F53A0 /* TextAttributes */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		33C503B92A24C26C008F53A0 /* TextAttributes */ = {
+			isa = PBXGroup;
+			children = (
+				33C503BA2A24C26C008F53A0 /* TextAttributesPresenter.swift */,
+				33C503BB2A24C26C008F53A0 /* TextAttributesEnum.swift */,
+				33C503BC2A24C26C008F53A0 /* Cell */,
+				33C503BF2A24C26C008F53A0 /* TextAttributesViewController.swift */,
+			);
+			path = TextAttributes;
+			sourceTree = "<group>";
+		};
+		33C503BC2A24C26C008F53A0 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				33C503BD2A24C26C008F53A0 /* TextAttributesColorCell.swift */,
+				33C503BE2A24C26C008F53A0 /* TextAttributesSwitchCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		33CEDDEA29FED5A20088CD14 /* Localizable */ = {
@@ -367,6 +415,7 @@
 				33DDD9BE29B0D42200C8F0C9 /* EditPresenter.swift */,
 				33B4BD8729FB8D7200120319 /* EditEnum.swift */,
 				335B086129BAF13E008458E8 /* Cell */,
+				33C503B82A24C26C008F53A0 /* Modal */,
 			);
 			path = Edit;
 			sourceTree = "<group>";
@@ -393,6 +442,8 @@
 		33D9580229FAC2FF0016B1F6 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				33C503C62A24C285008F53A0 /* Array+.swift */,
+				33C503C52A24C285008F53A0 /* List+.swift */,
 				33D957FE29FAC2F00016B1F6 /* UIViewController+.swift */,
 				3369E8C229B9BD7D001E004C /* UIColor+.swift */,
 				33CEDDBF29FEC87A0088CD14 /* UIView+.swift */,
@@ -604,13 +655,17 @@
 				33D2727A29824AE200EF9321 /* CollectionViewCell_2x4.swift in Sources */,
 				33DDD9C829B6040400C8F0C9 /* ToastView.swift in Sources */,
 				335B087129BAF13E008458E8 /* EditTableViewTitleCell.swift in Sources */,
+				33C503C82A24C285008F53A0 /* Array+.swift in Sources */,
 				335B086A29BAF13E008458E8 /* EditTableViewImageCell.swift in Sources */,
 				33CEDDAF29FE96ED0088CD14 /* MainEnum.swift in Sources */,
 				33D272BB2988051900EF9321 /* EditViewController.swift in Sources */,
 				3369E8C529BA25F6001E004C /* AlertData.swift in Sources */,
 				33B4BD8829FB8D7200120319 /* EditEnum.swift in Sources */,
+				33C503C32A24C26C008F53A0 /* TextAttributesSwitchCell.swift in Sources */,
 				339D1FBC299CC0C900FEE6DB /* SettingViewController.swift in Sources */,
 				3369E8C729BA2CA0001E004C /* UserDefaultsManager.swift in Sources */,
+				33C503C42A24C26C008F53A0 /* TextAttributesViewController.swift in Sources */,
+				33C503C72A24C285008F53A0 /* List+.swift in Sources */,
 				33D272DE2990CE8500EF9321 /* Repository.swift in Sources */,
 				3369E8C329B9BD7D001E004C /* UIColor+.swift in Sources */,
 				33BEF24E29C318A80096486A /* AlertTimeCell.swift in Sources */,
@@ -620,16 +675,21 @@
 				33BEF24C29C3176B0096486A /* AlertToggleCell.swift in Sources */,
 				33DDD9BF29B0D42200C8F0C9 /* EditPresenter.swift in Sources */,
 				33D2728329824D7D00EF9321 /* Item.swift in Sources */,
+				33C503C12A24C26C008F53A0 /* TextAttributesEnum.swift in Sources */,
+				33C503C02A24C26C008F53A0 /* TextAttributesPresenter.swift in Sources */,
+				33C503C22A24C26C008F53A0 /* TextAttributesColorCell.swift in Sources */,
 				335B086F29BAF13E008458E8 /* EditTableViewToggleCell.swift in Sources */,
 				33D2727C29824AF000EF9321 /* CollectionViewCell_2x2.swift in Sources */,
 				33D27265298233E600EF9321 /* MainViewController.swift in Sources */,
 				33DDD9C129B0D96C00C8F0C9 /* DetailPresenter.swift in Sources */,
 				33CEDDC029FEC87A0088CD14 /* UIView+.swift in Sources */,
+				33C503B52A24C256008F53A0 /* DetailView.swift in Sources */,
 				33D27261298233E600EF9321 /* AppDelegate.swift in Sources */,
 				33BEF25029C89EAD0096486A /* DarkModeToggleCell.swift in Sources */,
 				335B086E29BAF13E008458E8 /* EditTableViewSegmentCell.swift in Sources */,
 				33D2727829824AD400EF9321 /* CollectionViewCell_1x4.swift in Sources */,
 				33D957FF29FAC2F00016B1F6 /* UIViewController+.swift in Sources */,
+				33C503B72A24C262008F53A0 /* EditTableViewPresentButtonCell.swift in Sources */,
 				33D272BE2988054300EF9321 /* DetailViewController.swift in Sources */,
 				33D9580529FAC4000016B1F6 /* SettingPresenter.swift in Sources */,
 				3373C551299CFAC600E5758A /* NotificationCenterManager.swift in Sources */,

@@ -7,15 +7,27 @@
 
 import UIKit
 
+protocol TextAttributesDelegate{
+    func textAttributesValueChanged(title: TextAttributes, dday: TextAttributes, date: TextAttributes)
+}
+
 protocol TextAttributesProtocol{
+    func setNavigation()
     func setLayout()
     func setData(title: Title, dday: DDay, backgound: Background, image: UIImage?)
+    
+    func getTitleTextAttributes() -> TextAttributes
+    func getDDayTextAttributes() -> TextAttributes
+    func getDateTextAttributes() -> TextAttributes
+    func dismiss()
 }
 
 
 final class TextAttributesPresenter: NSObject{
     private let viewController: TextAttributesProtocol
+    private let delegate: TextAttributesDelegate
     private let repository: Repository
+    
     private var itemTitle: Title
     private var dday: DDay
     private var background: Background
@@ -24,8 +36,9 @@ final class TextAttributesPresenter: NSObject{
     private final let sectionCnt = TextAttributesCellType.allCases.count
     private final let cellCnt = TextAttributesCellList.allCases.count
     
-    init(viewController: TextAttributesProtocol, repository: Repository = Repository(), id: String, title: Title, dday: DDay, background: Background){
+    init(viewController: TextAttributesProtocol, delegate: TextAttributesDelegate, repository: Repository = Repository(), id: String, title: Title, dday: DDay, background: Background){
         self.viewController = viewController
+        self.delegate = delegate
         self.repository = repository
         self.itemTitle = title
         self.dday = dday
@@ -34,6 +47,7 @@ final class TextAttributesPresenter: NSObject{
     }
     
     func viewDidLoad(){
+        viewController.setNavigation()
         viewController.setLayout()
     }
     
@@ -41,6 +55,19 @@ final class TextAttributesPresenter: NSObject{
         let image = repository.loadImageFromDocumentDirectory(imageName: id)
         
         viewController.setData(title: itemTitle, dday: dday, backgound: background, image: image)
+    }
+    
+    func leftCencelButtonTap(){
+        viewController.dismiss()
+    }
+    
+    func rightEditButtonTap(){
+        let title = viewController.getTitleTextAttributes()
+        let dday = viewController.getDDayTextAttributes()
+        let date = viewController.getDateTextAttributes()
+        
+        delegate.textAttributesValueChanged(title: title, dday: dday, date: date)
+        viewController.dismiss()
     }
 }
 

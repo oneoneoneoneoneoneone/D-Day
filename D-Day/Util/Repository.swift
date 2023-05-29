@@ -30,7 +30,7 @@ class Repository: RepositoryProtocol{
             let realmURL = container?.appendingPathComponent(defaultRealmPath)
             let config = Realm.Configuration(
                 fileURL: realmURL,
-                schemaVersion: 14,
+                schemaVersion: 15,
                 migrationBlock: {migration, oldSchemaVersion in
                     if oldSchemaVersion < 9{    //마지막으로 실행된 스키마 버전이 새스키마 버전보다 작은 경우
                         migration.enumerateObjects(ofType: Item.className()){ oldObject, newObject in
@@ -75,7 +75,7 @@ class Repository: RepositoryProtocol{
             if let item = realm?.objects(Item.self).filter(NSPredicate(format: "id = %@", data.id )).first{
                 //수정
                 try realm?.write{
-                    item.title!.text = data.title!.text
+                    item.title = data.title
                     item.dday = data.dday
                     item.background = data.background
                     item.memo = data.memo

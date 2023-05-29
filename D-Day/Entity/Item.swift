@@ -47,8 +47,8 @@ class Background: Object{
 }
 
 class TextAttributes: Object{
-    @Persisted var centerX: Double = 0.0
-    @Persisted var centerY: Double = 0.0
+    @Persisted var centerX: Float = 0.0
+    @Persisted var centerY: Float = 0.0
     @Persisted var isHidden: Bool = false
 }
 

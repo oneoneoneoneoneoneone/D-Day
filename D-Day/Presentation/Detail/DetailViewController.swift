@@ -13,41 +13,7 @@ class DetailViewController: UIViewController{
     private lazy var presenter = DetailPresenter(viewController: self, id: id)
     private let id: String
     
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        
-        return imageView
-    }()
-    private let topStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .center
-//        stackView.distribution = .fillEqually
-        stackView.spacing = 10
-        
-        return stackView
-    }()
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 24, weight: .medium)
-        label.numberOfLines = 0
-        
-        return label
-    }()
-    private let dDayLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 42, weight: .semibold)
-        
-        return label
-    }()
-    private let dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .light)
-        
-        return label
-    }()
+    private let detailView = DetailView()
     
     private let bottomStackView: UIStackView = {
         let stackView = UIStackView()
@@ -121,6 +87,7 @@ extension DetailViewController: DetailProtocol{
     func setNavigation(){
         let rightEditButton = UIBarButtonItem(title: NSLocalizedString("수정", comment: ""), style: .plain, target: self, action: #selector(rightEditButtonTap))
         navigationItem.rightBarButtonItem = rightEditButton
+        navigationItem.rightBarButtonItem?.tintColor = .systemBlue
         
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         navigationItem.backAction = UIAction(handler: {_ in
@@ -129,12 +96,8 @@ extension DetailViewController: DetailProtocol{
     }
     
     func setLayout(){
-        [topStackView, bottomStackView].forEach{
+        [detailView, bottomStackView].forEach{
             view.addSubview($0)
-        }
-        
-        [imageView, titleLabel, dDayLabel, dateLabel].forEach{
-            topStackView.addArrangedSubview($0)
         }
         
         [memoLabel, buttonStackView].forEach{
@@ -145,48 +108,24 @@ extension DetailViewController: DetailProtocol{
             buttonStackView.addArrangedSubview($0)
         }
         
-        topStackView.snp.makeConstraints{
+        detailView.snp.makeConstraints{
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(view.snp.width)
         }
-        imageView.snp.makeConstraints{
-            $0.top.leading.trailing.bottom.equalTo(topStackView)
-        }
-        titleLabel.snp.makeConstraints{
-            $0.top.equalTo(topStackView).inset(10)
-            $0.centerX.equalToSuperview()
-        }
-        dDayLabel.snp.makeConstraints{
-            $0.centerX.centerY.equalToSuperview()
-        }
-        dateLabel.snp.makeConstraints{
-            $0.top.equalTo(dDayLabel.snp.bottom).offset(10)
-            $0.centerX.equalToSuperview()
-        }
         
         bottomStackView.snp.makeConstraints{
-            $0.top.equalTo(topStackView.snp.bottom)
+            $0.top.equalTo(detailView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
     
-    func setData(item: Item, image: UIImage!){
-        titleLabel.text = item.title
-        titleLabel.textColor = UIColor(hexCode: item.titleColor)
-        dDayLabel.text = Util.numberOfDaysFromDate(isStartCount: item.isStartCount, from: item.date)
-        dDayLabel.textColor = UIColor(hexCode: item.titleColor)
-        dateLabel.text = Util.stringFromDate(date: item.date)
+    func setData(item: Item, image: UIImage?){
+        detailView.setTitle(item.title)
+        detailView.setDday(item.dday)
+        detailView.setBackground(item.background, image: image)
+        detailView.layer.cornerRadius = item.background?.isCircle == true ? (view.frame.width)/2 : 0
         memoLabel.text = item.memo
-        
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@ imageView.frame.height = 0.....
-//        imageView.layer.cornerRadius = item.isCircle ? (imageView.frame.height)/2 : 0
-        if item.isBackgroundColor{
-            imageView.backgroundColor = UIColor(hexCode: item.backgroundColor)
-        }
-        if item.isBackgroundImage{
-            imageView.image = image
-        }
     }
 
     func presentToEditViewController(item: Item) {
@@ -228,13 +167,13 @@ extension DetailViewController: DetailProtocol{
     ///현재 화면 캡쳐
     func transformToImage() -> UIImage? {
         //비트맵 기반 그래픽 컨텍스트를 만들음
-        UIGraphicsBeginImageContextWithOptions(topStackView.bounds.size, topStackView.isOpaque, 0.0)
+        UIGraphicsBeginImageContextWithOptions(detailView.bounds.size, detailView.isOpaque, 0.0)
         defer{
             UIGraphicsEndImageContext()
         }
         //UIGraphicsBeginImageContextWithOptions.. 변수로 치환한 것도 아닌데.. 어케 이어지는..
         if let context = UIGraphicsGetCurrentContext(){
-            topStackView.layer.render(in: context)
+            detailView.layer.render(in: context)
             return UIGraphicsGetImageFromCurrentImageContext()
         }
         return nil

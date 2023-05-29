@@ -8,20 +8,20 @@
 import Foundation
 
 enum EditCellType: Int, CaseIterable{
-    case contens = 0
+    case contents = 0
     case background = 1
     case ext = 2
 }
 
 enum EditCellList: CaseIterable{
-    case title, date, isStartCount, backgroundColor, backgroundImage, isCircle, memo
+    case title, date, isStartCount, backgroundColor, backgroundImage, isCircle, textAttribute, memo
     //, repeatCode
 
     var section: EditCellType{
         switch self{
         case.title, .date, .isStartCount://, .repeatCode:
-            return .contens
-        case .backgroundColor, .backgroundImage, .isCircle:
+            return .contents
+        case .backgroundColor, .backgroundImage, .isCircle, .textAttribute:
             return .background
         case .memo:
             return .ext
@@ -44,6 +44,8 @@ enum EditCellList: CaseIterable{
             return NSLocalizedString("배경 이미지", comment: "")
         case .isCircle:
             return NSLocalizedString("배경 스타일", comment: "")
+        case .textAttribute:
+            return NSLocalizedString("글자 세부 설정하기", comment: "")
         case .memo:
             return NSLocalizedString("메모", comment: "")
         }

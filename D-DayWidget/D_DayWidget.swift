@@ -51,7 +51,7 @@ struct Provider: IntentTimelineProvider {
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)! //언제 리로드할지
             
-            let items = Array(Repository().readItem())
+            let items = Repository().readItem()
             var item = Item()
             
             if items.filter({$0.id.stringValue == configuration.SelectedWidget?.identifier}).count > 0{
@@ -64,11 +64,11 @@ struct Provider: IntentTimelineProvider {
             let entry = SimpleEntry(
                 date: entryDate,
                 id: item.id.stringValue,
-                title: item.title,
-                dday: Util.numberOfDaysFromDate(isStartCount: item.isStartCount, from: item.date),
+                title: item.title!.text,
+                dday: Util.numberOfDaysFromDate(isStartCount: item.dday!.isStartCount, from: item.dday!.date),
                 image: Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue) ?? UIImage(),
-                forColor: UIColor(hexCode: item.titleColor),
-                backColor: UIColor(hexCode: item.backgroundColor)
+                forColor: UIColor(hexCode: item.title!.color),
+                backColor: UIColor(hexCode: item.background!.color)
             )
             entries.append(entry)
             

@@ -26,18 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        //필드 이름 변경 , 기존 데이터 값 추가 , 디폴트 관계 데이터 추가
-//        let config = Realm.Configuration(
-//            schemaVersion: 3,   //새로운 스키마 버전
-//            migrationBlock: {migration, oldSchemaVersion in
-//                if oldSchemaVersion < 3{    //실행되는 버전이 새스키마 버전보다 작을 경우 수정하도록
-//                    migration.renameProperty(onType: Item.className(), from: "backgroundColor", to: "bgColor")
-//                }
-//            }
-//        )
-//        
-//        Realm.Configuration.defaultConfiguration = config
-        
         return true
     }
 }

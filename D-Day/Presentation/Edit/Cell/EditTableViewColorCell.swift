@@ -70,12 +70,12 @@ class EditTableViewColorCell: UITableViewCell{
         label.text = cell.text
     }
     
-    func setDate(isOn: Bool, color: String?){
+    func setData(isOn: Bool?, color: String?){
+        guard let isOn = isOn else{ return }
         toggle.isOn = isOn
         toggle.sendActions(for: .valueChanged)
         
         guard let color = color, color != "" else { return }
-  
         colorWell.selectedColor = UIColor(hexCode: color)
         colorWell.sendActions(for: .valueChanged)
     }
@@ -85,10 +85,10 @@ class EditTableViewColorCell: UITableViewCell{
     }
     
     @objc func colorWellValueChanged(_ sender: UIColorWell){
-        delegate?.valueChanged(self.cell!, didChangeValue: sender.selectedColor)
+        delegate?.valueChanged(self.cell, didChangeValue: sender.selectedColor)
     }
     
     @objc func toggleValueChanged(_ sender: UISwitch){
-        delegate?.valueChanged(self.cell!, didChangeValue: sender.isOn)
+        delegate?.valueChanged(self.cell, didChangeValue: sender.isOn)
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 class EditViewController: UIViewController{
     private lazy var presenter = EditPresenter(viewController: self, delegate: delegate, item: item)
     private let delegate: EditDelegate
-    private var item = Item()
+    private var item: Item
 
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -21,14 +21,15 @@ class EditViewController: UIViewController{
         tableView.register(EditTableViewColorCell.self, forCellReuseIdentifier: "EditTableViewColorCell")
         tableView.register(EditTableViewImageCell.self, forCellReuseIdentifier: "EditTableViewImageCell")
         tableView.register(EditTableViewMemoCell.self, forCellReuseIdentifier: "EditTableViewMenoCell")
-
+        tableView.register(EditTableViewPresentButtonCell.self, forCellReuseIdentifier: "EditTableViewPresentButtonCell")
+        
         tableView.delegate = presenter
         tableView.dataSource = presenter
 
         return tableView
     }()
     
-    init(delegate: EditDelegate = MainPresenter(viewController: MainViewController()), item: Item = Item()){
+    init(delegate: EditDelegate = MainPresenter(viewController: MainViewController()), item: Item = Item(id: "")){
         self.delegate = delegate
         self.item = item
         

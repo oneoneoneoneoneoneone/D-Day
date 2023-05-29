@@ -43,11 +43,11 @@ final class MainPresenter: NSObject{
     private func setSort(){
         switch SortList[currentSortIndex]{
         case .title:
-            items = items.sorted { $0.title < $1.title }
+            items = items.sorted { $0.title?.text ?? "" < $1.title?.text ?? "" }
         case .dateAsc:
-            items = items.sorted { $0.date > $1.date }
+            items = items.sorted { $0.dday?.date ?? Date() > $1.dday?.date ?? Date() }
         case .dateDesc:
-            items = items.sorted { $0.date < $1.date }
+            items = items.sorted { $0.dday?.date ?? Date() < $1.dday?.date ?? Date() }
         }
     }
         
@@ -65,7 +65,7 @@ final class MainPresenter: NSObject{
     }
     
     func viewWillAppear(){
-        let readItems = Array(repository.readItem())
+        let readItems = repository.readItem()
         bind(readItems)
         
         setSort()

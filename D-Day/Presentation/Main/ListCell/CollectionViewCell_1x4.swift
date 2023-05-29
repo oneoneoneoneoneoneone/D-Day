@@ -66,42 +66,27 @@ class CollectionViewCell_1x4: UICollectionViewCell{
     }
     
     func setData(item: Item){
-        d_DayLabel.text = Util.numberOfDaysFromDate(isStartCount: item.isStartCount, from: item.date)
-        d_DayLabel.textColor = UIColor(hexCode: item.titleColor)
-        titleLabel.text = item.title
-        titleLabel.textColor = UIColor(hexCode: item.titleColor)
-        dateLabel.text = Util.stringFromDate(date: item.date)
-        dateLabel.textColor = UIColor(hexCode: item.titleColor)
+        d_DayLabel.text = Util.numberOfDaysFromDate(isStartCount: item.dday!.isStartCount, from: item.dday!.date)
+        d_DayLabel.textColor = UIColor(hexCode: item.title!.color)
+        titleLabel.text = item.title!.text
+        titleLabel.textColor = UIColor(hexCode: item.title!.color)
+        dateLabel.text = Util.stringFromDate(date: item.dday!.date)
+        dateLabel.textColor = UIColor(hexCode: item.title!.color)
+                
+        let visibleView = item.background!.isCircle ? circleView : imageView
+        let hiddenView = visibleView == circleView ? imageView : circleView
+        circleView.layer.cornerRadius = visibleView == circleView ? (self.frame.height-35)/2 : 0
         
-        if item.isCircle{
-            circleView.isHidden = false
-            imageView.isHidden = true
-            
-            circleView.layer.cornerRadius = (self.frame.height-35)/2
-            
-            if item.isBackgroundColor{
-                circleView.backgroundColor = UIColor(hexCode: item.backgroundColor)
-                circleView.image = nil
-            }
-            if item.isBackgroundImage{
-                circleView.image = Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue)
-                circleView.backgroundColor = nil
-            }
+        visibleView.isHidden = false
+        hiddenView.isHidden = true
+        
+        if item.background!.isColor{
+            visibleView.backgroundColor = UIColor(hexCode: item.background!.color)
+            visibleView.image = nil
         }
-        else{
-            imageView.isHidden = false
-            circleView.isHidden = true
-            
-//            circleView.layer.cornerRadius = 0
-            
-            if item.isBackgroundColor{
-                imageView.backgroundColor = UIColor(hexCode: item.backgroundColor)
-                imageView.image = nil
-            }
-            if item.isBackgroundImage{
-                imageView.image = Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue)
-                imageView.backgroundColor = nil
-            }
+        if item.background!.isImage{
+            visibleView.image = Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue)
+            visibleView.backgroundColor = nil
         }
     }
 }

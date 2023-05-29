@@ -57,12 +57,16 @@ class EditTableViewDateCell: UITableViewCell{
         label.text = cell.text
     }
     
-    func setDate(date: Date){
+    func setData(date: Date?){
+        guard let date = date else{
+            return
+        }
+        
         datePicker.date = date
         datePicker.sendActions(for: .valueChanged)
     }
     
     @objc func datePickerValueChanged(_ sender: UIDatePicker){
-        delegate?.valueChanged(self.cell!, didChangeValue: sender.date)
+        delegate?.valueChanged(self.cell, didChangeValue: sender.date)
     }
 }

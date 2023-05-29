@@ -12,9 +12,9 @@ class IntentHandler: INExtension, WidgetIntentHandling {
     func provideSelectedWidgetOptionsCollection(for intent: WidgetIntent, with completion: @escaping (INObjectCollection<SelectedWidget>?, Error?) -> Void) {
         let myDatas: [SelectedWidget] = getItem().map{ data in
 
-            let myData = SelectedWidget(identifier: data.id.stringValue, display: data.title)
+            let myData = SelectedWidget(identifier: data.id.stringValue, display: data.title!.text)
 
-            myData.name = data.title
+            myData.name = data.title?.text
             return myData
 
         }
@@ -27,7 +27,7 @@ class IntentHandler: INExtension, WidgetIntentHandling {
 }
 
 func getItem() -> [Item]{
-    let items = Repository().readItem()!
+    let items = Repository().readItem()
 
     return Array(items)
 }

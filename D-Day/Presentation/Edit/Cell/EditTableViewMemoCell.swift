@@ -51,12 +51,12 @@ class EditTableViewMemoCell: UITableViewCell{
         self.cell = cell
     }
     
-    func setDate(text: String){
-        if text == "" {
+    func setData(text: String?){
+        guard let text = text, text != "" else{
             return
         }
         textView.text = text
-        delegate?.valueChanged(self.cell!, didChangeValue: textView.text)
+        delegate?.valueChanged(self.cell, didChangeValue: textView.text)
     }
 }
 
@@ -76,6 +76,6 @@ extension EditTableViewMemoCell: UITextViewDelegate{
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        delegate?.valueChanged(self.cell!, didChangeValue: textView.text)
+        delegate?.valueChanged(self.cell, didChangeValue: textView.text)
     }
 }

@@ -146,8 +146,11 @@ extension EditPresenter: EditCellDelegate{
             if value is TextAttributes{
                 editItem.title?.textAttributes = value as? TextAttributes
             }
-            if value is List<TextAttributes>{
-                editItem.dday?.textAttributes = value as? List<TextAttributes> ?? List()
+            if value is [TextAttributes]{
+                let list = List<TextAttributes>()
+                list.append(objectsIn: value as? [TextAttributes] ?? [])
+                
+                editItem.dday?.textAttributes = list
             }
         case .memo:
             if value is String{

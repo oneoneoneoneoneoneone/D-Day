@@ -66,7 +66,17 @@ class EditTableViewPresentButtonCell: UITableViewCell{
     }
     
     @objc func buttonTap(){
-        let textAttributesViewController = TextAttributesViewController(id: id, title: title, dday: dday, background: background)
+        let textAttributesViewController = UINavigationController(rootViewController: TextAttributesViewController(delegate: self, id: id, title: title, dday: dday, background: background))
+        textAttributesViewController.modalPresentationStyle = .overFullScreen
         window?.rootViewController?.presentedViewController?.present(textAttributesViewController, animated: true)
     }
+}
+
+extension EditTableViewPresentButtonCell: TextAttributesDelegate{
+    func textAttributesValueChanged(title: TextAttributes, dday: TextAttributes, date: TextAttributes) {
+        delegate?.valueChanged(self.cell, didChangeValue: title)
+        delegate?.valueChanged(self.cell, didChangeValue: [dday, date])
+    }
+    
+    
 }

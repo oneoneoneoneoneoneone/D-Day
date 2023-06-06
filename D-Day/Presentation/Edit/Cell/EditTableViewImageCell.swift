@@ -8,11 +8,7 @@
 import UIKit
 import PhotosUI
 
-class EditTableViewImageCell: UITableViewCell{
-    private var delegate: EditCellDelegate?
-    private var cell: EditCellList?
-    var id = ""
-    
+class EditTableViewImageCell: UIEditCell{    
     let label: UILabel = {
         let label = UILabel()
         label.text = "배경이미지"
@@ -48,7 +44,7 @@ class EditTableViewImageCell: UITableViewCell{
         fatalError("init(coder:) has not been implemented")
     }
         
-    private func setLayout(){
+    override func setLayout(){
         [label, toggle, button].forEach{
             contentView.addSubview($0)
         }
@@ -134,24 +130,26 @@ class EditTableViewImageCell: UITableViewCell{
         window?.rootViewController?.presentedViewController?.present(alertController, animated: true)
     }
         
-    func bind(delegate: EditCellDelegate, cell: EditCellList){
+    override func bind(delegate: EditCellDelegate, cell: EditCell){
         self.delegate = delegate
         self.cell = cell
         label.text = cell.text
     }
     
-    func setData(isOn: Bool?, id: String?){
-        guard let isOn = isOn else{ return }
+    override func setData(backgroundIsImage: Bool?) {
+        guard let backgroundIsImage = backgroundIsImage else { return }
         
-        toggle.isOn = isOn
+        toggle.isOn = backgroundIsImage
         toggle.sendActions(for: .valueChanged)
-        
-        guard let id = id else{ return }
-        self.id = id
+    }
+    
+    override func setData(id: String?){
+        guard let id = id else { return }
         guard let image = Repository().loadImageFromDocumentDirectory(imageName: id) else {
             button.setImage(UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(pointSize: 80, weight: .light)), for: .normal)
             return
         }
+        
         button.setImage(image, for: .normal)
         delegate?.valueChanged(self.cell, didChangeValue: button.image(for: .normal))
     }

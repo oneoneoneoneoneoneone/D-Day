@@ -14,6 +14,18 @@
 		3322DB6329FEE68300580FE8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3322DB6729FEE68300580FE8 /* InfoPlist.strings */; };
 		3322DB7229FF9D1A00580FE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D27269298233E700EF9321 /* Assets.xcassets */; };
 		3322DB7929FFA88700580FE8 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33619F8429D5C2C2007F44A9 /* IntentHandler.swift */; };
+		3326FB332A2E10E4009A800D /* UIEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326FB322A2E10E4009A800D /* UIEditCell.swift */; };
+		3326FB352A2E3AA3009A800D /* TextAttributesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326FB342A2E3AA3009A800D /* TextAttributesCell.swift */; };
+		3326FB372A2EF946009A800D /* TextAttributesButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326FB362A2EF946009A800D /* TextAttributesButtonCell.swift */; };
+		3326FB392A2F2E18009A800D /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326FB382A2F2E18009A800D /* Date+.swift */; };
+		3326FB3A2A2F2FD4009A800D /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326FB382A2F2E18009A800D /* Date+.swift */; };
+		3326FB3B2A2F2FD5009A800D /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326FB382A2F2E18009A800D /* Date+.swift */; };
+		3326FB3C2A2F62F9009A800D /* List+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503C52A24C285008F53A0 /* List+.swift */; };
+		3326FB3D2A2F62F9009A800D /* List+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503C52A24C285008F53A0 /* List+.swift */; };
+		3326FB3E2A2F62FD009A800D /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503C62A24C285008F53A0 /* Array+.swift */; };
+		3326FB3F2A2F62FE009A800D /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503C62A24C285008F53A0 /* Array+.swift */; };
+		3326FB402A2F733E009A800D /* TextAttributesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503BB2A24C26C008F53A0 /* TextAttributesEnum.swift */; };
+		3326FB412A2F733E009A800D /* TextAttributesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503BB2A24C26C008F53A0 /* TextAttributesEnum.swift */; };
 		332D1CF2299945A900239C46 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D272DD2990CE8500EF9321 /* Repository.swift */; };
 		333BBE35299A52BA000AEC91 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 333BBE34299A52BA000AEC91 /* SnapKit */; };
 		333BBE38299A52D2000AEC91 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 333BBE37299A52D2000AEC91 /* RealmSwift */; };
@@ -54,8 +66,6 @@
 		33C503B72A24C262008F53A0 /* EditTableViewPresentButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503B62A24C262008F53A0 /* EditTableViewPresentButtonCell.swift */; };
 		33C503C02A24C26C008F53A0 /* TextAttributesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503BA2A24C26C008F53A0 /* TextAttributesPresenter.swift */; };
 		33C503C12A24C26C008F53A0 /* TextAttributesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503BB2A24C26C008F53A0 /* TextAttributesEnum.swift */; };
-		33C503C22A24C26C008F53A0 /* TextAttributesColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503BD2A24C26C008F53A0 /* TextAttributesColorCell.swift */; };
-		33C503C32A24C26C008F53A0 /* TextAttributesSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503BE2A24C26C008F53A0 /* TextAttributesSwitchCell.swift */; };
 		33C503C42A24C26C008F53A0 /* TextAttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503BF2A24C26C008F53A0 /* TextAttributesViewController.swift */; };
 		33C503C72A24C285008F53A0 /* List+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503C52A24C285008F53A0 /* List+.swift */; };
 		33C503C82A24C285008F53A0 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C503C62A24C285008F53A0 /* Array+.swift */; };
@@ -123,6 +133,10 @@
 		3322DB6629FEE68300580FE8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3322DB6829FEE68700580FE8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3322DB6929FEE81900580FE8 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
+		3326FB322A2E10E4009A800D /* UIEditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEditCell.swift; sourceTree = "<group>"; };
+		3326FB342A2E3AA3009A800D /* TextAttributesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttributesCell.swift; sourceTree = "<group>"; };
+		3326FB362A2EF946009A800D /* TextAttributesButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttributesButtonCell.swift; sourceTree = "<group>"; };
+		3326FB382A2F2E18009A800D /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		335B086229BAF13E008458E8 /* EditTableViewImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewImageCell.swift; sourceTree = "<group>"; };
 		335B086329BAF13E008458E8 /* EditTableViewDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewDateCell.swift; sourceTree = "<group>"; };
 		335B086429BAF13E008458E8 /* EditTableViewMemoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewMemoCell.swift; sourceTree = "<group>"; };
@@ -154,8 +168,6 @@
 		33C503B62A24C262008F53A0 /* EditTableViewPresentButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewPresentButtonCell.swift; sourceTree = "<group>"; };
 		33C503BA2A24C26C008F53A0 /* TextAttributesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAttributesPresenter.swift; sourceTree = "<group>"; };
 		33C503BB2A24C26C008F53A0 /* TextAttributesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAttributesEnum.swift; sourceTree = "<group>"; };
-		33C503BD2A24C26C008F53A0 /* TextAttributesColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAttributesColorCell.swift; sourceTree = "<group>"; };
-		33C503BE2A24C26C008F53A0 /* TextAttributesSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAttributesSwitchCell.swift; sourceTree = "<group>"; };
 		33C503BF2A24C26C008F53A0 /* TextAttributesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAttributesViewController.swift; sourceTree = "<group>"; };
 		33C503C52A24C285008F53A0 /* List+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "List+.swift"; sourceTree = "<group>"; };
 		33C503C62A24C285008F53A0 /* Array+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
@@ -227,6 +239,7 @@
 		335B086129BAF13E008458E8 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				3326FB322A2E10E4009A800D /* UIEditCell.swift */,
 				33C503B62A24C262008F53A0 /* EditTableViewPresentButtonCell.swift */,
 				335B086229BAF13E008458E8 /* EditTableViewImageCell.swift */,
 				335B086329BAF13E008458E8 /* EditTableViewDateCell.swift */,
@@ -292,10 +305,10 @@
 		33C503B92A24C26C008F53A0 /* TextAttributes */ = {
 			isa = PBXGroup;
 			children = (
+				33C503BF2A24C26C008F53A0 /* TextAttributesViewController.swift */,
 				33C503BA2A24C26C008F53A0 /* TextAttributesPresenter.swift */,
 				33C503BB2A24C26C008F53A0 /* TextAttributesEnum.swift */,
 				33C503BC2A24C26C008F53A0 /* Cell */,
-				33C503BF2A24C26C008F53A0 /* TextAttributesViewController.swift */,
 			);
 			path = TextAttributes;
 			sourceTree = "<group>";
@@ -303,8 +316,8 @@
 		33C503BC2A24C26C008F53A0 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				33C503BD2A24C26C008F53A0 /* TextAttributesColorCell.swift */,
-				33C503BE2A24C26C008F53A0 /* TextAttributesSwitchCell.swift */,
+				3326FB342A2E3AA3009A800D /* TextAttributesCell.swift */,
+				3326FB362A2EF946009A800D /* TextAttributesButtonCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -445,6 +458,7 @@
 				33C503C62A24C285008F53A0 /* Array+.swift */,
 				33C503C52A24C285008F53A0 /* List+.swift */,
 				33D957FE29FAC2F00016B1F6 /* UIViewController+.swift */,
+				3326FB382A2F2E18009A800D /* Date+.swift */,
 				3369E8C229B9BD7D001E004C /* UIColor+.swift */,
 				33CEDDBF29FEC87A0088CD14 /* UIView+.swift */,
 			);
@@ -625,10 +639,14 @@
 				33619F9129D5C613007F44A9 /* Item.swift in Sources */,
 				3322DB5B29FEE4CF00580FE8 /* Util.swift in Sources */,
 				33CEDDB829FEC1CB0088CD14 /* D_DayWidget.intentdefinition in Sources */,
+				3326FB412A2F733E009A800D /* TextAttributesEnum.swift in Sources */,
 				33619F8529D5C2C2007F44A9 /* IntentHandler.swift in Sources */,
+				3326FB3D2A2F62F9009A800D /* List+.swift in Sources */,
 				33619F8F29D5C5D7007F44A9 /* D_DayWidget.swift in Sources */,
 				33619F9029D5C60B007F44A9 /* Repository.swift in Sources */,
 				3322DB5C29FEE4DF00580FE8 /* UIColor+.swift in Sources */,
+				3326FB3B2A2F2FD5009A800D /* Date+.swift in Sources */,
+				3326FB3F2A2F62FE009A800D /* Array+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,11 +654,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3326FB3A2A2F2FD4009A800D /* Date+.swift in Sources */,
+				3326FB3E2A2F62FD009A800D /* Array+.swift in Sources */,
+				3326FB3C2A2F62F9009A800D /* List+.swift in Sources */,
 				33D9580629FAD92E0016B1F6 /* UIColor+.swift in Sources */,
 				332D1CF2299945A900239C46 /* Repository.swift in Sources */,
 				33F51B5029D78BB40021884F /* Util.swift in Sources */,
 				33C487832996074400792ABB /* Item.swift in Sources */,
 				33CEDDB729FEC1CB0088CD14 /* D_DayWidget.intentdefinition in Sources */,
+				3326FB402A2F733E009A800D /* TextAttributesEnum.swift in Sources */,
 				33AE1F712994CDEB008A67A5 /* D_DayWidgetBundle.swift in Sources */,
 				3322DB7929FFA88700580FE8 /* IntentHandler.swift in Sources */,
 				33AE1F752994CDEB008A67A5 /* D_DayWidget.swift in Sources */,
@@ -661,11 +683,12 @@
 				33D272BB2988051900EF9321 /* EditViewController.swift in Sources */,
 				3369E8C529BA25F6001E004C /* AlertData.swift in Sources */,
 				33B4BD8829FB8D7200120319 /* EditEnum.swift in Sources */,
-				33C503C32A24C26C008F53A0 /* TextAttributesSwitchCell.swift in Sources */,
+				3326FB352A2E3AA3009A800D /* TextAttributesCell.swift in Sources */,
 				339D1FBC299CC0C900FEE6DB /* SettingViewController.swift in Sources */,
 				3369E8C729BA2CA0001E004C /* UserDefaultsManager.swift in Sources */,
 				33C503C42A24C26C008F53A0 /* TextAttributesViewController.swift in Sources */,
 				33C503C72A24C285008F53A0 /* List+.swift in Sources */,
+				3326FB332A2E10E4009A800D /* UIEditCell.swift in Sources */,
 				33D272DE2990CE8500EF9321 /* Repository.swift in Sources */,
 				3369E8C329B9BD7D001E004C /* UIColor+.swift in Sources */,
 				33BEF24E29C318A80096486A /* AlertTimeCell.swift in Sources */,
@@ -677,7 +700,7 @@
 				33D2728329824D7D00EF9321 /* Item.swift in Sources */,
 				33C503C12A24C26C008F53A0 /* TextAttributesEnum.swift in Sources */,
 				33C503C02A24C26C008F53A0 /* TextAttributesPresenter.swift in Sources */,
-				33C503C22A24C26C008F53A0 /* TextAttributesColorCell.swift in Sources */,
+				3326FB372A2EF946009A800D /* TextAttributesButtonCell.swift in Sources */,
 				335B086F29BAF13E008458E8 /* EditTableViewToggleCell.swift in Sources */,
 				33D2727C29824AF000EF9321 /* CollectionViewCell_2x2.swift in Sources */,
 				33D27265298233E600EF9321 /* MainViewController.swift in Sources */,
@@ -687,6 +710,7 @@
 				33D27261298233E600EF9321 /* AppDelegate.swift in Sources */,
 				33BEF25029C89EAD0096486A /* DarkModeToggleCell.swift in Sources */,
 				335B086E29BAF13E008458E8 /* EditTableViewSegmentCell.swift in Sources */,
+				3326FB392A2F2E18009A800D /* Date+.swift in Sources */,
 				33D2727829824AD400EF9321 /* CollectionViewCell_1x4.swift in Sources */,
 				33D957FF29FAC2F00016B1F6 /* UIViewController+.swift in Sources */,
 				33C503B72A24C262008F53A0 /* EditTableViewPresentButtonCell.swift in Sources */,

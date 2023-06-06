@@ -30,7 +30,7 @@ class Repository: RepositoryProtocol{
             let realmURL = container?.appendingPathComponent(defaultRealmPath)
             let config = Realm.Configuration(
                 fileURL: realmURL,
-                schemaVersion: 15,
+                schemaVersion: 18,
                 migrationBlock: {migration, oldSchemaVersion in
                     if oldSchemaVersion < 9{    //마지막으로 실행된 스키마 버전이 새스키마 버전보다 작은 경우
                         migration.enumerateObjects(ofType: Item.className()){ oldObject, newObject in
@@ -49,6 +49,48 @@ class Repository: RepositoryProtocol{
                             newObject?["title"] = tempTitle
                             newObject?["dday"] = tempDday
                             newObject?["background"] = tempBg
+                        }
+                    }
+                    if oldSchemaVersion < 16{    //마지막으로 실행된 스키마 버전이 새스키마 버전보다 작은 경우
+                        migration.enumerateObjects(ofType: Item.className()){ oldObject, newObject in
+                            let oldTitle = oldObject?["title"] as? DynamicObject
+                            let oldDDay = oldObject?["dday"] as? DynamicObject
+                            
+                            let oldTitleAttributes = oldTitle?["textAttributes"] as? DynamicObject
+                            let tempAttributes = List<TextAttributes>()
+                            let titleAttribute = TextAttributes()
+                            titleAttribute.centerX = oldTitleAttributes?["centerX"] as? Float ?? TextAttributes().centerX
+                            titleAttribute.centerY = oldTitleAttributes?["centerY"] as? Float ?? TextAttributes().centerY
+                            titleAttribute.isHidden = oldTitleAttributes?["isHidden"] as? Bool ?? TextAttributes().isHidden
+                            titleAttribute.color = oldTitle?["color"] as? String ?? TextAttributes().color
+                            
+                            let ddayAttribute = TextAttributes()
+                            let oldDdayAttributes = oldDDay?.dynamicList("textAttributes").first as? DynamicObject
+                            ddayAttribute.centerX = oldDdayAttributes?["centerX"] as? Float ?? TextAttributes().centerX
+                            ddayAttribute.centerY = oldDdayAttributes?["centerY"] as? Float ?? TextAttributes().centerY
+                            ddayAttribute.isHidden = oldDdayAttributes?["isHidden"] as? Bool ?? TextAttributes().isHidden
+                            let dateAttribute = TextAttributes()
+                            let oldDateAttributes = oldDDay?.dynamicList("textAttributes").last as? DynamicObject
+                            dateAttribute.centerX = oldDateAttributes?["centerX"] as? Float ?? TextAttributes().centerX
+                            dateAttribute.centerY = oldDateAttributes?["centerY"] as? Float ?? TextAttributes().centerY
+                            dateAttribute.isHidden = oldDateAttributes?["isHidden"] as? Bool ?? TextAttributes().isHidden
+                            
+                            tempAttributes.append(titleAttribute)
+                            tempAttributes.append(ddayAttribute)
+                            tempAttributes.append(dateAttribute)
+                            
+                            newObject?["title"] = oldTitle?["text"] as? String
+                            newObject?["date"] = oldDDay?["date"] as? Date
+                            newObject?["isStartCount"] = oldDDay?["isStartCount"] as? Bool
+
+
+                            newObject?["textAttributes"] = tempAttributes
+                        }
+                    }
+                    if oldSchemaVersion < 18{    //마지막으로 실행된 스키마 버전이 새스키마 버전보다 작은 경우
+                        migration.enumerateObjects(ofType: Item.className()){ oldObject, newObject in
+                            let date = oldObject?["date"] as? Date
+                            newObject?["date"] = date?.getMidnightDate ?? date
                         }
                     }
                 },
@@ -76,7 +118,10 @@ class Repository: RepositoryProtocol{
                 //수정
                 try realm?.write{
                     item.title = data.title
-                    item.dday = data.dday
+                    item.date = data.date
+                    item.isStartCount = data.isStartCount
+                    item.textAttributes = data.textAttributes
+//                    item.dday = data.dday
                     item.background = data.background
                     item.memo = data.memo
                 }

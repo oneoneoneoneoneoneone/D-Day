@@ -7,11 +7,8 @@
 
 import UIKit
 
-class EditTableViewMemoCell: UITableViewCell{
-    private var delegate: EditCellDelegate?
-    private var cell: EditCellList?
-    
-    final let textViewPlaceHolder = EditCellList.memo.subText.first
+class EditTableViewMemoCell: UIEditCell{
+    final let textViewPlaceHolder = EditCell.memo.subText.first
     
     lazy var textView: UITextView = {
         let textView = UITextView()
@@ -36,7 +33,7 @@ class EditTableViewMemoCell: UITableViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setLayout(){
+    override func setLayout(){
         [textView].forEach{
             contentView.addSubview($0)
         }
@@ -46,16 +43,16 @@ class EditTableViewMemoCell: UITableViewCell{
         }
     }
     
-    func bind(delegate: EditCellDelegate, cell: EditCellList){
+    override func bind(delegate: EditCellDelegate, cell: EditCell){
         self.delegate = delegate
         self.cell = cell
     }
     
-    func setData(text: String?){
-        guard let text = text, text != "" else{
+    override func setData(memo: String?){
+        guard let memo = memo, memo != "" else{
             return
         }
-        textView.text = text
+        textView.text = memo
         delegate?.valueChanged(self.cell, didChangeValue: textView.text)
     }
 }

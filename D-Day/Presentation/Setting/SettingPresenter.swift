@@ -37,10 +37,9 @@ class SettingPresenter{
     func selectLockScreenItemCellDidSelect(){
         var actionElement: [String:String] = [:]
         repository?.readItem().forEach{item in
-            guard let title = item.title?.text else { return }
             let isChecked = repository?.getDefaultWidget() == item.id.stringValue
             
-            actionElement.updateValue("\(title) \(isChecked ? "✔️" : "")", forKey: item.id.stringValue)
+            actionElement.updateValue("\(item.title) \(isChecked ? "✔️" : "")", forKey: item.id.stringValue)
         }
         viewController?.presentToWidgetItemSelectView(actionElement)
     }

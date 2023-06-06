@@ -9,7 +9,7 @@ import UIKit
 
 class EditTableViewSegmentCell: UITableViewCell{
     private var delegate: EditCellDelegate?
-    private var cell: EditCellList?
+    private var cell: EditCell?
     
     let label: UILabel = {
         let label = UILabel()
@@ -58,7 +58,7 @@ class EditTableViewSegmentCell: UITableViewCell{
         }
     }
     
-    func bind(delegate: EditCellDelegate, cell: EditCellList){
+    func bind(delegate: EditCellDelegate, cell: EditCell){
         self.delegate = delegate
         self.cell = cell
         label.text = cell.text

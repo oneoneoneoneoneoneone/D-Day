@@ -14,18 +14,17 @@ protocol EditDelegate{
     func selectItem(_ id: String)
 }
 protocol EditCellDelegate{
-    func valueChanged(_ cell: EditCellList?, didChangeValue value: Any?)
-    func valueChanged(_ cell: EditCellList?, didChangeValue value: UIColor?)
+    func valueChanged(_ editCell: EditCell?, didChangeValue value: Any?)
 }
 
 protocol EditProtocol{
     func setNavigation()
     func setLayout()
     
-    func setBgToggle(_ cell: EditCellList)
     func showCloseAlertController()
     func showToast(message: String)
     func dismiss()
+    func getTableViewCell(_ editCell: EditCell?) -> UITableViewCell?
 }
 
 final class EditPresenter: NSObject{
@@ -39,8 +38,8 @@ final class EditPresenter: NSObject{
     private let editItem = Item(id: "")
     private var image: UIImage?
     
-    final let textViewPlaceHolder = EditCellList.memo.subText.first
-    private final let cellList = EditCellList.allCases
+    final let textViewPlaceHolder = EditCell.memo.subText.first
+    private final let cellList = EditCell.allCases
 
     init(viewController: EditProtocol, delegate: EditDelegate, userDefaultsManager: UserDefaultsManager = UserDefaultsManager(), repository: Repository = Repository(), item: Item) {
         self.viewController = viewController
@@ -60,14 +59,14 @@ final class EditPresenter: NSObject{
     }
     
     func rightSaveButtonTap(){
-        if editItem.title?.text == "" {
-            viewController.showToast(message: EditCellList.title.text)
+        if editItem.title == "" {
+            viewController.showToast(message: EditCell.title.text)
             return
         }
         
         if editItem.background?.isImage == true{
             guard let image = image else {
-                viewController.showToast(message: EditCellList.backgroundImage.subText.first!)
+                viewController.showToast(message: EditCell.backgroundImage.subText.first!)
                 return
             }
             repository.saveImageToDocumentDirectory(imageName: item.id.stringValue, image: image)
@@ -76,7 +75,9 @@ final class EditPresenter: NSObject{
         let saveItem = Item()
         saveItem.id = item.id
         saveItem.title = editItem.title
-        saveItem.dday = editItem.dday
+        saveItem.date = editItem.date.getMidnightDate ?? editItem.date
+        saveItem.isStartCount = editItem.isStartCount
+        saveItem.textAttributes = editItem.textAttributes
         saveItem.background = editItem.background
         saveItem.memo = editItem.memo == textViewPlaceHolder ? "" : editItem.memo
         
@@ -102,72 +103,93 @@ final class EditPresenter: NSObject{
 
 
 extension EditPresenter: EditCellDelegate{
-    
-    func valueChanged(_ cell: EditCellList?, didChangeValue value: Any?) {
-        guard let cell = cell else { return }
+    func valueChanged(_ editCell: EditCell?, didChangeValue value: Any?) {
+        guard let editCell = editCell else { return }
+        let textAttributeCell = viewController.getTableViewCell(EditCell.textAttribute) as? EditTableViewPresentButtonCell
         
-        switch cell{
+        switch editCell{
         case .title:
             if value is String{
-                editItem.title?.text = value as? String ?? Title().text
+                let value = value as? String ?? ""
+                editItem.title = value
+                                
+                textAttributeCell?.setData(title: value)
             }
         case .date:
             if value is Date{
-                editItem.dday?.date = value as? Date ??  DDay().date
+                let value = value as? Date ?? Date()
+                editItem.date = value
+                
+                textAttributeCell?.setData(date: value)
             }
         case .isStartCount:
             if value is Bool{
-                editItem.dday?.isStartCount = value as? Bool ?? DDay().isStartCount
+                let value = value as? Bool ?? false
+                editItem.isStartCount = value
+                
+                textAttributeCell?.setData(isStartCount: value)
             }
         case .backgroundColor:
             if value is Bool{
-                editItem.background?.isColor = value as? Bool ?? Background().isColor
-                if editItem.background?.isColor == editItem.background?.isImage{
-                    viewController.setBgToggle(cell)
+                let value = value as? Bool ?? Background().isColor
+                editItem.background?.isColor = value
+                
+                if editItem.background?.isColor != editItem.background?.isImage{
+                    return
                 }
-                editItem.background?.isImage = (value as? Bool ?? Background().isImage) == false
+                let toggleCell = viewController.getTableViewCell(EditCell.backgroundImage) as? EditTableViewImageCell
+                toggleCell?.setToggle()
+                editItem.background?.isImage = value == false
+                                
+                textAttributeCell?.setData(backgroundIsColor: value)
+                textAttributeCell?.setData(backgroundIsImage: value == false)
+            }
+            if value is String{
+                let value = value as? String ?? Background().color
+                editItem.background?.color = value
+                
+                textAttributeCell?.setData(backgroundColor: value)
             }
         case .backgroundImage:
             if value is UIImage{
-                image = value as? UIImage ?? UIImage()
+                let value = value as? UIImage ?? UIImage()
+                image = value
+                
+                textAttributeCell?.setData(image: image)
             }
             if value is Bool{
-                editItem.background?.isImage = value as? Bool ?? Background().isImage
-                if editItem.background?.isColor == editItem.background?.isImage{
-                    viewController.setBgToggle(cell)
+                let value = value as? Bool ?? Background().isImage
+                editItem.background?.isImage = value
+                
+                if editItem.background?.isColor != editItem.background?.isImage{
+                    return
                 }
-                editItem.background?.isColor = (value as? Bool ?? Background().isColor) == false
+                let toggleCell = viewController.getTableViewCell(EditCell.backgroundColor) as? EditTableViewColorCell
+                toggleCell?.setToggle()
+                editItem.background?.isColor = value == false
+                
+                textAttributeCell?.setData(backgroundIsImage: value)
+                textAttributeCell?.setData(backgroundIsColor: value == false)
             }
         case .isCircle:
             if value is Bool{
-                editItem.background?.isCircle = value as? Bool ?? Background().isCircle
+                let value = value as? Bool ?? Background().isCircle
+                editItem.background?.isCircle = value
+                
+                textAttributeCell?.setData(backgroundIsCircle: value)
             }
         case .textAttribute:
-            if value is TextAttributes{
-                editItem.title?.textAttributes = value as? TextAttributes
-            }
             if value is [TextAttributes]{
+                let value = value as? [TextAttributes] ?? []
                 let list = List<TextAttributes>()
-                list.append(objectsIn: value as? [TextAttributes] ?? [])
-                
-                editItem.dday?.textAttributes = list
+                list.append(objectsIn: value)
+                editItem.textAttributes = list
             }
         case .memo:
             if value is String{
-                editItem.memo = value as? String ?? Item().memo
+                let value = value as? String ?? Item().memo
+                editItem.memo = value
             }
-        }
-    }
-    
-    func valueChanged(_ cell: EditCellList?, didChangeValue value: UIColor?) {
-        guard let cell = cell else { return }
-        
-        switch cell{
-        case .title:
-            editItem.title?.color = value?.rgbString ?? Title().color
-        case .backgroundColor:
-            editItem.background?.color = value?.rgbString ?? "FFFFFFFF"
-        default: break
         }
     }
 }
@@ -206,8 +228,8 @@ extension EditPresenter: UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = indexPath.row + cellList.filter{ cell in
-            cell.section.rawValue < indexPath.section
+        let row = indexPath.row + cellList.filter{
+            $0.section.rawValue < indexPath.section
         }.count
 
         switch cellList[row] {
@@ -215,35 +237,37 @@ extension EditPresenter: UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewTitleCell", for: indexPath) as? EditTableViewTitleCell
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
-            cell?.setData(text: item.title?.text, color: item.title?.color)
+            cell?.setData(title: item.title)
 
             return cell ?? UITableViewCell()
         case .date:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewDateCell", for: indexPath) as? EditTableViewDateCell
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
-            cell?.setData(date: item.dday?.date)
+            cell?.setData(date: item.date)
 
             return cell ?? UITableViewCell()
         case .isStartCount:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewToggleCell", for: indexPath) as? EditTableViewToggleCell
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
-            cell?.setData(isOn: item.dday?.isStartCount)
+            cell?.setData(isOn: item.isStartCount)
 
             return cell ?? UITableViewCell()
         case .backgroundColor:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewColorCell", for: indexPath) as? EditTableViewColorCell
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
-            cell?.setData(isOn: item.background?.isColor, color: item.background?.color)
+            cell?.setData(backgroundIsColor: item.background?.isColor)
+            cell?.setData(backgroundColor: item.background?.color)
 
             return cell ?? UITableViewCell()
         case .backgroundImage:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewImageCell", for: indexPath) as? EditTableViewImageCell
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
-            cell?.setData(isOn: item.background?.isImage, id: item.id.stringValue)
+            cell?.setData(backgroundIsImage: item.background?.isImage)
+            cell?.setData(id: item.id.stringValue)
 
             return cell ?? UITableViewCell()
         case .isCircle:
@@ -257,14 +281,19 @@ extension EditPresenter: UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewPresentButtonCell", for: indexPath) as? EditTableViewPresentButtonCell
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
-            cell?.setData(id: item.id.stringValue, title: item.title, dday: item.dday, background: item.background)
+            cell?.setData(image: image)
+            cell?.setData(title: item.title)
+            cell?.setData(date: item.date)
+            cell?.setData(isStartCount: item.isStartCount)
+            cell?.setData(textAttributes: item.textAttributes)
+            cell?.setData(background: item.background)
 
             return cell ?? UITableViewCell()
         case .memo:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewMenoCell", for: indexPath) as? EditTableViewMemoCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewMemoCell", for: indexPath) as? EditTableViewMemoCell
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
-            cell?.setData(text: item.memo)
+            cell?.setData(memo: item.memo)
 
             return cell ?? UITableViewCell()
         }

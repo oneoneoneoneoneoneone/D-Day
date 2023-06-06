@@ -8,14 +8,22 @@
 import UIKit
 
 protocol TextAttributesDelegate{
-    func textAttributesValueChanged(title: TextAttributes, dday: TextAttributes, date: TextAttributes)
+    func textAttributesValueChanged(textAttributes: [TextAttributes])
+}
+protocol DetailViewDelegate{
+    func valueChanged(_ cell: TextType?, didChangeValue: Any?)
+    func reset()
 }
 
 protocol TextAttributesProtocol{
     func setNavigation()
     func setLayout()
-    func setData(title: Title, dday: DDay, backgound: Background, image: UIImage?)
+    func setData(textAttributes: [TextAttributes])
+    func setIsHidden(_ cell: TextType?, value: Bool)
+    func setTextColor(_ cell: TextType?, value: String)
+    func resetPosition()
     
+    func getTableViewEditCell() -> [UITableViewCell]
     func getTitleTextAttributes() -> TextAttributes
     func getDDayTextAttributes() -> TextAttributes
     func getDateTextAttributes() -> TextAttributes
@@ -28,22 +36,22 @@ final class TextAttributesPresenter: NSObject{
     private let delegate: TextAttributesDelegate
     private let repository: Repository
     
-    private var itemTitle: Title
-    private var dday: DDay
-    private var background: Background
-    private var id: String
+    var textAttributes: [TextAttributes]
     
-    private final let sectionCnt = TextAttributesCellType.allCases.count
-    private final let cellCnt = TextAttributesCellList.allCases.count
+    private final let sectionList = TextTypeSection.allCases
+    private final let cellList = TextType.allCases
     
-    init(viewController: TextAttributesProtocol, delegate: TextAttributesDelegate, repository: Repository = Repository(), id: String, title: Title, dday: DDay, background: Background){
+    init(viewController: TextAttributesProtocol, delegate: TextAttributesDelegate, repository: Repository = Repository(), textAttributes: [TextAttributes]){
         self.viewController = viewController
         self.delegate = delegate
         self.repository = repository
-        self.itemTitle = title
-        self.dday = dday
-        self.background = background
-        self.id = id
+        self.textAttributes = textAttributes
+        
+        if textAttributes.count == 0{
+            self.textAttributes.append(viewController.getTitleTextAttributes())
+            self.textAttributes.append(viewController.getDDayTextAttributes())
+            self.textAttributes.append(viewController.getDateTextAttributes())
+        }
     }
     
     func viewDidLoad(){
@@ -51,10 +59,8 @@ final class TextAttributesPresenter: NSObject{
         viewController.setLayout()
     }
     
-    func viewWillAppear(){
-        let image = repository.loadImageFromDocumentDirectory(imageName: id)
-        
-        viewController.setData(title: itemTitle, dday: dday, backgound: background, image: image)
+    func viewWillAppear(){        
+        viewController.setData(textAttributes: textAttributes)
     }
     
     func leftCencelButtonTap(){
@@ -66,7 +72,7 @@ final class TextAttributesPresenter: NSObject{
         let dday = viewController.getDDayTextAttributes()
         let date = viewController.getDateTextAttributes()
         
-        delegate.textAttributesValueChanged(title: title, dday: dday, date: date)
+        delegate.textAttributesValueChanged(textAttributes: [title, dday, date])
         viewController.dismiss()
     }
 }
@@ -78,41 +84,66 @@ extension TextAttributesPresenter: UITableViewDelegate{
 
 extension TextAttributesPresenter: UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        sectionCnt
+        sectionList.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
-//        switch section{
-//        case TextAttributesCellType.title.rawValue:
-//            return cellCnt - 1
-//        default:
-//            return cellCnt
-//        }
+        switch section{
+        case TextTypeSection.edit.rawValue:
+            return cellList.count
+        case TextTypeSection.reset.rawValue:
+            return 1
+        default:
+            return 0
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var row = TextAttributes()
         switch indexPath.section{
-        case TextAttributesCellType.title.rawValue:
-            row = itemTitle.textAttributes ?? TextAttributes()
-        case TextAttributesCellType.dday.rawValue:
-            row = dday.textAttributes[safe: DDayText.dday.rawValue] ?? TextAttributes()
-        case TextAttributesCellType.date.rawValue:
-            row = dday.textAttributes[safe: DDayText.date.rawValue] ?? TextAttributes()
-        default:
-            break
-        }
-        
-        switch indexPath.row{
-        case TextAttributesCellList.ishidden.rawValue:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TextAttributesSwitchCell", for: indexPath) as? TextAttributesSwitchCell
-//            cell?.bind(delegate: <#T##EditCellDelegate#>, cell: <#T##EditCellList#>)
-            cell?.setData(isOn: row.isHidden)
+        case TextTypeSection.edit.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TextAttributesCell", for: indexPath) as? TextAttributesCell
+            cell?.selectionStyle = .none
+            cell?.bind(delegate: self, cell: cellList[safe: indexPath.row])
+            cell?.setData(isHidden: textAttributes[safe: indexPath.row]?.isHidden)
+            cell?.setData(color: textAttributes[safe: indexPath.row]?.color)
+            return cell ?? UITableViewCell()
             
+        case TextTypeSection.reset.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TextAttributesButtonCell", for: indexPath) as? TextAttributesButtonCell
+            cell?.selectionStyle = .none
+            cell?.bind(delegate: self, cell: sectionList[safe: indexPath.section])
             return cell ?? UITableViewCell()
         default:
             return UITableViewCell()
         }
+    }
+}
+
+extension TextAttributesPresenter: TextAttributesDelegate{
+    func textAttributesValueChanged(textAttributes: [TextAttributes]) {
+        self.textAttributes = textAttributes
+    }
+}
+
+extension TextAttributesPresenter: DetailViewDelegate{
+    func valueChanged(_ cell: TextType?, didChangeValue: Any?) {
+        if didChangeValue is Bool{
+            guard let isHidden = didChangeValue as? Bool else {return}
+            viewController.setIsHidden(cell, value: isHidden)
+        }
+        if didChangeValue is String{
+            guard let color = didChangeValue as? String else {return}
+            viewController.setTextColor(cell, value: color)
+        }
+    }
+    
+    func reset(){
+        let cells = viewController.getTableViewEditCell() as? [TextAttributesCell]
+        cells?.forEach{
+            let textAttributes = TextAttributes()
+            $0.setData(isHidden: textAttributes.isHidden)
+            $0.setData(color: textAttributes.color)
+        }
+        viewController.resetPosition()
     }
 }

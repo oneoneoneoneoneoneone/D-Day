@@ -7,10 +7,7 @@
 
 import UIKit
 
-class EditTableViewDateCell: UITableViewCell{
-    private var delegate: EditCellDelegate?
-    private var cell: EditCellList?
-    
+class EditTableViewDateCell: UIEditCell{
     let label: UILabel = {
         let label = UILabel()
         label.text = "날짜"
@@ -38,29 +35,24 @@ class EditTableViewDateCell: UITableViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    private func setLayout(){
+    override func setLayout(){
         [datePicker].forEach{
             contentView.addSubview($0)
         }
         
         datePicker.snp.makeConstraints{
             $0.top.leading.trailing.bottom.equalToSuperview().inset(10)
-//            $0.centerX.centerY.equalToSuperview()
-//            $0.height.equalTo(240)
         }
     }
     
-    func bind(delegate: EditCellDelegate, cell: EditCellList){
+    override func bind(delegate: EditCellDelegate, cell: EditCell){
         self.delegate = delegate
         self.cell = cell
         label.text = cell.text
     }
     
-    func setData(date: Date?){
-        guard let date = date else{
-            return
-        }
+    override func setData(date: Date?){
+        guard let date = date else { return }
         
         datePicker.date = date
         datePicker.sendActions(for: .valueChanged)

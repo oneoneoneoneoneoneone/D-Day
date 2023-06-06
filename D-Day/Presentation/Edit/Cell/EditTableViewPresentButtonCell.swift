@@ -8,15 +8,7 @@
 import UIKit
 import RealmSwift
 
-class EditTableViewPresentButtonCell: UITableViewCell{
-    private var delegate: EditCellDelegate?
-    private var cell: EditCellList?
-    
-    private var title = Title()
-    private var dday = DDay()
-    private var background = Background()
-    private var id = ""
-        
+class EditTableViewPresentButtonCell: UIEditCell{
     lazy var button: UIButton = {
         let button = UIButton()
         button.setTitleColor(.label, for: [])
@@ -37,8 +29,8 @@ class EditTableViewPresentButtonCell: UITableViewCell{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-        
-    private func setLayout(){
+            
+    override func setLayout(){
         [button].forEach{
             contentView.addSubview($0)
         }
@@ -47,35 +39,31 @@ class EditTableViewPresentButtonCell: UITableViewCell{
             $0.height.width.equalToSuperview().inset(10)
         }
     }
-    
-    func bind(delegate: EditCellDelegate, cell: EditCellList){
+
+    override func bind(delegate: EditCellDelegate, cell: EditCell){
         self.delegate = delegate
         self.cell = cell
         button.setTitle(cell.text, for: [])
     }
-    
-    func setData(id: String?, title: Title?, dday: DDay?, background: Background?){
-        guard let id = id,
-              let title = title,
-              let dday = dday,
-              let background = background else { return }
-        self.id = id
-        self.title = title
-        self.dday = dday
-        self.background = background
+    override func setData(textAttributes: List<TextAttributes>?) {
+        super.setData(textAttributes: textAttributes)
+        delegate?.valueChanged(self.cell, didChangeValue: self.textAttributes)
     }
     
     @objc func buttonTap(){
-        let textAttributesViewController = UINavigationController(rootViewController: TextAttributesViewController(delegate: self, id: id, title: title, dday: dday, background: background))
-        textAttributesViewController.modalPresentationStyle = .overFullScreen
-        window?.rootViewController?.presentedViewController?.present(textAttributesViewController, animated: true)
+        let viewController = TextAttributesViewController(delegate: self, textAttributes: textAttributes)
+        viewController.setViewData(title: title, date: date, isStartCount: isStartCount, background: background, image: image)
+        let navigationViewController = UINavigationController(rootViewController: viewController)
+        navigationViewController.modalPresentationStyle = .overFullScreen
+        window?.rootViewController?.presentedViewController?.present(navigationViewController, animated: true)
     }
 }
 
 extension EditTableViewPresentButtonCell: TextAttributesDelegate{
-    func textAttributesValueChanged(title: TextAttributes, dday: TextAttributes, date: TextAttributes) {
-        delegate?.valueChanged(self.cell, didChangeValue: title)
-        delegate?.valueChanged(self.cell, didChangeValue: [dday, date])
+    func textAttributesValueChanged(textAttributes: [TextAttributes]) {
+        self.textAttributes = textAttributes
+                
+        delegate?.valueChanged(self.cell, didChangeValue: textAttributes)
     }
     
     

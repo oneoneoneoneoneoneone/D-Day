@@ -48,11 +48,17 @@ class CollectionViewCell_2x2: UICollectionViewCell{
     }
     
     func setData(item: Item){
-        d_DayLabel.text = Util.numberOfDaysFromDate(isStartCount: item.dday!.isStartCount, from: item.dday!.date)
-        d_DayLabel.textColor = UIColor(hexCode: item.title!.color)
-        titleLabel.text = item.title!.text
-        titleLabel.textColor = UIColor(hexCode: item.title!.color)
+        titleLabel.text = item.title
+        d_DayLabel.text = Util.numberOfDaysFromDate(isStartCount: item.isStartCount, from: item.date)
         
+        guard let titleAttributes = item.textAttributes[safe: TextType.title.rawValue] else {return}
+        titleLabel.isHidden = titleAttributes.isHidden
+        titleLabel.textColor = UIColor(hexCode: titleAttributes.color)
+        
+        guard let ddayAttributes = item.textAttributes[safe: TextType.dday.rawValue] else {return}
+        d_DayLabel.isHidden = ddayAttributes.isHidden
+        d_DayLabel.textColor = UIColor(hexCode: ddayAttributes.color)
+                   
         if item.background!.isCircle{
             imageView.layer.cornerRadius = frame.height/2
         }

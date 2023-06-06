@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum EditCellType: Int, CaseIterable{
     case contents = 0
@@ -13,7 +14,7 @@ enum EditCellType: Int, CaseIterable{
     case ext = 2
 }
 
-enum EditCellList: CaseIterable{
+enum EditCell: Int, CaseIterable{
     case title, date, isStartCount, backgroundColor, backgroundImage, isCircle, textAttribute, memo
     //, repeatCode
 
@@ -62,6 +63,27 @@ enum EditCellList: CaseIterable{
         case .memo:
             return [NSLocalizedString("메모를 입력해주세요.", comment: "")]
         default: return []
+        }
+    }
+    
+    var reuseIdentifier: String{
+        switch self{
+        case .title:
+            return "EditTableViewTitleCell"
+        case .date:
+            return "EditTableViewDateCell"
+        case .isStartCount:
+            return "EditTableViewToggleCell"
+        case .backgroundColor:
+            return "EditTableViewColorCell"
+        case .backgroundImage:
+            return "EditTableViewImageCell"
+        case .isCircle:
+            return "EditTableViewToggleCell"
+        case .textAttribute:
+            return "EditTableViewPresentButtonCell"
+        case .memo:
+            return "EditTableViewMemoCell"
         }
     }
 }

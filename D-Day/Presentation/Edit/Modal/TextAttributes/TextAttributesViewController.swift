@@ -8,12 +8,10 @@
 import UIKit
 
 class TextAttributesViewController: UIViewController{
-    private lazy var presenter = TextAttributesPresenter(viewController: self, delegate: delegate, id: id, title: itemTitle, dday: dday, background: background)
+    private lazy var presenter = TextAttributesPresenter(viewController: self, delegate: delegate, textAttributes: textAttributes)
     private let delegate: TextAttributesDelegate
-    private var itemTitle = Title()
-    private var dday = DDay()
-    private var background = Background()
-    private var id = ""
+    
+    var textAttributes: [TextAttributes]
     
     private let detailView: DetailView = {
         let detailView = DetailView()
@@ -24,20 +22,18 @@ class TextAttributesViewController: UIViewController{
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.register(TextAttributesSwitchCell.self, forCellReuseIdentifier: "TextAttributesSwitchCell")
+        tableView.register(TextAttributesCell.self, forCellReuseIdentifier: "TextAttributesCell")
+        tableView.register(TextAttributesButtonCell.self, forCellReuseIdentifier: "TextAttributesButtonCell")
         
         tableView.delegate = presenter
         tableView.dataSource = presenter
-
+        
         return tableView
     }()
     
-    init(delegate: TextAttributesDelegate, id: String, title: Title, dday: DDay, background: Background){
+    init(delegate: TextAttributesDelegate, textAttributes: [TextAttributes]){
         self.delegate = delegate
-        self.id = id
-        self.itemTitle = title
-        self.dday = dday
-        self.background = background
+        self.textAttributes = textAttributes
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -57,6 +53,11 @@ class TextAttributesViewController: UIViewController{
         super.viewWillAppear(animated)
         
         presenter.viewWillAppear()
+    }
+    
+    func setViewData(title: String, date: Date, isStartCount: Bool, background: Background, image: UIImage){
+        detailView.setData(title: title, date: date, isStartCount: isStartCount, background: background, image: image)
+        detailView.layer.cornerRadius = background.isCircle ? (view.frame.width)/2 : 0
     }
     
     @objc func rightEditButtonTap(){
@@ -102,11 +103,24 @@ extension TextAttributesViewController: TextAttributesProtocol{
         }
     }
     
-    func setData(title: Title, dday: DDay, backgound: Background, image: UIImage?) {
-        detailView.setTitle(itemTitle)
-        detailView.setDday(dday)
-        detailView.setBackground(background, image: image)
-        detailView.layer.cornerRadius = background.isCircle ? (view.frame.width)/2 : 0
+    func setData(textAttributes: [TextAttributes]) {
+        detailView.setData(textAttributes: textAttributes)
+    }
+    
+    func setIsHidden(_ cell: TextType?, value: Bool){
+        detailView.setIsHidden(cell, value)
+    }
+    func setTextColor(_ cell: TextType?, value: String){
+        detailView.setTextColor(cell, value)
+    }
+    
+    func resetPosition() {
+        detailView.resetPosition()
+        detailView.reloadView()
+    }
+    
+    func getTableViewEditCell() -> [UITableViewCell] {
+        return tableView.visibleCells.filter{$0.reuseIdentifier == "TextAttributesCell"}
     }
     
     func getTitleTextAttributes() -> TextAttributes{

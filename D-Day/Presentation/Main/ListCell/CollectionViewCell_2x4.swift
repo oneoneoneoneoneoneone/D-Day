@@ -62,13 +62,22 @@ class CollectionViewCell_2x4: UICollectionViewCell{
     }
     
     func setData(item: Item){
-        d_DayLabel.text = Util.numberOfDaysFromDate(isStartCount: item.dday!.isStartCount, from: item.dday!.date)
-        d_DayLabel.textColor = UIColor(hexCode: item.title!.color)
-        titleLabel.text = item.title!.text
-        titleLabel.textColor = UIColor(hexCode: item.title!.color)
-        dateLabel.text = Util.stringFromDate(date: item.dday!.date)
-        dateLabel.textColor = UIColor(hexCode: item.title!.color)
+        titleLabel.text = item.title
+        d_DayLabel.text = Util.numberOfDaysFromDate(isStartCount: item.isStartCount, from: item.date)
+        dateLabel.text = item.date.toString
         
+        guard let titleAttributes = item.textAttributes[safe: TextType.title.rawValue] else {return}
+        titleLabel.isHidden = titleAttributes.isHidden
+        titleLabel.textColor = UIColor(hexCode: titleAttributes.color)
+        
+        guard let ddayAttributes = item.textAttributes[safe: TextType.dday.rawValue] else {return}
+        d_DayLabel.isHidden = ddayAttributes.isHidden
+        d_DayLabel.textColor = UIColor(hexCode: ddayAttributes.color)
+        
+        guard let dateAttributes = item.textAttributes[safe: TextType.date.rawValue] else {return}
+        dateLabel.isHidden = dateAttributes.isHidden
+        dateLabel.textColor = UIColor(hexCode: dateAttributes.color)
+           
         let visibleView = item.background!.isCircle ? circleView : imageView
         let hiddenView = visibleView == circleView ? imageView : circleView
         circleView.layer.cornerRadius = visibleView == circleView ? (self.frame.height-80)/2 : 0

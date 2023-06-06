@@ -55,11 +55,9 @@ final class DetailPresenter{
     }
     
     func shareButtonTap(){
-        guard let title = item.title,
-              let dday = item.dday,
-              let image = viewController.transformToImage() else {return}
+        guard let image = viewController.transformToImage() else {return}
         
-        viewController.showShareActivityViewController(title: title.text, date: Util.stringFromDate(date: dday.date), image: image)
+        viewController.showShareActivityViewController(title: item.title, date: item.date.toString, image: image)
     }
     
     func deleteButtonTap(){

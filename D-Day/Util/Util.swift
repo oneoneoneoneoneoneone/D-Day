@@ -9,16 +9,9 @@ import Foundation
 import UIKit
 import WidgetKit
 
-struct Util{    
-    static func stringFromDate(date: Date) -> String{
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        
-        return dateFormatter.string(from: date)
-    }
-    
-    static func numberOfDaysFromDate(isStartCount: Bool, from: Date, to: Date = Date.now) -> String{
-        guard var numberOfDays = numberOfDaysFromDate(from: from) else {return "" }
+struct Util{
+    static func numberOfDaysFromDate(isStartCount: Bool, from: Date, to: Date? = Date.now.getMidnightDate) -> String{
+        guard var numberOfDays = numberOfDaysFromDate(from: from, to: to) else {return "" }
         if isStartCount{
             numberOfDays += 1
         }
@@ -34,9 +27,9 @@ struct Util{
         }
     }
     
-    static func numberOfDaysFromDate(from: Date, to: Date = Date.now) -> Int?{
+    static func numberOfDaysFromDate(from: Date, to: Date?) -> Int?{
         let calendar = NSCalendar.current
-        let numberOfDays = calendar.dateComponents([.day], from: from, to: to)
+        let numberOfDays = calendar.dateComponents([.day], from: from, to: to ?? Date.now)
         
         return numberOfDays.day
     }

@@ -5,40 +5,44 @@
 //  Created by hana on 2023/02/09.
 //
 
+import Foundation
+
 import WidgetKit
 import SwiftUI
 import Intents
 
 //isPreview - 위젯갤러리에 표시하기위한 미리보기 스냅샷 표시 // : TimelineProvider
 struct Provider: IntentTimelineProvider {    
-    typealias Entry = SimpleEntry
+    typealias Entry = ItemEntry
     
-//    typealias Intent = WidgetItemIntent
-//        .intentdefinition
     //본격적으로 위젯에 표시될
-    func placeholder(in context: Context) -> SimpleEntry {
-        return SimpleEntry(date: Date(),
-                           id: "",
-                           title: "EVENT",
-                           dday: "D-Day",
-                           image: UIImage(),
-                           forColor: .label,
-                           backColor: .systemBackground
+    func placeholder(in context: Context) -> ItemEntry {
+        return ItemEntry(date: Date(),
+                         id: "",
+                         title: "EVENT",
+                         titleTextAttribute: TextAttributes(centerY: Float(TextType.title.centerY)),
+                         dday: "D-Day",
+                         ddayTextAttribute: TextAttributes(),
+                         dateText: Date.now.toString,
+                         dateTextAttribute: TextAttributes(centerY: Float(TextType.date.centerY)),
+                         backImage: UIImage(),
+                         backColor: .systemBackground
         )
     }
 
     //데이터를 가져와서 표출해주는.  스냅샷 샘플데이터 설정
     //ConfigurationIntent: D_DayWidget.intentdefinition - CustomIntent 이름
-    func getSnapshot(for configuration: WidgetIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-//        let item = Array(Repository().readItem()).first
-        
-        let entry = SimpleEntry(
+    func getSnapshot(for configuration: WidgetIntent, in context: Context, completion: @escaping (ItemEntry) -> ()) {
+        let entry = ItemEntry(
             date: Date(),
             id: "",
             title: "EVENT",
+            titleTextAttribute: TextAttributes(centerY: Float(TextType.title.centerY)),
             dday: "D-Day",
-            image: UIImage(),
-            forColor: .label,
+            ddayTextAttribute: TextAttributes(),
+            dateText: Date.now.toString,
+            dateTextAttribute: TextAttributes(centerY: Float(TextType.date.centerY)),
+            backImage: UIImage(),
             backColor: .systemGray6
         )
         completion(entry)
@@ -46,7 +50,7 @@ struct Provider: IntentTimelineProvider {
 
     //타임라인 설정 관련된. 언제 리로드할지
     func getTimeline(for configuration: WidgetIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
+        var entries: [ItemEntry] = []
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)! //언제 리로드할지
@@ -61,14 +65,17 @@ struct Provider: IntentTimelineProvider {
                 item = items.filter{$0.id.stringValue == Repository().getDefaultWidget()}.first ?? Item()
             }
             
-            let entry = SimpleEntry(
+            let entry = ItemEntry(
                 date: entryDate,
                 id: item.id.stringValue,
-                title: item.title!.text,
-                dday: Util.numberOfDaysFromDate(isStartCount: item.dday!.isStartCount, from: item.dday!.date),
-                image: Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue) ?? UIImage(),
-                forColor: UIColor(hexCode: item.title!.color),
-                backColor: UIColor(hexCode: item.background!.color)
+                title: item.title,
+                titleTextAttribute: item.textAttributes[safe: TextType.title.rawValue] ?? TextAttributes(centerY: Float(TextType.title.centerY)),
+                dday: Util.numberOfDaysFromDate(isStartCount: item.isStartCount, from: item.date),
+                ddayTextAttribute: item.textAttributes[safe: TextType.dday.rawValue] ?? TextAttributes(),
+                dateText: item.date.toString,
+                dateTextAttribute: item.textAttributes[safe: TextType.date.rawValue] ?? TextAttributes(centerY: Float(TextType.date.centerY)),
+                backImage: item.background?.isImage == true ? Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue) ?? UIImage() : UIImage(),
+                backColor: item.background?.isColor == true ? UIColor(hexCode: item.background?.color ?? Background().color) : nil
             )
             entries.append(entry)
             
@@ -79,14 +86,17 @@ struct Provider: IntentTimelineProvider {
 }
 
 //위젯 콘텐츠를 업데이트한 date정보 + 표시하고자하는 정보 : TimelineEntry
-struct SimpleEntry: TimelineEntry {
+struct ItemEntry: TimelineEntry {
     let date: Date
     let id: String
     let title: String
+    let titleTextAttribute: TextAttributes
     let dday: String
-    let image: UIImage
-    let forColor: UIColor
-    let backColor: UIColor
+    let ddayTextAttribute: TextAttributes
+    let dateText: String
+    let dateTextAttribute: TextAttributes
+    let backImage: UIImage
+    let backColor: UIColor?
 }
 
 //SwiftUI로 콘텐츠 정의 :View
@@ -100,20 +110,140 @@ struct D_DayWidgetEntryView : View {
         switch self.family {
         case .systemSmall:
             ZStack{
-                Image(uiImage: entry.image)
+                Image(uiImage: entry.backImage)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                 VStack{
-                    Text(entry.title)
-                        .font(.caption)
-                        .multilineTextAlignment(.center)
-                    Spacer().frame(height: 5)
-                    Text(entry.dday)
-                        .font(.title3)
-                }.foregroundColor(.init(entry.forColor))
+                    GeometryReader { geometry in
+                        Text(entry.title)
+                            .font(.caption)
+                            .multilineTextAlignment(.center)
+                            .opacity(entry.titleTextAttribute.isHidden ? 0 : 1)
+                            .foregroundColor(.init(uiColor: UIColor(hexCode: entry.titleTextAttribute.color)))
+                            .position(x: geometry.size.width/4 * CGFloat(entry.titleTextAttribute.centerX) + geometry.size.width/4,
+                                      y: geometry.size.height/2 * CGFloat(entry.titleTextAttribute.centerY))
+                        Text(entry.dday)
+                            .font(.title3)
+                            .multilineTextAlignment(.center)
+                            .opacity(entry.ddayTextAttribute.isHidden ? 0 : 1)
+                            .foregroundColor(.init(uiColor: UIColor(hexCode: entry.ddayTextAttribute.color)))
+                            .position(x: geometry.size.width/4 * CGFloat(entry.ddayTextAttribute.centerX) + geometry.size.width/4,
+                                      y: geometry.size.height/2 * CGFloat(entry.ddayTextAttribute.centerY))
+                        Text(entry.dateText)
+                            .font(.caption2)
+                            .multilineTextAlignment(.center)
+                            .opacity(entry.dateTextAttribute.isHidden ? 0 : 1)
+                            .foregroundColor(.init(uiColor: UIColor(hexCode: entry.dateTextAttribute.color)))
+                            .position(x: geometry.size.width/4 * CGFloat(entry.dateTextAttribute.centerX) + geometry.size.width/4,
+                                      y: geometry.size.height/2 * CGFloat(entry.dateTextAttribute.centerY))
+                    }
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(entry.backColor))
+            .background(Color(entry.backColor ?? .white))
+            .widgetURL(URL(string: "open://detail?id=\(entry.id)"))
+            
+        case .systemMedium:
+            ZStack{
+                Image(uiImage: entry.backImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                VStack{
+                    GeometryReader { geometry in
+                        Text(entry.title)
+                            .font(.caption)
+                            .multilineTextAlignment(.center)
+                            .opacity(entry.titleTextAttribute.isHidden ? 0 : 1)
+                            .foregroundColor(.init(uiColor: UIColor(hexCode: entry.titleTextAttribute.color)))
+                            .position(x: geometry.size.width/2 * CGFloat(entry.titleTextAttribute.centerX),
+                                      y: geometry.size.height/4 * CGFloat(entry.titleTextAttribute.centerY) + geometry.size.height/4)
+                        Text(entry.dday)
+                            .font(.title3)
+                            .multilineTextAlignment(.center)
+                            .opacity(entry.ddayTextAttribute.isHidden ? 0 : 1)
+                            .foregroundColor(.init(uiColor: UIColor(hexCode: entry.ddayTextAttribute.color)))
+                            .position(x: geometry.size.width/2 * CGFloat(entry.ddayTextAttribute.centerX),
+                                      y: geometry.size.height/4 * CGFloat(entry.ddayTextAttribute.centerY) + geometry.size.height/4)
+                        Text(entry.dateText)
+                            .font(.caption2)
+                            .multilineTextAlignment(.center)
+                            .opacity(entry.dateTextAttribute.isHidden ? 0 : 1)
+                            .foregroundColor(.init(uiColor: UIColor(hexCode: entry.dateTextAttribute.color)))
+                            .position(x: geometry.size.width/2 * CGFloat(entry.dateTextAttribute.centerX),
+                                      y: geometry.size.height/4 * CGFloat(entry.dateTextAttribute.centerY) + geometry.size.height/4)
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(entry.backColor ?? .white))
+            .widgetURL(URL(string: "open://detail?id=\(entry.id)"))
+        case .systemLarge:
+            ZStack{
+                Image(uiImage: entry.backImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                VStack{
+                    GeometryReader { geometry in
+                        Text(entry.title)
+                            .font(.title)
+                            .multilineTextAlignment(.center)
+                            .opacity(entry.titleTextAttribute.isHidden ? 0 : 1)
+                            .foregroundColor(.init(uiColor: UIColor(hexCode: entry.titleTextAttribute.color)))
+                            .position(x: geometry.size.width/4 * CGFloat(entry.titleTextAttribute.centerX) + geometry.size.width/4,
+                                      y: geometry.size.height/2 * CGFloat(entry.titleTextAttribute.centerY))
+                        Text(entry.dday)
+                            .font(.largeTitle)
+                            .multilineTextAlignment(.center)
+                            .opacity(entry.ddayTextAttribute.isHidden ? 0 : 1)
+                            .foregroundColor(.init(uiColor: UIColor(hexCode: entry.ddayTextAttribute.color)))
+                            .position(x: geometry.size.width/4 * CGFloat(entry.ddayTextAttribute.centerX) + geometry.size.width/4,
+                                      y: geometry.size.height/2 * CGFloat(entry.ddayTextAttribute.centerY))
+                        Text(entry.dateText)
+                            .font(.caption)
+                            .multilineTextAlignment(.center)
+                            .opacity(entry.dateTextAttribute.isHidden ? 0 : 1)
+                            .foregroundColor(.init(uiColor: UIColor(hexCode: entry.dateTextAttribute.color)))
+                            .position(x: geometry.size.width/4 * CGFloat(entry.dateTextAttribute.centerX) + geometry.size.width/4,
+                                      y: geometry.size.height/2 * CGFloat(entry.dateTextAttribute.centerY))
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(entry.backColor ?? .white))
+            .widgetURL(URL(string: "open://detail?id=\(entry.id)"))
+        case .systemExtraLarge:
+            ZStack{
+                Image(uiImage: entry.backImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                VStack{
+                    GeometryReader { geometry in
+                        Text(entry.title)
+                            .font(.title3)
+                            .multilineTextAlignment(.center)
+                            .opacity(entry.titleTextAttribute.isHidden ? 0 : 1)
+                            .foregroundColor(.init(uiColor: UIColor(hexCode: entry.titleTextAttribute.color)))
+                            .position(x: geometry.size.width/2 * CGFloat(entry.titleTextAttribute.centerX),
+                                      y: geometry.size.height/2 * CGFloat(entry.titleTextAttribute.centerY))
+                        Text(entry.dday)
+                            .font(.title2)
+                            .multilineTextAlignment(.center)
+                            .opacity(entry.ddayTextAttribute.isHidden ? 0 : 1)
+                            .foregroundColor(.init(uiColor: UIColor(hexCode: entry.ddayTextAttribute.color)))
+                            .position(x: geometry.size.width/2 * CGFloat(entry.ddayTextAttribute.centerX),
+                                      y: geometry.size.height/2 * CGFloat(entry.ddayTextAttribute.centerY))
+                        Text(entry.dateText)
+                            .font(.caption)
+                            .multilineTextAlignment(.center)
+                            .opacity(entry.dateTextAttribute.isHidden ? 0 : 1)
+                            .foregroundColor(.init(uiColor: UIColor(hexCode: entry.dateTextAttribute.color)))
+                            .position(x: geometry.size.width/2 * CGFloat(entry.dateTextAttribute.centerX),
+                                      y: geometry.size.height/2 * CGFloat(entry.dateTextAttribute.centerY))
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(entry.backColor ?? .white))
             .widgetURL(URL(string: "open://detail?id=\(entry.id)"))
         case .accessoryCircular:
             VStack{
@@ -132,7 +262,6 @@ struct D_DayWidgetEntryView : View {
             Text("\(entry.title)  \(entry.dday)")
                 .font(.caption)
                 .widgetURL(URL(string: "open://detail?id=\(entry.id)"))
-//        @unknown default:
         default:
             Text("")
         }
@@ -146,28 +275,31 @@ struct D_DayWidget: Widget {
     var body: some WidgetConfiguration {
         IntentConfiguration(
             kind: kind,
-            intent: WidgetIntent.self,   //사용자가 설정하는 컨피그
+            intent: WidgetIntent.self,          //사용자가 설정하는 컨피그
             provider: Provider()                //위젯 생성자 (타이밍 설정도 가능)
         ){ entry in
             D_DayWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName(NSLocalizedString("디데이 위젯", comment: ""))      //위젯 추가갤러리 - 이름
-        .description(NSLocalizedString("한개의 디데이를 선택하여 위젯에 표시할 수 있습니다.", comment: ""))  //위젯 추가갤러리 - 설명
-        .supportedFamilies([.systemSmall, .accessoryCircular, .accessoryInline, .accessoryRectangular])
+        .configurationDisplayName(NSLocalizedString("디데이 위젯", comment: ""))                         //위젯 추가갤러리 - 이름
+        .description(NSLocalizedString("한개의 디데이를 선택하여 위젯에 표시할 수 있습니다.", comment: ""))        //위젯 추가갤러리 - 설명
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge, .accessoryCircular, .accessoryInline, .accessoryRectangular])
     }
 }
 
 
 struct D_DayWidget_Previews: PreviewProvider {
     static var previews: some View {
-        D_DayWidgetEntryView(entry: SimpleEntry(date: Date(),
-                                                id: "",
-                                                title: "이벤트",
-                                                dday: "D-Day",
-                                                image: UIImage(),
-                                                forColor: .gray,
-                                                backColor: .yellow
-                                               ))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        D_DayWidgetEntryView(entry: ItemEntry(date: Date(),
+                                              id: "",
+                                              title: "이벤트",
+                                              titleTextAttribute: TextAttributes(centerY: Float(TextType.title.centerY)),
+                                              dday: "D-Day",
+                                              ddayTextAttribute: TextAttributes(),
+                                              dateText: Date.now.toString,
+                                              dateTextAttribute: TextAttributes(centerY: Float(TextType.date.centerY)),
+                                              backImage: UIImage(),
+                                              backColor: .yellow
+                                             ))
+        .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

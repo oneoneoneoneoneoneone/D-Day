@@ -17,10 +17,9 @@ class EditViewController: UIViewController{
         tableView.register(EditTableViewTitleCell.self, forCellReuseIdentifier: "EditTableViewTitleCell")
         tableView.register(EditTableViewDateCell.self, forCellReuseIdentifier: "EditTableViewDateCell")
         tableView.register(EditTableViewToggleCell.self, forCellReuseIdentifier: "EditTableViewToggleCell")
-        tableView.register(EditTableViewSegmentCell.self, forCellReuseIdentifier: "EditTableViewSegmentCell")
         tableView.register(EditTableViewColorCell.self, forCellReuseIdentifier: "EditTableViewColorCell")
         tableView.register(EditTableViewImageCell.self, forCellReuseIdentifier: "EditTableViewImageCell")
-        tableView.register(EditTableViewMemoCell.self, forCellReuseIdentifier: "EditTableViewMenoCell")
+        tableView.register(EditTableViewMemoCell.self, forCellReuseIdentifier: "EditTableViewMemoCell")
         tableView.register(EditTableViewPresentButtonCell.self, forCellReuseIdentifier: "EditTableViewPresentButtonCell")
         
         tableView.delegate = presenter
@@ -44,6 +43,14 @@ class EditViewController: UIViewController{
         super.viewDidLoad()
         
         presenter.viewDidLoad()
+    }
+    
+    @objc func leftCancelButtonTap(){
+        presenter.leftCancelButtonTap()
+    }
+    
+    @objc func rightSaveButtonTap(){
+        presenter.rightSaveButtonTap()
     }
 }
 
@@ -90,25 +97,7 @@ extension EditViewController: EditProtocol{
         self.dismiss(animated: true)
     }
     
-    func setBgToggle(_ cell: EditCellList){
-        if cell == .backgroundColor{
-            guard let cell = tableView.visibleCells.filter({ $0.reuseIdentifier == "EditTableViewImageCell"}).first as? EditTableViewImageCell else {return}
-            cell.setToggle()
-        }
-        if cell == .backgroundImage{
-            guard let cell = tableView.visibleCells.filter({ $0.reuseIdentifier == "EditTableViewColorCell"}).first as? EditTableViewColorCell else {return}
-            cell.setToggle()
-        }
+    func getTableViewCell(_ editCell: EditCell?) -> UITableViewCell?{
+        return tableView.visibleCells.filter({ $0.reuseIdentifier == editCell?.reuseIdentifier}).first
     }
-}
-
-extension EditViewController{
-    @objc func leftCancelButtonTap(){
-        presenter.leftCancelButtonTap()
-    }
-    
-    @objc func rightSaveButtonTap(){
-        presenter.rightSaveButtonTap()
-    }
-    
 }

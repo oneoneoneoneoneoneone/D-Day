@@ -7,10 +7,7 @@
 
 import UIKit
 
-class EditTableViewToggleCell: UITableViewCell{
-    private var delegate: EditCellDelegate?
-    private var cell: EditCellList?
-    
+class EditTableViewToggleCell: UIEditCell{
     let label: UILabel = {
         let label = UILabel()
         label.text = "시작일"
@@ -34,7 +31,7 @@ class EditTableViewToggleCell: UITableViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setLayout(){
+    override func setLayout(){
         [label, segment].forEach{
             contentView.addSubview($0)
         }
@@ -50,7 +47,7 @@ class EditTableViewToggleCell: UITableViewCell{
         }
     }
     
-    func bind(delegate: EditCellDelegate, cell: EditCellList){
+    override func bind(delegate: EditCellDelegate, cell: EditCell){
         self.delegate = delegate
         self.cell = cell
         label.text = cell.text

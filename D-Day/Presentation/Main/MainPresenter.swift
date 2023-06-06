@@ -43,11 +43,11 @@ final class MainPresenter: NSObject{
     private func setSort(){
         switch SortList[currentSortIndex]{
         case .title:
-            items = items.sorted { $0.title?.text ?? "" < $1.title?.text ?? "" }
+            items = items.sorted { $0.title < $1.title }
         case .dateAsc:
-            items = items.sorted { $0.dday?.date ?? Date() > $1.dday?.date ?? Date() }
+            items = items.sorted { $0.date > $1.date }
         case .dateDesc:
-            items = items.sorted { $0.dday?.date ?? Date() < $1.dday?.date ?? Date() }
+            items = items.sorted { $0.date < $1.date }
         }
     }
         

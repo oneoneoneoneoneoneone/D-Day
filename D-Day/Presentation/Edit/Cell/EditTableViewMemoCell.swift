@@ -17,7 +17,6 @@ class EditTableViewMemoCell: UIEditCell{
         textView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         textView.font = .systemFont(ofSize: 17)
         textView.text = textViewPlaceHolder
-        textView.textColor = .lightGray
         
         textView.delegate = self
         
@@ -50,10 +49,11 @@ class EditTableViewMemoCell: UIEditCell{
     
     override func setData(memo: String?){
         guard let memo = memo, memo != "" else{
+            textView.textColor = .lightGray
             return
         }
         textView.text = memo
-        delegate?.valueChanged(self.cell, didChangeValue: textView.text)
+        textView.textColor = .label
     }
 }
 
@@ -63,6 +63,7 @@ extension EditTableViewMemoCell: UITextViewDelegate{
             textView.text = nil
             textView.textColor = .label
         }
+        delegate?.viewUp(self.cell)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -70,6 +71,7 @@ extension EditTableViewMemoCell: UITextViewDelegate{
             textView.text = textViewPlaceHolder
             textView.textColor = .lightGray
         }
+        delegate?.viewDown(self.cell)
     }
     
     func textViewDidChange(_ textView: UITextView) {

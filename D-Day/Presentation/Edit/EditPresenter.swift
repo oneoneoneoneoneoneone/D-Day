@@ -13,8 +13,11 @@ import RealmSwift
 protocol EditDelegate{
     func selectItem(_ id: String)
 }
+
 protocol EditCellDelegate{
     func valueChanged(_ editCell: EditCell?, didChangeValue value: Any?)
+    func viewUp(_ editCell: EditCell?)
+    func viewDown(_ editCell: EditCell?)
 }
 
 protocol EditProtocol{
@@ -25,6 +28,9 @@ protocol EditProtocol{
     func showToast(message: String)
     func dismiss()
     func getTableViewCell(_ editCell: EditCell?) -> UITableViewCell?
+    
+    func viewUp(_ editCell: EditCell?)
+    func viewDown(_ editCell: EditCell?)
 }
 
 final class EditPresenter: NSObject{
@@ -191,6 +197,13 @@ extension EditPresenter: EditCellDelegate{
                 editItem.memo = value
             }
         }
+    }
+    
+    func viewUp(_ editCell: EditCell?){
+        viewController.viewUp(editCell)
+    }
+    func viewDown(_ editCell: EditCell?){
+        viewController.viewDown(editCell)
     }
 }
 

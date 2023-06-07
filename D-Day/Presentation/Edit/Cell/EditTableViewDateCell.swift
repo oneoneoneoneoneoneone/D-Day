@@ -55,7 +55,6 @@ class EditTableViewDateCell: UIEditCell{
         guard let date = date else { return }
         
         datePicker.date = date
-        datePicker.sendActions(for: .valueChanged)
     }
     
     @objc func datePickerValueChanged(_ sender: UIDatePicker){

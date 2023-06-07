@@ -140,7 +140,6 @@ class EditTableViewImageCell: UIEditCell{
         guard let backgroundIsImage = backgroundIsImage else { return }
         
         toggle.isOn = backgroundIsImage
-        toggle.sendActions(for: .valueChanged)
     }
     
     override func setData(id: String?){

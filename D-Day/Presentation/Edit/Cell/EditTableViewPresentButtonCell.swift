@@ -47,7 +47,6 @@ class EditTableViewPresentButtonCell: UIEditCell{
     }
     override func setData(textAttributes: List<TextAttributes>?) {
         super.setData(textAttributes: textAttributes)
-        delegate?.valueChanged(self.cell, didChangeValue: self.textAttributes)
     }
     
     @objc func buttonTap(){
@@ -65,6 +64,4 @@ extension EditTableViewPresentButtonCell: TextAttributesDelegate{
                 
         delegate?.valueChanged(self.cell, didChangeValue: textAttributes)
     }
-    
-    
 }

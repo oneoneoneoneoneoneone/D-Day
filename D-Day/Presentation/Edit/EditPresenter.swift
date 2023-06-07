@@ -40,7 +40,6 @@ final class EditPresenter: NSObject{
     private let repository: Repository
     private let notificationCenter = NotificationCenterManager()
     
-    private let item: Item
     private let editItem = Item(id: "")
     private var image: UIImage?
     
@@ -52,7 +51,18 @@ final class EditPresenter: NSObject{
         self.delegate = delegate
         self.userDefaultsManager = userDefaultsManager
         self.repository = repository
-        self.item = item
+//        self.item = item
+        
+        editItem.id = item.id
+        editItem.title = item.title
+        editItem.date = item.date
+        editItem.isStartCount = item.isStartCount
+        editItem.textAttributes = item.textAttributes
+        editItem.background?.isImage = item.background?.isImage ?? Background().isImage
+        editItem.background?.isColor = item.background?.isColor ?? Background().isColor
+        editItem.background?.color = item.background?.color ?? Background().color
+        editItem.background?.isCircle = item.background?.isCircle ?? Background().isCircle
+        editItem.memo = item.memo
     }
     
     func viewDidLoad(){
@@ -75,35 +85,26 @@ final class EditPresenter: NSObject{
                 viewController.showToast(message: EditCell.backgroundImage.subText.first!)
                 return
             }
-            repository.saveImageToDocumentDirectory(imageName: item.id.stringValue, image: image)
+            repository.saveImageToDocumentDirectory(imageName: editItem.id.stringValue, image: image)
         }
         
-        let saveItem = Item()
-        saveItem.id = item.id
-        saveItem.title = editItem.title
-        saveItem.date = editItem.date.getMidnightDate ?? editItem.date
-        saveItem.isStartCount = editItem.isStartCount
-        saveItem.textAttributes = editItem.textAttributes
-        saveItem.background = editItem.background
-        saveItem.memo = editItem.memo == textViewPlaceHolder ? "" : editItem.memo
-        
         //저장
-        repository.editItem(saveItem)
+        repository.editItem(editItem)
         
         //알림추가
         let alertData = userDefaultsManager.getAlertTime()
-        notificationCenter.addNotificationRequest(by: item, alertData: alertData)
+        notificationCenter.addNotificationRequest(by: editItem, alertData: alertData)
         
         //기본 위젯
         if repository.getDefaultWidget() == nil {
-            repository.setDefaultWidget(id: item.id.stringValue)
+            repository.setDefaultWidget(id: editItem.id.stringValue)
         }
         
         //위젯 새로고침
         Util.widgetReload()
         
         viewController.dismiss()
-        delegate.selectItem(item.id.stringValue)
+        delegate.selectItem(editItem.id.stringValue)
     }
 }
 
@@ -124,9 +125,9 @@ extension EditPresenter: EditCellDelegate{
         case .date:
             if value is Date{
                 let value = value as? Date ?? Date()
-                editItem.date = value
+                editItem.date = value.getMidnightDate ?? value
                 
-                textAttributeCell?.setData(date: value)
+                textAttributeCell?.setData(date: editItem.date)
             }
         case .isStartCount:
             if value is Bool{
@@ -194,7 +195,7 @@ extension EditPresenter: EditCellDelegate{
         case .memo:
             if value is String{
                 let value = value as? String ?? Item().memo
-                editItem.memo = value
+                editItem.memo = value == textViewPlaceHolder ? "" : value
             }
         }
     }
@@ -250,44 +251,44 @@ extension EditPresenter: UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewTitleCell", for: indexPath) as? EditTableViewTitleCell
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
-            cell?.setData(title: item.title)
+            cell?.setData(title: editItem.title)
 
             return cell ?? UITableViewCell()
         case .date:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewDateCell", for: indexPath) as? EditTableViewDateCell
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
-            cell?.setData(date: item.date)
+            cell?.setData(date: editItem.date)
 
             return cell ?? UITableViewCell()
         case .isStartCount:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewToggleCell", for: indexPath) as? EditTableViewToggleCell
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
-            cell?.setData(isOn: item.isStartCount)
+            cell?.setData(isOn: editItem.isStartCount)
 
             return cell ?? UITableViewCell()
         case .backgroundColor:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewColorCell", for: indexPath) as? EditTableViewColorCell
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
-            cell?.setData(backgroundIsColor: item.background?.isColor)
-            cell?.setData(backgroundColor: item.background?.color)
+            cell?.setData(backgroundIsColor: editItem.background?.isColor)
+            cell?.setData(backgroundColor: editItem.background?.color)
 
             return cell ?? UITableViewCell()
         case .backgroundImage:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewImageCell", for: indexPath) as? EditTableViewImageCell
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
-            cell?.setData(backgroundIsImage: item.background?.isImage)
-            cell?.setData(id: item.id.stringValue)
+            cell?.setData(backgroundIsImage: editItem.background?.isImage)
+            cell?.setData(id: editItem.id.stringValue)
 
             return cell ?? UITableViewCell()
         case .isCircle:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewToggleCell", for: indexPath) as? EditTableViewToggleCell
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
-            cell?.setData(isOn: item.background?.isCircle)
+            cell?.setData(isOn: editItem.background?.isCircle)
 
             return cell ?? UITableViewCell()
         case .textAttribute:
@@ -295,18 +296,18 @@ extension EditPresenter: UITableViewDataSource{
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
             cell?.setData(image: image)
-            cell?.setData(title: item.title)
-            cell?.setData(date: item.date)
-            cell?.setData(isStartCount: item.isStartCount)
-            cell?.setData(textAttributes: item.textAttributes)
-            cell?.setData(background: item.background)
+            cell?.setData(title: editItem.title)
+            cell?.setData(date: editItem.date)
+            cell?.setData(isStartCount: editItem.isStartCount)
+            cell?.setData(textAttributes: editItem.textAttributes)
+            cell?.setData(background: editItem.background)
 
             return cell ?? UITableViewCell()
         case .memo:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewMemoCell", for: indexPath) as? EditTableViewMemoCell
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
-            cell?.setData(memo: item.memo)
+            cell?.setData(memo: editItem.memo)
 
             return cell ?? UITableViewCell()
         }

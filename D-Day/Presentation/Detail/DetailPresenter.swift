@@ -66,14 +66,14 @@ final class DetailPresenter{
     
     func deleteItem(){
         //기본 위젯
-        if repository.getDefaultWidget() == self.item.id.stringValue {
+        if repository.getDefaultWidget() == id {
             repository.setDefaultWidget(id: nil)
         }
         //알림
-        notificationCenter.remove(self.item.id.stringValue)
+        notificationCenter.remove(id)
         //이미지
-        repository.deleteImageToDocumentDirectory(imageName: self.item.id.stringValue)
+        repository.deleteImageToDocumentDirectory(imageName: id)
         //item
-        repository.deleteItem(self.item)
+        repository.deleteItem(item)
     }
 }

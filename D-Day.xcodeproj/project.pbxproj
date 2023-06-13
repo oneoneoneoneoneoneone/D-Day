@@ -34,7 +34,6 @@
 		335B086B29BAF13E008458E8 /* EditTableViewDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335B086329BAF13E008458E8 /* EditTableViewDateCell.swift */; };
 		335B086C29BAF13E008458E8 /* EditTableViewMemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335B086429BAF13E008458E8 /* EditTableViewMemoCell.swift */; };
 		335B086D29BAF13E008458E8 /* EditTableViewColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335B086529BAF13E008458E8 /* EditTableViewColorCell.swift */; };
-		335B086E29BAF13E008458E8 /* EditTableViewSegmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335B086629BAF13E008458E8 /* EditTableViewSegmentCell.swift */; };
 		335B086F29BAF13E008458E8 /* EditTableViewToggleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335B086729BAF13E008458E8 /* EditTableViewToggleCell.swift */; };
 		335B087129BAF13E008458E8 /* EditTableViewTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335B086929BAF13E008458E8 /* EditTableViewTitleCell.swift */; };
 		33619F8229D5C2C2007F44A9 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33619F8129D5C2C2007F44A9 /* Intents.framework */; };
@@ -141,7 +140,6 @@
 		335B086329BAF13E008458E8 /* EditTableViewDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewDateCell.swift; sourceTree = "<group>"; };
 		335B086429BAF13E008458E8 /* EditTableViewMemoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewMemoCell.swift; sourceTree = "<group>"; };
 		335B086529BAF13E008458E8 /* EditTableViewColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewColorCell.swift; sourceTree = "<group>"; };
-		335B086629BAF13E008458E8 /* EditTableViewSegmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewSegmentCell.swift; sourceTree = "<group>"; };
 		335B086729BAF13E008458E8 /* EditTableViewToggleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewToggleCell.swift; sourceTree = "<group>"; };
 		335B086929BAF13E008458E8 /* EditTableViewTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewTitleCell.swift; sourceTree = "<group>"; };
 		33619F8029D5C2C2007F44A9 /* Intent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Intent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,7 +243,6 @@
 				335B086329BAF13E008458E8 /* EditTableViewDateCell.swift */,
 				335B086429BAF13E008458E8 /* EditTableViewMemoCell.swift */,
 				335B086529BAF13E008458E8 /* EditTableViewColorCell.swift */,
-				335B086629BAF13E008458E8 /* EditTableViewSegmentCell.swift */,
 				335B086729BAF13E008458E8 /* EditTableViewToggleCell.swift */,
 				335B086929BAF13E008458E8 /* EditTableViewTitleCell.swift */,
 			);
@@ -709,7 +706,6 @@
 				33C503B52A24C256008F53A0 /* DetailView.swift in Sources */,
 				33D27261298233E600EF9321 /* AppDelegate.swift in Sources */,
 				33BEF25029C89EAD0096486A /* DarkModeToggleCell.swift in Sources */,
-				335B086E29BAF13E008458E8 /* EditTableViewSegmentCell.swift in Sources */,
 				3326FB392A2F2E18009A800D /* Date+.swift in Sources */,
 				33D2727829824AD400EF9321 /* CollectionViewCell_1x4.swift in Sources */,
 				33D957FF29FAC2F00016B1F6 /* UIViewController+.swift in Sources */,

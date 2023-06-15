@@ -52,6 +52,7 @@ class EditTableViewMemoCell: UIEditCell{
             textView.textColor = .lightGray
             return
         }
+        
         textView.text = memo
         textView.textColor = .label
     }

@@ -72,7 +72,7 @@ final class DetailPresenter{
         //알림
         notificationCenter.remove(id)
         //이미지
-        repository.deleteImageToDocumentDirectory(imageName: id)
+        repository.deleteImageToFileManager(imageName: id)
         //item
         repository.deleteItem(item)
     }

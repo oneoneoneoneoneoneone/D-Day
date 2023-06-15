@@ -119,8 +119,10 @@ extension EditTableViewImageCell{
     private func setImage(image: UIImage){
         button.setImage(image, for: .normal)
         
-        setData(backgroundIsImage: true)
         delegate?.valueChanged(self.cell, didChangeValue: image)
+        
+        toggle.isOn = true
+        toggle.sendActions(for: .valueChanged)
     }
     
     private func presentLibrary(){

@@ -51,7 +51,6 @@ final class EditPresenter: NSObject{
         self.delegate = delegate
         self.userDefaultsManager = userDefaultsManager
         self.repository = repository
-//        self.item = item
         
         editItem.id = item.id
         editItem.title = item.title
@@ -85,7 +84,7 @@ final class EditPresenter: NSObject{
                 viewController.showToast(message: EditCell.backgroundImage.subText.first!)
                 return
             }
-            repository.saveImageToDocumentDirectory(imageName: editItem.id.stringValue, image: image)
+            repository.saveImageToFileManager(imageName: editItem.id.stringValue, image: image)
         }
         
         //저장

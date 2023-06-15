@@ -74,7 +74,7 @@ struct Provider: IntentTimelineProvider {
                 ddayTextAttribute: item.textAttributes[safe: TextType.dday.rawValue] ?? TextAttributes(),
                 dateText: item.date.toString,
                 dateTextAttribute: item.textAttributes[safe: TextType.date.rawValue] ?? TextAttributes(centerY: Float(TextType.date.centerY)),
-                backImage: item.background?.isImage == true ? Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue) ?? UIImage() : UIImage(),
+                backImage: item.background?.isImage == true ? Repository().loadImageFromFileManager(imageName: item.id.stringValue) ?? UIImage() : UIImage(),
                 backColor: item.background?.isColor == true ? UIColor(hexCode: item.background?.color ?? Background().color) : nil
             )
             entries.append(entry)

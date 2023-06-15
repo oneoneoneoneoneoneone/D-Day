@@ -45,6 +45,7 @@ class EditTableViewPresentButtonCell: UIEditCell{
         self.cell = cell
         button.setTitle(cell.text, for: [])
     }
+    
     override func setData(textAttributes: List<TextAttributes>?) {
         super.setData(textAttributes: textAttributes)
     }
@@ -54,6 +55,7 @@ class EditTableViewPresentButtonCell: UIEditCell{
         viewController.setViewData(title: title, date: date, isStartCount: isStartCount, background: background, image: image)
         let navigationViewController = UINavigationController(rootViewController: viewController)
         navigationViewController.modalPresentationStyle = .overFullScreen
+        
         window?.rootViewController?.presentedViewController?.present(navigationViewController, animated: true)
     }
 }

@@ -80,7 +80,7 @@ class DetailView: UIView {
         let originY = dDayLabel.frame.origin.y + dDayLabel.frame.size.height/2
         textAttributes.centerX = Float(originX / (window.bounds.width/2))
         textAttributes.centerY = Float(originY / (window.bounds.width/2))
-
+        
         return textAttributes
     }
     
@@ -202,17 +202,6 @@ class DetailView: UIView {
         textLabels[safe: cell.rawValue]?.textColor = UIColor(hexCode: color)
     }
     
-    func resetPosition(){
-        titleLabelCenterXMultiplier = CGFloat(TextType.title.centerX)
-        titleLabelCenterYMultiplier = CGFloat(TextType.title.centerY)
-        
-        dDayLabelCenterXMultiplier = CGFloat(TextType.dday.centerX)
-        dDayLabelCenterYMultiplier = CGFloat(TextType.dday.centerY)
-        
-        dateLabelCenterXMultiplier = CGFloat(TextType.date.centerX)
-        dateLabelCenterYMultiplier = CGFloat(TextType.date.centerY)
-    }
-    
     func setCornerRadius(_ value: CGFloat){
         layer.cornerRadius = value
     }
@@ -225,18 +214,32 @@ class DetailView: UIView {
         textLabels = [titleLabel, dDayLabel, dateLabel]
     }
     
+    func resetPosition(){
+        titleLabelCenterXMultiplier = TextType.title.centerX
+        titleLabelCenterYMultiplier = TextType.title.centerY
+        
+        dDayLabelCenterXMultiplier = TextType.dday.centerX
+        dDayLabelCenterYMultiplier = TextType.dday.centerY
+        
+        dateLabelCenterXMultiplier = TextType.date.centerX
+        dateLabelCenterYMultiplier = TextType.date.centerY
+    }
+    
     func reloadView(){
-        titleLabel.snp.remakeConstraints{
+        titleLabel.snp.removeConstraints()
+        titleLabel.snp.makeConstraints{
             $0.centerX.equalToSuperview().multipliedBy(titleLabelCenterXMultiplier)
             $0.centerY.equalToSuperview().multipliedBy(titleLabelCenterYMultiplier)
         }
         
-        dDayLabel.snp.remakeConstraints{
+        dDayLabel.snp.removeConstraints()
+        dDayLabel.snp.makeConstraints{
             $0.centerX.equalToSuperview().multipliedBy(dDayLabelCenterXMultiplier)
             $0.centerY.equalToSuperview().multipliedBy(dDayLabelCenterYMultiplier)
         }
         
-        dateLabel.snp.remakeConstraints{
+        dateLabel.snp.removeConstraints()
+        dateLabel.snp.makeConstraints{
             $0.centerX.equalToSuperview().multipliedBy(dateLabelCenterXMultiplier)
             $0.centerY.equalToSuperview().multipliedBy(dateLabelCenterYMultiplier)
         }
@@ -263,8 +266,11 @@ class DraggableLabel: UILabel{
             return
             
         }
-          
-        frame.origin = CGPoint(x: touchPointX, y: touchPointY)
+        
+        self.snp.remakeConstraints{
+            $0.leading.equalToSuperview().inset(touchPointX)
+            $0.top.equalToSuperview().inset(touchPointY)
+        }
     }
     
     open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

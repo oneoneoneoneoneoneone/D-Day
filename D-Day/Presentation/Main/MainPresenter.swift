@@ -27,8 +27,8 @@ final class MainPresenter: NSObject{
     private let repository: Repository
     
     
-    private let DisplayList = [DisplayStyle.x11, DisplayStyle.x22, DisplayStyle.x14, DisplayStyle.x24]
-    private let SortList = [SortStyle.title, SortStyle.dateDesc, SortStyle.dateAsc]
+    private let displayList = [DisplayStyle.x11, DisplayStyle.x22, DisplayStyle.x14, DisplayStyle.x24]
+    private let sortList = [SortStyle.title, SortStyle.dateDesc, SortStyle.dateAsc]
     private var currentDisplayIndex = 0
     private var currentSortIndex = 0
     
@@ -41,7 +41,7 @@ final class MainPresenter: NSObject{
     }
     
     private func setSort(){
-        switch SortList[currentSortIndex]{
+        switch sortList[currentSortIndex]{
         case .title:
             items = items.sorted { $0.title < $1.title }
         case .dateAsc:
@@ -74,21 +74,21 @@ final class MainPresenter: NSObject{
     }
     
     func rightDisplayButtonTap(){
-        self.currentDisplayIndex = (self.currentDisplayIndex + 1) % DisplayList.count
+        self.currentDisplayIndex = (self.currentDisplayIndex + 1) % displayList.count
         userDefaultsManager.setCurrentDisplay(index: currentDisplayIndex)
         
         viewController.reloadCollectionView()
-        viewController.showToast(message: DisplayList[currentDisplayIndex].message)
+        viewController.showToast(message: displayList[currentDisplayIndex].message)
     }
     
     func rightSortButtonTap(){
-        self.currentSortIndex = (currentSortIndex + 1) % SortList.count
+        self.currentSortIndex = (currentSortIndex + 1) % sortList.count
         userDefaultsManager.setCurrentSort(index: currentSortIndex)
         
         setSort()
         
         viewController.reloadCollectionView()
-        viewController.showToast(message: SortList[currentSortIndex].message)
+        viewController.showToast(message: sortList[currentSortIndex].message)
     }
     
     func rightSettingButtonTap(){
@@ -121,24 +121,24 @@ extension MainPresenter: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch DisplayList[currentDisplayIndex]{
+        switch displayList[currentDisplayIndex]{
         case .x11:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DisplayList[currentDisplayIndex].id, for: indexPath) as? CollectionViewCell_1x1 else{return UICollectionViewCell()}
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: displayList[currentDisplayIndex].id, for: indexPath) as? CollectionViewCell1x1 else{return UICollectionViewCell()}
             cell.setData(item: items[indexPath.row])
             
             return cell
         case .x22:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DisplayList[currentDisplayIndex].id, for: indexPath) as? CollectionViewCell_2x2 else{return UICollectionViewCell()}
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: displayList[currentDisplayIndex].id, for: indexPath) as? CollectionViewCell2x2 else{return UICollectionViewCell()}
             cell.setData(item: items[indexPath.row])
             
             return cell
         case .x14:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DisplayList[currentDisplayIndex].id, for: indexPath) as? CollectionViewCell_1x4 else{return UICollectionViewCell()}
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: displayList[currentDisplayIndex].id, for: indexPath) as? CollectionViewCell1x4 else{return UICollectionViewCell()}
             cell.setData(item: items[indexPath.row])
             
             return cell
         case .x24:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DisplayList[currentDisplayIndex].id, for: indexPath) as? CollectionViewCell_2x4 else{return UICollectionViewCell()}
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: displayList[currentDisplayIndex].id, for: indexPath) as? CollectionViewCell2x4 else{return UICollectionViewCell()}
             cell.setData(item: items[indexPath.row])
             
             return cell
@@ -146,7 +146,7 @@ extension MainPresenter: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch DisplayList[currentDisplayIndex]{
+        switch displayList[currentDisplayIndex]{
         case .x11:
             return CGSize(width: collectionView.frame.width/4 - 1, height: collectionView.frame.width/4 - 1)
         case .x22:

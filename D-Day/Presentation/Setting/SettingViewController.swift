@@ -172,7 +172,7 @@ extension SettingViewController: SettingProtocol{
             self.present(controller, animated: true, completion: nil)
         }
         else {
-            print("메일 보내기 실패")
+            NSLog("메일 보내기 실패")
             let sendMailErrorAlert = UIAlertController(
                 title: NSLocalizedString("메일 전송 실패", comment: ""),
                 message: NSLocalizedString("메일을 보내려면 'Mail' 앱이 필요합니다. 앱스토어에서 해당 앱을 복원하거나 이메일 설정을 확인하고 다시 시도해주세요.", comment: ""),

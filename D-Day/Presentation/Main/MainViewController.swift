@@ -20,10 +20,10 @@ class MainViewController: UIViewController {
         collectionView.delegate = presenter
         collectionView.dataSource = presenter
         
-        collectionView.register(CollectionViewCell_1x1.self, forCellWithReuseIdentifier: "CollectionViewCell_1x1")
-        collectionView.register(CollectionViewCell_2x2.self, forCellWithReuseIdentifier: "CollectionViewCell_2x2")
-        collectionView.register(CollectionViewCell_1x4.self, forCellWithReuseIdentifier: "CollectionViewCell_1x4")
-        collectionView.register(CollectionViewCell_2x4.self, forCellWithReuseIdentifier: "CollectionViewCell_2x4")
+        collectionView.register(CollectionViewCell1x1.self, forCellWithReuseIdentifier: "CollectionViewCell_1x1")
+        collectionView.register(CollectionViewCell2x2.self, forCellWithReuseIdentifier: "CollectionViewCell_2x2")
+        collectionView.register(CollectionViewCell1x4.self, forCellWithReuseIdentifier: "CollectionViewCell_1x4")
+        collectionView.register(CollectionViewCell2x4.self, forCellWithReuseIdentifier: "CollectionViewCell_2x4")
         
         return collectionView
     }()
@@ -114,9 +114,9 @@ extension MainViewController: MainProtocol{
     }
     
     func presentToSideMenu(){
-        let SetingVC = SettingViewController()
+        let settingViewController = SettingViewController()
         // rootViewController에 SideMenu화면 VC를 삽입
-        let sideMenuNav = SideMenuNavigationController(rootViewController: SetingVC)
+        let sideMenuNav = SideMenuNavigationController(rootViewController: settingViewController)
 //        setUpSideMenuNavigationVC(vc: self, menuNavVC: sideMenuNav)
 //        let sideMenu = SideMenuManager.default.leftMenuNavigationController!
         present(sideMenuNav, animated: true)

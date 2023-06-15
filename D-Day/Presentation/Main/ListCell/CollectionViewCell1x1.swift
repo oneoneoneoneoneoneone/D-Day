@@ -7,10 +7,9 @@
 
 import UIKit
 
-class CollectionViewCell_1x1: UICollectionViewCell{
+class CollectionViewCell1x1: UICollectionViewCell {
     let imageView = UIImageView()
-    let d_DayLabel = UILabel()
-//    let titleLabel = UILabel()
+    let ddayLabel = UILabel()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -19,24 +18,24 @@ class CollectionViewCell_1x1: UICollectionViewCell{
         setLayout()
     }
     
-    private func setAttribute(){
+    private func setAttribute() {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         
-        d_DayLabel.font = .systemFont(ofSize: 24, weight: .semibold)
+        ddayLabel.font = .systemFont(ofSize: 24, weight: .semibold)
 //        titleLabel.font = .systemFont(ofSize: 36, weight: .light)
     }
     
-    private func setLayout(){
-        [imageView, d_DayLabel].forEach{
+    private func setLayout() {
+        [imageView, ddayLabel].forEach {
             addSubview($0)
         }
         
-        imageView.snp.makeConstraints{
+        imageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
-        d_DayLabel.snp.makeConstraints{
+        ddayLabel.snp.makeConstraints {
 //            $0.top.equalToSuperview().inset(10)
             $0.centerY.centerX.equalToSuperview()
         }
@@ -47,11 +46,11 @@ class CollectionViewCell_1x1: UICollectionViewCell{
     }
     
     func setData(item: Item){
-        d_DayLabel.text = Util.numberOfDaysFromDate(isStartCount: item.isStartCount, from: item.date)
+        ddayLabel.text = Util.numberOfDaysFromDate(isStartCount: item.isStartCount, from: item.date)
         
         guard let ddayAttributes = item.textAttributes[safe: TextType.dday.rawValue] else {return}
-        d_DayLabel.isHidden = ddayAttributes.isHidden
-        d_DayLabel.textColor = UIColor(hexCode: ddayAttributes.color)
+        ddayLabel.isHidden = ddayAttributes.isHidden
+        ddayLabel.textColor = UIColor(hexCode: ddayAttributes.color)
         
         if item.background!.isCircle{
             imageView.layer.cornerRadius = frame.height/2
@@ -65,7 +64,7 @@ class CollectionViewCell_1x1: UICollectionViewCell{
             imageView.image = nil
         }
         if item.background!.isImage{
-            imageView.image = Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue)
+            imageView.image = Repository().loadImageFromFileManager(imageName: item.id.stringValue)
             imageView.backgroundColor = nil
         }
     }

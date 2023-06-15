@@ -14,15 +14,7 @@ class EditTableViewTitleCell: UIEditCell{
                 
         return textField
     }()
-    
-//    lazy var colorWell: UIColorWell = {
-//        let colorWell = UIColorWell()
-//        colorWell.supportsAlpha = false
-//        colorWell.addTarget(self, action: #selector(colorWellValueChanged), for: .valueChanged)
-//
-//        return colorWell
-//    }()
-    
+        
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setLayout()
@@ -53,7 +45,6 @@ class EditTableViewTitleCell: UIEditCell{
         guard let title = title else { return }
         
         textField.text = title
-        delegate?.valueChanged(self.cell, didChangeValue: textField.text)
     }
 }
 
@@ -61,5 +52,13 @@ class EditTableViewTitleCell: UIEditCell{
 extension EditTableViewTitleCell: UITextFieldDelegate{
     func textFieldDidChangeSelection(_ textField: UITextField) {
         delegate?.valueChanged(self.cell, didChangeValue: textField.text)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        delegate?.viewUp(self.cell)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        delegate?.viewDown(self.cell)
     }
 }

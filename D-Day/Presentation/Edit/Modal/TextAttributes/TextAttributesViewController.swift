@@ -22,6 +22,11 @@ class TextAttributesViewController: UIViewController{
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.isScrollEnabled = false
+        tableView.sectionFooterHeight = .leastNormalMagnitude
+        tableView.contentInset = .zero
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         tableView.register(TextAttributesCell.self, forCellReuseIdentifier: "TextAttributesCell")
         tableView.register(TextAttributesButtonCell.self, forCellReuseIdentifier: "TextAttributesButtonCell")
         
@@ -79,9 +84,6 @@ extension TextAttributesViewController: TextAttributesProtocol{
         navigationItem.leftBarButtonItem?.tintColor = .systemBlue
         
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
-//        navigationItem.backAction = UIAction(handler: {_ in
-//            self.navigationController?.popViewController(animated: true)
-//        })
     }
     
     func setLayout(){
@@ -105,6 +107,7 @@ extension TextAttributesViewController: TextAttributesProtocol{
     
     func setData(textAttributes: [TextAttributes]) {
         detailView.setData(textAttributes: textAttributes)
+        detailView.reloadView()
     }
     
     func setIsHidden(_ cell: TextType?, value: Bool){

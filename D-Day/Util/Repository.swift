@@ -58,22 +58,22 @@ class Repository: RepositoryProtocol{
                             
                             let oldTitleAttributes = oldTitle?["textAttributes"] as? DynamicObject
                             let tempAttributes = List<TextAttributes>()
-                            let titleAttribute = TextAttributes()
-                            titleAttribute.centerX = oldTitleAttributes?["centerX"] as? Float ?? TextAttributes().centerX
-                            titleAttribute.centerY = oldTitleAttributes?["centerY"] as? Float ?? TextAttributes().centerY
-                            titleAttribute.isHidden = oldTitleAttributes?["isHidden"] as? Bool ?? TextAttributes().isHidden
-                            titleAttribute.color = oldTitle?["color"] as? String ?? TextAttributes().color
+                            let titleAttribute = TextAttributes(centerY: Float(TextType.title.centerY))
+                            titleAttribute.centerX = oldTitleAttributes?["centerX"] as? Float ?? titleAttribute.centerX
+                            titleAttribute.centerY = oldTitleAttributes?["centerY"] as? Float ?? titleAttribute.centerY
+                            titleAttribute.isHidden = oldTitleAttributes?["isHidden"] as? Bool ?? titleAttribute.isHidden
+                            titleAttribute.color = oldTitle?["color"] as? String ?? titleAttribute.color
                             
-                            let ddayAttribute = TextAttributes()
+                            let ddayAttribute = TextAttributes(centerY: Float(TextType.dday.centerY))
                             let oldDdayAttributes = oldDDay?.dynamicList("textAttributes").first as? DynamicObject
-                            ddayAttribute.centerX = oldDdayAttributes?["centerX"] as? Float ?? TextAttributes().centerX
-                            ddayAttribute.centerY = oldDdayAttributes?["centerY"] as? Float ?? TextAttributes().centerY
-                            ddayAttribute.isHidden = oldDdayAttributes?["isHidden"] as? Bool ?? TextAttributes().isHidden
-                            let dateAttribute = TextAttributes()
+                            ddayAttribute.centerX = oldDdayAttributes?["centerX"] as? Float ?? ddayAttribute.centerX
+                            ddayAttribute.centerY = oldDdayAttributes?["centerY"] as? Float ?? ddayAttribute.centerY
+                            ddayAttribute.isHidden = oldDdayAttributes?["isHidden"] as? Bool ?? ddayAttribute.isHidden
+                            let dateAttribute = TextAttributes(centerY: Float(TextType.date.centerY))
                             let oldDateAttributes = oldDDay?.dynamicList("textAttributes").last as? DynamicObject
-                            dateAttribute.centerX = oldDateAttributes?["centerX"] as? Float ?? TextAttributes().centerX
-                            dateAttribute.centerY = oldDateAttributes?["centerY"] as? Float ?? TextAttributes().centerY
-                            dateAttribute.isHidden = oldDateAttributes?["isHidden"] as? Bool ?? TextAttributes().isHidden
+                            dateAttribute.centerX = oldDateAttributes?["centerX"] as? Float ?? dateAttribute.centerX
+                            dateAttribute.centerY = oldDateAttributes?["centerY"] as? Float ?? dateAttribute.centerY
+                            dateAttribute.isHidden = oldDateAttributes?["isHidden"] as? Bool ?? dateAttribute.isHidden
                             
                             tempAttributes.append(titleAttribute)
                             tempAttributes.append(ddayAttribute)

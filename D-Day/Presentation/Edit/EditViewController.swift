@@ -14,6 +14,10 @@ class EditViewController: UIViewController{
 
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.sectionFooterHeight = .leastNormalMagnitude
+        tableView.contentInset = .zero
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         tableView.register(EditTableViewTitleCell.self, forCellReuseIdentifier: "EditTableViewTitleCell")
         tableView.register(EditTableViewDateCell.self, forCellReuseIdentifier: "EditTableViewDateCell")
         tableView.register(EditTableViewToggleCell.self, forCellReuseIdentifier: "EditTableViewToggleCell")
@@ -41,6 +45,7 @@ class EditViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemGray6
         
         presenter.viewDidLoad()
     }
@@ -64,9 +69,9 @@ extension EditViewController: EditProtocol{
     }
 
     func setLayout(){
-        view.backgroundColor = .systemGray6
         view.addSubview(tableView)
 
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.snp.makeConstraints{
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.bottom.equalToSuperview()
@@ -99,5 +104,23 @@ extension EditViewController: EditProtocol{
     
     func getTableViewCell(_ editCell: EditCell?) -> UITableViewCell?{
         return tableView.visibleCells.filter({ $0.reuseIdentifier == editCell?.reuseIdentifier}).first
+    }
+    
+    func viewUp(_ editCell: EditCell?){
+        UIView.animate(withDuration: 0.4, animations: {
+            self.view.frame.size.height -= 250
+            
+            guard let cell = self.tableView.visibleCells.filter({ $0.reuseIdentifier == editCell?.reuseIdentifier}).first else {return}
+            self.tableView.bounds.origin.y += cell.frame.origin.y/2
+        })
+    }
+    
+    func viewDown(_ editCell: EditCell?){
+        UIView.animate(withDuration: 0.4, animations: {
+            self.view.frame.size.height += 250
+            
+            guard let cell = self.tableView.visibleCells.filter({ $0.reuseIdentifier == editCell?.reuseIdentifier}).first else {return}
+            self.tableView.bounds.origin.y -= cell.frame.origin.y/2
+        })
     }
 }

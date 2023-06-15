@@ -23,18 +23,21 @@ class DetailView: UIView{
         let label = DraggableLabel()
         label.font = .systemFont(ofSize: 24, weight: .medium)
         label.numberOfLines = 0
+        label.sizeToFit()
         
         return label
     }()
     private let dDayLabel: DraggableLabel = {
         let label = DraggableLabel()
         label.font = .systemFont(ofSize: 42, weight: .semibold)
+        label.sizeToFit()
         
         return label
     }()
     private let dateLabel: DraggableLabel = {
         let label = DraggableLabel()
         label.font = .systemFont(ofSize: 14, weight: .light)
+        label.sizeToFit()
         
         return label
     }()
@@ -83,7 +86,7 @@ class DetailView: UIView{
             let y = dDayLabel.frame.origin.y + dDayLabel.frame.size.height/2
             textAttributes.centerX = Float(x / (window.bounds.width/2))
             textAttributes.centerY = Float(y / (window.bounds.width/2))
-
+            
             return textAttributes
         }
     }
@@ -108,11 +111,15 @@ class DetailView: UIView{
         }
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    init(){
+        super.init(frame: .zero)
         self.clipsToBounds = true
         
         setLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setLayout(){
@@ -205,8 +212,6 @@ class DetailView: UIView{
     }
     
     func resetPosition(){
-        let textAttributes = TextAttributes()
-        
         titleLabelCenterXMultiplier = CGFloat(TextType.title.centerX)
         titleLabelCenterYMultiplier = CGFloat(TextType.title.centerY)
         
@@ -230,8 +235,20 @@ class DetailView: UIView{
     }
     
     func reloadView(){
-        self.setLayout()
-        self.reloadInputViews()
+        titleLabel.snp.remakeConstraints{
+            $0.centerX.equalToSuperview().multipliedBy(titleLabelCenterXMultiplier)
+            $0.centerY.equalToSuperview().multipliedBy(titleLabelCenterYMultiplier)
+        }
+        
+        dDayLabel.snp.remakeConstraints{
+            $0.centerX.equalToSuperview().multipliedBy(dDayLabelCenterXMultiplier)
+            $0.centerY.equalToSuperview().multipliedBy(dDayLabelCenterYMultiplier)
+        }
+        
+        dateLabel.snp.remakeConstraints{
+            $0.centerX.equalToSuperview().multipliedBy(dateLabelCenterXMultiplier)
+            $0.centerY.equalToSuperview().multipliedBy(dateLabelCenterYMultiplier)
+        }
     }
 }
 

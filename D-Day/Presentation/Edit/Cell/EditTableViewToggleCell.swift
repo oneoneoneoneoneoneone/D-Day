@@ -52,6 +52,7 @@ class EditTableViewToggleCell: UIEditCell{
         self.cell = cell
         label.text = cell.text
         
+        segment.removeAllSegments()
         for i in 0..<cell.subText.count{
             segment.insertSegment(withTitle: cell.subText[i], at: i, animated: true)
         }
@@ -60,7 +61,6 @@ class EditTableViewToggleCell: UIEditCell{
     func setData(isOn: Bool?){
         guard let isOn = isOn else { return }
         segment.selectedSegmentIndex = isOn ? 1 : 0
-        segment.sendActions(for: .valueChanged)
     }
     
     @objc func segmentValueChanged(_ sender: UISegmentedControl){

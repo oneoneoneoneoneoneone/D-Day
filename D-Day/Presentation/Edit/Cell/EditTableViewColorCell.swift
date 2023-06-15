@@ -71,14 +71,12 @@ class EditTableViewColorCell: UIEditCell{
         guard let backgroundIsColor = backgroundIsColor else{ return }
         
         toggle.isOn = backgroundIsColor
-        toggle.sendActions(for: .valueChanged)
     }
     
     override func setData(backgroundColor: String?) {
         guard let backgroundColor = backgroundColor, backgroundColor != "" else { return }
         
         colorWell.selectedColor = UIColor(hexCode: backgroundColor)
-        colorWell.sendActions(for: .valueChanged)
     }
     
     func setToggle(){

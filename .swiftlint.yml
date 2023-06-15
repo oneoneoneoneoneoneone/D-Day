@@ -1,0 +1,71 @@
+included: # 린트 과정에 포함할 파일 경로. 이 항목이 존재하면 `--path`는 무시됨
+    - D-Day
+excluded: # 린트 과정에서 무시할 파일 경로. `included`보다 우선순위 높음
+    - Application/*.swift
+
+disabled_rules: # 제외
+    - leading_whitespace # 파일 선행 공백 X
+    - trailing_whitespace # 빈 줄에 공백 X
+    - line_length # 라인 길이 제한
+    - missing_docs # 선언 주석 필수
+#opt_in_rules:
+    - control_statement # if, for, guard, switch, while, catch문 괄호X
+    - colon # 키 옆에 콜론(:)
+    - empty_count # 0 비교 -> isEmpty
+    - comma # 쉼표 앞 공백X, 뒤 공백 O
+    - unavailable_function # 구현되지 않은 기능은 사용할 수 없는 것으로 표시
+    - unneeded_parentheses_in_closure_argument #클로저 인수 괄호 X
+    - shorthand_operator # 단축된 연산자 사용 (+=)
+    - fatal_error_message # fatalError에 메시지 필수
+    - force_cast # 강제 캐스팅 X
+    - force_try # 강제 try X
+    - vertical_whitespace # 한줄 공백만 허용
+    - unneeded_break_in_switch # 불필요 break X
+    - unused_closure_parameter # 사용되지 않는 매개변수 _ 처리
+    - opening_brace # 중괄호 앞 공백
+    - switch_case_alignment # switch-case문 정렬
+    - statement_position # else, catch문 위치 - 닫힘 괄호 뒤 한 칸 공백
+    - mark # '// MARK: ' or '// MARK: - '
+    - return_arrow_whitespace # -> 앞,뒤 공백
+    - weak_delegate # delegate 프로퍼티는 순환 참조를 막기 위해 weak 참조
+    - class_delegate_protocol # delegate 프로토콜은 약한 참조를 할 수 있도록 class 전용
+    - trailing_newline # 파일 끝 빈줄 1개 허용
+    - syntactic_sugar # 딕셔너리 선언 형식 [: ]
+    - syntactic_sugar # 어레이 선언 형식 []
+    - for_where # for 문 안에서 if 문으로 조건 확인을 하는 경우, 그보다 for문에 where 절 사용을 권장
+    - redundant_optional_initialization # 옵셔널 변수 nil 초기화 X
+    - comment_spacing # 주석 시작 공백
+    - implicit_getter # 읽기전용 프로퍼티에 get 키워드 사용 X
+
+# 함수 복잡성
+cyclomatic_complexity: 60
+
+line_length: 200
+
+type_body_length:
+    warning: 500
+    error: 1000
+
+file_length:
+    warning: 1000
+    error: 2000
+
+type_name:
+    min_length: 3 # 경고에만 적용됨
+    max_length: # 경고와 에러 둘 다 적용
+        warning: 50
+        error: 100
+    excluded: iPhone
+
+# 변수명
+identifier_name:
+    min_length:
+        error: 2
+    excluded:
+        - to
+        - id
+        - URL
+reporter: "xcode" # 보고 유형 (xcode, json, csv, codeclimate, checkstyle, junit, html, emoji, sonarqube, markdown, github-actions-logging)
+
+# 네이밍 룰은 경고/에러에 min_length와 max_length를 각각 설정 가능
+# custom_rules:

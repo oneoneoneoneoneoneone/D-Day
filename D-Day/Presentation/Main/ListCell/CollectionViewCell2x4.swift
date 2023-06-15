@@ -7,10 +7,10 @@
 
 import UIKit
 
-class CollectionViewCell_2x4: UICollectionViewCell{
+class CollectionViewCell2x4: UICollectionViewCell{
     let imageView = UIImageView()
     let circleView = UIImageView()
-    let d_DayLabel = UILabel()
+    let ddayLabel = UILabel()
     let titleLabel = UILabel()
     let dateLabel = UILabel()
     
@@ -30,11 +30,11 @@ class CollectionViewCell_2x4: UICollectionViewCell{
         
         titleLabel.font = .systemFont(ofSize: 24, weight: .light)
         dateLabel.font = .systemFont(ofSize: 18, weight: .light)
-        d_DayLabel.font = .systemFont(ofSize: 36, weight: .semibold)
+        ddayLabel.font = .systemFont(ofSize: 36, weight: .semibold)
     }
     
     private func setLayout(){
-        [imageView, circleView, d_DayLabel, titleLabel, dateLabel].forEach{
+        [imageView, circleView, ddayLabel, titleLabel, dateLabel].forEach{
             addSubview($0)
         }
         
@@ -48,7 +48,7 @@ class CollectionViewCell_2x4: UICollectionViewCell{
             $0.height.equalToSuperview().offset(-80)
             $0.width.equalTo(circleView.snp.height)
         }
-        d_DayLabel.snp.makeConstraints{
+        ddayLabel.snp.makeConstraints{
             $0.bottom.equalTo(titleLabel.snp.top)
             $0.centerX.equalToSuperview()
         }
@@ -63,7 +63,7 @@ class CollectionViewCell_2x4: UICollectionViewCell{
     
     func setData(item: Item){
         titleLabel.text = item.title
-        d_DayLabel.text = Util.numberOfDaysFromDate(isStartCount: item.isStartCount, from: item.date)
+        ddayLabel.text = Util.numberOfDaysFromDate(isStartCount: item.isStartCount, from: item.date)
         dateLabel.text = item.date.toString
         
         guard let titleAttributes = item.textAttributes[safe: TextType.title.rawValue] else {return}
@@ -71,8 +71,8 @@ class CollectionViewCell_2x4: UICollectionViewCell{
         titleLabel.textColor = UIColor(hexCode: titleAttributes.color)
         
         guard let ddayAttributes = item.textAttributes[safe: TextType.dday.rawValue] else {return}
-        d_DayLabel.isHidden = ddayAttributes.isHidden
-        d_DayLabel.textColor = UIColor(hexCode: ddayAttributes.color)
+        ddayLabel.isHidden = ddayAttributes.isHidden
+        ddayLabel.textColor = UIColor(hexCode: ddayAttributes.color)
         
         guard let dateAttributes = item.textAttributes[safe: TextType.date.rawValue] else {return}
         dateLabel.isHidden = dateAttributes.isHidden
@@ -90,7 +90,7 @@ class CollectionViewCell_2x4: UICollectionViewCell{
             visibleView.image = nil
         }
         if item.background!.isImage{
-            visibleView.image = Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue)
+            visibleView.image = Repository().loadImageFromFileManager(imageName: item.id.stringValue)
             visibleView.backgroundColor = nil
         }
     }

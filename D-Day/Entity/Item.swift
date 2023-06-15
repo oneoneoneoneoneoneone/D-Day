@@ -11,9 +11,7 @@ import RealmSwift
 
 class Item: Object{
     @Persisted(primaryKey: true) var id: ObjectId
-//    @Persisted var title: Title?
     @Persisted var title: String
-//    @Persisted var dday: DDay?
     @Persisted var date: Date = Date.now
     @Persisted var isStartCount: Bool = false
     @Persisted var textAttributes: List<TextAttributes> = List<TextAttributes>()

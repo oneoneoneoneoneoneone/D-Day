@@ -69,7 +69,7 @@ final class EditPresenter: NSObject{
                 viewController.showToast(message: EditCell.backgroundImage.subText.first!)
                 return
             }
-            repository.saveImageToDocumentDirectory(imageName: item.id.stringValue, image: image)
+            repository.saveImageToFileManager(imageName: item.id.stringValue, image: image)
         }
         
         let saveItem = Item()
@@ -180,7 +180,13 @@ extension EditPresenter: EditCellDelegate{
             }
         case .textAttribute:
             if value is [TextAttributes]{
-                let value = value as? [TextAttributes] ?? []
+                var value = value as? [TextAttributes] ?? []
+                if value.isEmpty {
+                    TextType.allCases.forEach{
+                        value.append($0.defualtValue)
+                    }
+                }
+                
                 let list = List<TextAttributes>()
                 list.append(objectsIn: value)
                 editItem.textAttributes = list
@@ -266,8 +272,8 @@ extension EditPresenter: UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "EditTableViewImageCell", for: indexPath) as? EditTableViewImageCell
             cell?.selectionStyle = .none
             cell?.bind(delegate: self, cell: cellList[row])
-            cell?.setData(backgroundIsImage: item.background?.isImage)
             cell?.setData(id: item.id.stringValue)
+            cell?.setData(backgroundIsImage: item.background?.isImage)
 
             return cell ?? UITableViewCell()
         case .isCircle:

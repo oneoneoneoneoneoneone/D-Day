@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailView: UIView{
+class DetailView: UIView {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -49,63 +49,57 @@ class DetailView: UIView{
     private var dateLabelCenterYMultiplier: CGFloat = TextType.date.centerY
     
     var titleTextAttributes: TextAttributes {
-        get{
-            let textAttributes = TextAttributes()
-            textAttributes.isHidden = titleLabel.isHidden
-            textAttributes.color = titleLabel.textColor.rgbString
-            
-            guard let window = window else {
-                textAttributes.centerX = Float(titleLabelCenterXMultiplier)
-                textAttributes.centerY = Float(titleLabelCenterYMultiplier)
-                return textAttributes
-            }
-            let x = titleLabel.frame.origin.x + titleLabel.frame.size.width/2
-            let y = titleLabel.frame.origin.y + titleLabel.frame.size.height/2
-            textAttributes.centerX = Float(x / (window.bounds.width/2))
-            textAttributes.centerY = Float(y / (window.bounds.width/2))
-            
+        let textAttributes = TextAttributes()
+        textAttributes.isHidden = titleLabel.isHidden
+        textAttributes.color = titleLabel.textColor.rgbString
+        
+        guard let window = window else {
+            textAttributes.centerX = Float(titleLabelCenterXMultiplier)
+            textAttributes.centerY = Float(titleLabelCenterYMultiplier)
             return textAttributes
         }
+        let originX = titleLabel.frame.origin.x + titleLabel.frame.size.width/2
+        let originY = titleLabel.frame.origin.y + titleLabel.frame.size.height/2
+        textAttributes.centerX = Float(originX / (window.bounds.width/2))
+        textAttributes.centerY = Float(originY / (window.bounds.width/2))
+        
+        return textAttributes
     }
     
     var dDayTextAttributes: TextAttributes {
-        get{
-            let textAttributes = TextAttributes()
-            textAttributes.isHidden = dDayLabel.isHidden
-            textAttributes.color = dDayLabel.textColor.rgbString
-            
-            guard let window = window else {
-                textAttributes.centerX = Float(dDayLabelCenterXMultiplier)
-                textAttributes.centerY = Float(dDayLabelCenterYMultiplier)
-                return textAttributes
-            }
-            let x = dDayLabel.frame.origin.x + dDayLabel.frame.size.width/2
-            let y = dDayLabel.frame.origin.y + dDayLabel.frame.size.height/2
-            textAttributes.centerX = Float(x / (window.bounds.width/2))
-            textAttributes.centerY = Float(y / (window.bounds.width/2))
-
+        let textAttributes = TextAttributes()
+        textAttributes.isHidden = dDayLabel.isHidden
+        textAttributes.color = dDayLabel.textColor.rgbString
+        
+        guard let window = window else {
+            textAttributes.centerX = Float(dDayLabelCenterXMultiplier)
+            textAttributes.centerY = Float(dDayLabelCenterYMultiplier)
             return textAttributes
         }
+        let originX = dDayLabel.frame.origin.x + dDayLabel.frame.size.width/2
+        let originY = dDayLabel.frame.origin.y + dDayLabel.frame.size.height/2
+        textAttributes.centerX = Float(originX / (window.bounds.width/2))
+        textAttributes.centerY = Float(originY / (window.bounds.width/2))
+
+        return textAttributes
     }
     
     var dateTextAttributes: TextAttributes {
-        get{
-            let textAttributes = TextAttributes()
-            textAttributes.isHidden = dateLabel.isHidden
-            textAttributes.color = dateLabel.textColor.rgbString
-            
-            guard let window = window else {
-                textAttributes.centerX = Float(dateLabelCenterXMultiplier)
-                textAttributes.centerY = Float(dateLabelCenterYMultiplier)
-                return textAttributes
-            }
-            let x = dateLabel.frame.origin.x + dateLabel.frame.size.width/2
-            let y = dateLabel.frame.origin.y + dateLabel.frame.size.height/2
-            textAttributes.centerX = Float(x / (window.bounds.width/2))
-            textAttributes.centerY = Float(y / (window.bounds.width/2))
-            
+        let textAttributes = TextAttributes()
+        textAttributes.isHidden = dateLabel.isHidden
+        textAttributes.color = dateLabel.textColor.rgbString
+        
+        guard let window = window else {
+            textAttributes.centerX = Float(dateLabelCenterXMultiplier)
+            textAttributes.centerY = Float(dateLabelCenterYMultiplier)
             return textAttributes
         }
+        let originX = dateLabel.frame.origin.x + dateLabel.frame.size.width/2
+        let originY = dateLabel.frame.origin.y + dateLabel.frame.size.height/2
+        textAttributes.centerX = Float(originX / (window.bounds.width/2))
+        textAttributes.centerY = Float(originY / (window.bounds.width/2))
+        
+        return textAttributes
     }
     
     override func layoutSubviews() {
@@ -205,8 +199,6 @@ class DetailView: UIView{
     }
     
     func resetPosition(){
-        let textAttributes = TextAttributes()
-        
         titleLabelCenterXMultiplier = CGFloat(TextType.title.centerX)
         titleLabelCenterYMultiplier = CGFloat(TextType.title.centerY)
         
@@ -248,19 +240,17 @@ class DraggableLabel: UILabel{
         guard let location = touch?.location(in: superview) else {return}
         
         //터치포인트를 가운데로
-        let x = location.x - frame.size.width/2
-        let y = location.y - frame.size.height/2
-        guard x > 0, x < (window?.bounds.width)! - frame.size.width,
-              y > 0, y < (window?.bounds.width)! - frame.size.height else {
+        let touchPointX = location.x - frame.size.width/2
+        let touchPointY = location.y - frame.size.height/2
+        guard touchPointX > 0, touchPointX < (window?.bounds.width)! - frame.size.width,
+              touchPointY > 0, touchPointY < (window?.bounds.width)! - frame.size.height else {
             return
             
         }
           
-        frame.origin = CGPoint(x: x, y: y)
+        frame.origin = CGPoint(x: touchPointX, y: touchPointY)
     }
     
     open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        print("x - ", ((touches.first?.location(in: superview).x)! + frame.size.width/2) / ((window?.bounds.width)!/2))
-//        print("y - ", ((touches.first?.location(in: superview).y)! + frame.size.height/2) / ((window?.bounds.width)!/2))
     }
 }

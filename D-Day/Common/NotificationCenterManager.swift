@@ -32,9 +32,11 @@ class NotificationCenterManager{
         
         //UNUserNotificationCenter에 추가
         let request = UNNotificationRequest(identifier: item.id.stringValue, content: content, trigger: trigger)
-        notificationCenter.add(request, withCompletionHandler: nil)
-        
-        print("addNotificationRequest 완 - \(item.title)")
+        notificationCenter.add(request) { error in
+            if let _ = error {
+                NSLog("add Notification Fail - \(item.id): \(item.title)")
+            }
+        }
     }
     
     ///알림 시간 변경(전체)

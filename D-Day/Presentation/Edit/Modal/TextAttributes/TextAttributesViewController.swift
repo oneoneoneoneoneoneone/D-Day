@@ -79,9 +79,6 @@ extension TextAttributesViewController: TextAttributesProtocol{
         navigationItem.leftBarButtonItem?.tintColor = .systemBlue
         
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
-//        navigationItem.backAction = UIAction(handler: {_ in
-//            self.navigationController?.popViewController(animated: true)
-//        })
     }
     
     func setLayout(){

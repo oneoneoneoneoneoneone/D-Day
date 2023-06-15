@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let authrizationOptions = UNAuthorizationOptions(arrayLiteral: [.alert, .badge, .sound])
         userNotificationCenter.requestAuthorization(options: authrizationOptions){_, error in
             if let error = error{
-                print("ERROR: \(error)")
+                NSLog(error.localizedDescription)
             }
         }
         

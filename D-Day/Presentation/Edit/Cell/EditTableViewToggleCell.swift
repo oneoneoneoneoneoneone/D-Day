@@ -52,8 +52,8 @@ class EditTableViewToggleCell: UIEditCell{
         self.cell = cell
         label.text = cell.text
         
-        for i in 0..<cell.subText.count{
-            segment.insertSegment(withTitle: cell.subText[i], at: i, animated: true)
+        for index in 0..<cell.subText.count{
+            segment.insertSegment(withTitle: cell.subText[index], at: index, animated: true)
         }
     }
     

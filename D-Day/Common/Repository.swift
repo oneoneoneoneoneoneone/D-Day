@@ -100,14 +100,13 @@ class Repository: RepositoryProtocol{
             
             return try Realm(configuration: config)
         }catch{
-            print(error)
+            NSLog(error.localizedDescription)
             return nil
         }
     }
     
     func readItem() -> [Item]{
         guard let realm = realm else { return [] }
-        print(realm.configuration.fileURL ?? "")
         
         return Array(realm.objects(Item.self))
     }
@@ -121,7 +120,6 @@ class Repository: RepositoryProtocol{
                     item.date = data.date
                     item.isStartCount = data.isStartCount
                     item.textAttributes = data.textAttributes
-//                    item.dday = data.dday
                     item.background = data.background
                     item.memo = data.memo
                 }
@@ -133,7 +131,7 @@ class Repository: RepositoryProtocol{
                 }
             }
         }catch{
-            print(error)
+            NSLog(error.localizedDescription)
         }
     }
     
@@ -143,45 +141,43 @@ class Repository: RepositoryProtocol{
                 realm?.delete(data)
             }
         }catch{
-            print(error)
+            NSLog(error.localizedDescription)
         }
     }
     
     
     //MARK: FileManager Document Image
-    func loadImageFromDocumentDirectory(imageName: String) -> UIImage? {
+    func loadImageFromFileManager(imageName: String) -> UIImage? {
         guard let imageUrl = container?.appendingPathComponent(imageName) else {return nil}
         
-        print("\(imageName) - \(imageUrl.path)")
-        //UIImage로 불러오기
         return UIImage(contentsOfFile: imageUrl.path)
     }
     
-    func saveImageToDocumentDirectory(imageName: String, image: UIImage) {
+    func saveImageToFileManager(imageName: String, image: UIImage) {
         //경로 설정
         guard let imageUrl = container?.appendingPathComponent(imageName) else {return}
         
         //이미지 압축(image.pngData())
         //??압축할거면 jpegData로~(0~1 사이 값)
         guard let data = image.pngData() else {
-            print("압축이 실패했습니다.")
+            NSLog("압축이 실패했습니다.")
             return
         }
         
         //덮어쓰기 여부 확인
-        deleteImageToDocumentDirectory(imageName: imageName)
+        deleteImageToFileManager(imageName: imageName)
         
         //이미지를 도큐먼트에 저장
         //파일을 저장하는 등의 행위는 조심스러워야하기 때문에 do try catch 문을 사용하는 편임
         do {
             try data.write(to: imageUrl)
-            print("이미지 저장완료")
+            NSLog("이미지 저장완료")
         } catch {
-            print("이미지를 저장하지 못했습니다.")
+            NSLog("이미지를 저장하지 못했습니다.")
         }
     }
     
-    func deleteImageToDocumentDirectory(imageName: String) {
+    func deleteImageToFileManager(imageName: String) {
         guard let imageUrl = container?.appendingPathComponent(imageName) else {return}
         
         //이미지 경로 여부 확인
@@ -189,13 +185,14 @@ class Repository: RepositoryProtocol{
             //이미지가 존재한다면 기존 경로에 있는 이미지 삭제
             do {
                 try FileManager.default.removeItem(at: imageUrl)
-                print("이미지 삭제 완료")
+                NSLog("이미지 삭제 완료")
             } catch {
-                print("이미지를 삭제하지 못했습니다.")
+                NSLog("이미지를 삭제하지 못했습니다.")
             }
         }
     }
     
+    //MARK: UserDefaults defaultWidget
     func setDefaultWidget(id: String?){
         UserDefaults(suiteName: appGroupId)?.setValue(id, forKey: "defaultWidget")
     }

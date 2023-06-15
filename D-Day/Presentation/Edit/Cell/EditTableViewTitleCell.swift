@@ -62,4 +62,9 @@ extension EditTableViewTitleCell: UITextFieldDelegate{
     func textFieldDidChangeSelection(_ textField: UITextField) {
         delegate?.valueChanged(self.cell, didChangeValue: textField.text)
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
 }

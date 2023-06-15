@@ -14,6 +14,7 @@ import Intents
 //isPreview - 위젯갤러리에 표시하기위한 미리보기 스냅샷 표시 // : TimelineProvider
 struct Provider: IntentTimelineProvider {    
     typealias Entry = ItemEntry
+    let repository = Repository()
     
     //본격적으로 위젯에 표시될
     func placeholder(in context: Context) -> ItemEntry {
@@ -55,14 +56,14 @@ struct Provider: IntentTimelineProvider {
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)! //언제 리로드할지
             
-            let items = Repository().readItem()
+            let items = repository.readItem()
             var item = Item()
             
             if items.filter({$0.id.stringValue == configuration.SelectedWidget?.identifier}).count > 0{
                 item = items.filter{$0.id.stringValue == configuration.SelectedWidget?.identifier}.first ?? Item()
             }
             else{
-                item = items.filter{$0.id.stringValue == Repository().getDefaultWidget()}.first ?? Item()
+                item = items.filter{$0.id.stringValue == repository.getDefaultWidget()}.first ?? Item()
             }
             
             let entry = ItemEntry(
@@ -74,7 +75,7 @@ struct Provider: IntentTimelineProvider {
                 ddayTextAttribute: item.textAttributes[safe: TextType.dday.rawValue] ?? TextAttributes(),
                 dateText: item.date.toString,
                 dateTextAttribute: item.textAttributes[safe: TextType.date.rawValue] ?? TextAttributes(centerY: Float(TextType.date.centerY)),
-                backImage: item.background?.isImage == true ? Repository().loadImageFromDocumentDirectory(imageName: item.id.stringValue) ?? UIImage() : UIImage(),
+                backImage: item.background?.isImage == true ? repository.loadImageFromFileManager(imageName: item.id.stringValue) ?? UIImage() : UIImage(),
                 backColor: item.background?.isColor == true ? UIColor(hexCode: item.background?.color ?? Background().color) : nil
             )
             entries.append(entry)

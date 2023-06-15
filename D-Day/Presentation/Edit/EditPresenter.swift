@@ -187,7 +187,13 @@ extension EditPresenter: EditCellDelegate{
             }
         case .textAttribute:
             if value is [TextAttributes]{
-                let value = value as? [TextAttributes] ?? []
+                var value = value as? [TextAttributes] ?? []
+                if value.isEmpty {
+                    TextType.allCases.forEach{
+                        value.append($0.defualtValue)
+                    }
+                }
+                
                 let list = List<TextAttributes>()
                 list.append(objectsIn: value)
                 editItem.textAttributes = list

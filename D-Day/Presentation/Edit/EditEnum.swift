@@ -46,7 +46,7 @@ enum EditCell: Int, CaseIterable{
         case .isCircle:
             return NSLocalizedString("배경 스타일", comment: "")
         case .textAttribute:
-            return NSLocalizedString("글자 세부 설정하기", comment: "")
+            return NSLocalizedString("글자 배치 설정", comment: "")
         case .memo:
             return NSLocalizedString("메모", comment: "")
         }

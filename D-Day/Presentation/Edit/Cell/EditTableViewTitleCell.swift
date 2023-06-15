@@ -60,8 +60,9 @@ extension EditTableViewTitleCell: UITextFieldDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         delegate?.viewDown(self.cell)
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return false
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.resignFirstResponder()
+            return false
+        }
     }
 }

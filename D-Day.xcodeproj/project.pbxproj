@@ -411,13 +411,13 @@
 			path = Localizable;
 			sourceTree = "<group>";
 		};
-		33CEDDEB29FED5CB0088CD14 /* Delegate */ = {
+		33CEDDEB29FED5CB0088CD14 /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				33D27260298233E600EF9321 /* AppDelegate.swift */,
 				33D27262298233E600EF9321 /* SceneDelegate.swift */,
 			);
-			path = Delegate;
+			path = Application;
 			sourceTree = "<group>";
 		};
 		33D27254298233E600EF9321 = {
@@ -445,7 +445,7 @@
 			isa = PBXGroup;
 			children = (
 				33C4877F299606EF00792ABB /* D-Day.entitlements */,
-				33CEDDEB29FED5CB0088CD14 /* Delegate */,
+				33CEDDEB29FED5CB0088CD14 /* Application */,
 				33D9580229FAC2FF0016B1F6 /* Extension */,
 				33225A4C2A3B56CA00164200 /* Custom */,
 				33D2728A298399A800EF9321 /* Presentation */,

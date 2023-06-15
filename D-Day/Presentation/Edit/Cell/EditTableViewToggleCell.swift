@@ -60,6 +60,7 @@ class EditTableViewToggleCell: UIEditCell{
     
     func setData(isOn: Bool?){
         guard let isOn = isOn else { return }
+        
         segment.selectedSegmentIndex = isOn ? 1 : 0
     }
     

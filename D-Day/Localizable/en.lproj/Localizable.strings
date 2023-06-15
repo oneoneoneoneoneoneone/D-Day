@@ -27,11 +27,13 @@
 "닫기" = "Discard Changeds";
 
 "제목을 입력해주세요." = "Please enter a title.";
+"제목" = "Title";
 "날짜" = "Date";
 "날짜 카운트" = "Date Count";
 "배경 색" = "Background Color";
 "배경 이미지" = "Background Image";
 "배경 스타일" = "Background Style";
+"글자 배치 설정" = "Text Placement Settings";
 "메모" = "Notes";
 
 "디데이" = "D-Day";
@@ -46,6 +48,11 @@
 "이동" = "Move";
 "사진 보관함에서 선택" = "Select from Photo Library";
 "카메라로 촬영" = "Taking a picture with a Camera";
+"이미지 검색" = "Search Image";
+"검색어 입력" = "Enter search word";
+
+"확인" = "Check";
+"초기화" = "Reset";
 
 //Mark: Detail
 

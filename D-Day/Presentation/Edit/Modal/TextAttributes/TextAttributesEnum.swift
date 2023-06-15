@@ -13,11 +13,11 @@ enum TextType: Int, CaseIterable{
     var text: String{
         switch self{
         case .title:
-            return "제목"
+            return NSLocalizedString("제목", comment: "")
         case .dday:
-            return "디데이"
+            return NSLocalizedString("디데이", comment: "")
         case .date:
-            return "날짜"
+            return NSLocalizedString("날짜", comment: "")
         }
     }
     
@@ -42,6 +42,10 @@ enum TextType: Int, CaseIterable{
             return 1.5
         }
     }
+    
+    var defualtValue: TextAttributes{
+        return TextAttributes(centerY: Float(self.centerY))
+    }
 }
 
 enum TextTypeSection: Int, CaseIterable{
@@ -50,9 +54,9 @@ enum TextTypeSection: Int, CaseIterable{
     var text: String{
         switch self{
         case .edit:
-            return "수정"
+            return NSLocalizedString("수정", comment: "")
         case .reset:
-            return "초기화"
+            return NSLocalizedString("초기화", comment: "")
         }
     }
 }

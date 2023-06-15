@@ -45,7 +45,7 @@ final class DetailPresenter{
     func viewWillAppear(){
         guard let item = repository.readItem().first(where: {$0.id.stringValue == id}) else {return}
         self.item = item
-        let image = repository.loadImageFromDocumentDirectory(imageName: item.id.stringValue)
+        let image = repository.loadImageFromFileManager(imageName: item.id.stringValue)
         
         viewController.setData(item: item, image: image)
     }
@@ -72,7 +72,7 @@ final class DetailPresenter{
         //알림
         notificationCenter.remove(id)
         //이미지
-        repository.deleteImageToDocumentDirectory(imageName: id)
+        repository.deleteImageToFileManager(imageName: id)
         //item
         repository.deleteItem(item)
     }

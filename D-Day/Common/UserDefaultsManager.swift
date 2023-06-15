@@ -13,6 +13,7 @@ class UserDefaultsManager{
     private final let currentSort = "currentSort"
     private final let alertData = "alertData"
     
+    //MARK: Main Display
     func setCurrentDisplay(index: Int){
         UserDefaults.standard.setValue(index, forKey: currentDisplay)
     }
@@ -30,33 +31,36 @@ class UserDefaultsManager{
     }
     
     
-    func setAlertTime(data: AlertData!){
+    //MARK: Setting
+    func setAlertTime(data: AlertData){
         do{
             let encoded = try JSONEncoder().encode(data)
             UserDefaults.standard.setValue(encoded, forKey: alertData)
         }
         catch{
-            print("UserData encode Error - \(error.localizedDescription)")
+            NSLog("encode Error - \(error.localizedDescription)")
         }
     }
 
     func getAlertTime() -> AlertData{
-        guard let savedData = UserDefaults.standard.object(forKey: alertData) as? Foundation.Data else {return AlertData()}
+        guard let savedData = UserDefaults.standard.object(forKey: alertData) as? Foundation.Data else {
+            return AlertData()
+        }
 
         do{
             return try JSONDecoder().decode(AlertData.self, from: savedData)
         }
         catch{
-            print("UserData decode Error - \(error.localizedDescription)")
+            NSLog("decode Error - \(error.localizedDescription)")
             return AlertData()
         }
     }
     
-    func setIsDarkMode(isDarkMode: Bool!){
+    func setIsDarkMode(isDarkMode: Bool){
         UserDefaults.standard.setValue(isDarkMode, forKey: "isDarkMode")
     }
 
-    func getIsDarkMode() -> Bool!{
+    func getIsDarkMode() -> Bool{
         return UserDefaults.standard.bool(forKey: "isDarkMode")
     }
     
